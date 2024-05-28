@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Lautaro Jovanovics** - [lautiland - Github](https://github.com/lautiland)
 * **Matias Vallejos** - [MatiasTK](https://github.com/MatiasTK)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
+* **Alejandro, Pablo Martin** - [integrante3](https://github.com/Pabloale96)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
 
 Corrector: **{Corrector}**

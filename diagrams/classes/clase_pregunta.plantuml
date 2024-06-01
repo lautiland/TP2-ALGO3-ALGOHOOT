@@ -1,0 +1,28 @@
+@startuml
+
+!theme plain
+
+abstract Pregunta {
+    + {abstract} procesarRespuestas(respuestas : List<Respuesta>)
+}
+class VerdaderoFalso {
+    + procesarRespuestas(respuestas : List<Respuesta>)
+}
+class MultipleChoice {
+    + procesarRespuestas(respuestas : List<Respuesta>)
+}
+class VFConPenalidad {
+    - aplicarPenalidad(respuestas : List<Respuesta>)
+}
+class MCConPenalidad {
+    - aplicarPenalidad(respuestas : List<Respuesta>)
+}
+
+VerdaderoFalso .up.|> Pregunta
+VFConPenalidad -up-|> VerdaderoFalso
+
+MultipleChoice .up.|> Pregunta
+MCConPenalidad -up-|> MultipleChoice
+
+
+@enduml

@@ -4,9 +4,9 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {3}
+## Grupo 3
 
-* **Lautaro Jovanovics** - [lautiland - Github](https://github.com/lautiland)
+* **Lautaro Jovanovics** - [lautiland](https://github.com/lautiland)
 * **Matias Vallejos** - [MatiasTK](https://github.com/MatiasTK)
 * **Alejandro, Pablo Martin** - [PabloAle96](https://github.com/Pabloale96)
 * **Daniel Arturo Pérez Contreras** - [UbermasterDP](https://github.com/UbermasterDP)

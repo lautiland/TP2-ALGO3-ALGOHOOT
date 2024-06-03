@@ -11,7 +11,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Alejandro, Pablo Martin** - [PabloAle96](https://github.com/Pabloale96)
 * **Daniel Arturo Pérez Contreras** - [UbermasterDP](https://github.com/UbermasterDP)
 
-Corrector: **{Santiago Valdez}**
+Corrector: **Santiago Valdez**
 
 ## Aplicación
 

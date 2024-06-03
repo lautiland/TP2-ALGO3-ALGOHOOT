@@ -1,0 +1,38 @@
+@startuml
+
+!theme plain
+
+class Juego {
+    + Juego(jugadores: List<Jugador>, preguntas : List<Pregunta>)
+    + hacerPregunta(): Void
+}
+
+class Jugador {
+    - puntos : Int
+    + Jugador()
+    + obtenerRespuestas(...): Respuesta
+    + setPuntos(puntos : Int): Void
+    + getPuntos(): Int
+}
+
+abstract Pregunta {
+    + {abstract} verificarRespuesta(respuesta : Respuesta): Int
+}
+
+class Respuesta {
+    - respuesta : Boolean
+    + Respuesta()
+    + getRespuesta(): Boolean
+}
+
+class ClassicTF {
+    + ClassicTF(pregunta : String, respuesta : Boolean)
+    + verificarRespuesta(respuesta : Respuesta): Int
+}
+
+Juego o-down- "1..*" Pregunta
+Jugador .right.> Respuesta
+ClassicTF .up.|> Pregunta
+Juego o-down- "2..*" Jugador
+
+@enduml

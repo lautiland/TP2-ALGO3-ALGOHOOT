@@ -1,0 +1,39 @@
+@startuml
+
+!theme plain
+skinparam style strictuml
+
+Actor TestCase
+
+create "mockJuan:Jugador"
+TestCase -> "mockJuan:Jugador" : Jugador()
+create "mockDaniel:Jugador"
+TestCase -> "mockDaniel:Jugador" : Jugador()
+create "__:ClassicTF__"
+TestCase -> "__:ClassicTF__" : ClassicTF()
+create "__:Juego__"
+TestCase -> "__:Juego__" : Juego(jugadores :List<Jugador>, preguntas :List<Pregunta>)
+
+TestCase -> "__:Juego__" : hacerPreguntas()
+
+"__:Juego__" -> "mockJuan:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "mockJuan:Jugador" : respuestaJuan
+"__:Juego__" -> "__:ClassicTF__" : verificarRespuesta(respuestaJuan)
+"__:Juego__" <-- "__:ClassicTF__" : 1
+"__:Juego__" -> "mockJuan:Jugador" : setPuntos(1)
+
+"__:Juego__" -> "mockDaniel:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "mockDaniel:Jugador" : respuestaDaniel
+"__:Juego__" -> "__:ClassicTF__" : verificarRespuesta(respuestaDaniel)
+"__:Juego__" <-- "__:ClassicTF__" : 0
+"__:Juego__" -> "mockDaniel:Jugador" : setPuntos(1)
+
+TestCase -> "mockJuan:Jugador": getPuntos()
+TestCase <-- "mockJuan:Jugador": 1
+TestCase -> "mockDaniel:Jugador": getPuntos()
+TestCase <-- "mockDaniel:Jugador": 0
+
+TestCase -> TestCase : AssertEquals(1, 1)
+TestCase -> TestCase : AssertEquals(0, 0)
+
+@enduml

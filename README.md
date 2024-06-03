@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Daniel Arturo Pérez Contreras** - [UbermasterDP](https://github.com/UbermasterDP)
 * **Franco Gualdrini** - [FrGcs](https://github.com/FrGcs)
 
-Corrector: **{Santiago Valdez}**
+Corrector: **Santiago Valdez**
 
 ## Aplicación
 

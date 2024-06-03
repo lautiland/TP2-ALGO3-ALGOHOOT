@@ -10,6 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Matias Vallejos** - [MatiasTK](https://github.com/MatiasTK)
 * **Alejandro, Pablo Martin** - [PabloAle96](https://github.com/Pabloale96)
 * **Daniel Arturo Pérez Contreras** - [UbermasterDP](https://github.com/UbermasterDP)
+* **Franco Gualdrini** - [FrGcs](https://github.com/FrGcs)
 
 Corrector: **{Santiago Valdez}**
 

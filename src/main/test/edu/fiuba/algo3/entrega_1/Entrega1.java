@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,16 +10,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class Entrega1Test {
-    @Test
-    public void test01PreguntaVoFClasicaAsignaPuntosCorrectamente(){
+    private Jugador jugador1Spy;
+    private Jugador jugador2Spy;
+
+    @BeforeEach
+    public void beforeEach() {
         Jugador jugador1 = new Jugador("Juan");
         Jugador jugador2 = new Jugador("Daniel");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
 
+        jugador1Spy = spy(jugador1);
+        jugador2Spy = spy(jugador2);
+    }
+
+    @Test
+    public void test01PreguntaVoFClasicaAsignaPuntosCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero", true);
         Opcion opcion2 = new Opcion("Falso", false);
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
@@ -31,20 +50,26 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(1,jugador1.puntos());
-        assertEquals(1, jugador2.puntos());
+        assertEquals(1,jugador1Spy.puntos());
+        assertEquals(1, jugador2Spy.puntos());
     }
 
     @Test
     public void test02PreguntaVoFClasicaAsignaPuntosCorrectamenteARespuestasIncorrectas(){
-        Jugador jugador1 = new Jugador("Juan");
-        Jugador jugador2 = new Jugador("Daniel");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-
         Opcion opcion1 = new Opcion("Verdadero", false);
         Opcion opcion2 = new Opcion("Falso", true);
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
@@ -57,8 +82,8 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(0,jugador1.puntos());
-        assertEquals(0, jugador2.puntos());
+        assertEquals(0,jugador1Spy.puntos());
+        assertEquals(0, jugador2Spy.puntos());
     }
 
     @Test
@@ -68,26 +93,17 @@ class Entrega1Test {
         Opcion opcion3 = new Opcion("Respuesta3", true);
         Opcion opcion4 = new Opcion("Respuesta4", false);
 
-        Jugador jugador1Mock = mock(Jugador.class);
-        when(jugador1Mock.obtenerRespuestas(any(Pregunta.class)))
-                .thenReturn(new ArrayList<>(){{
-                    add(opcion1);
-                    add(opcion3);
-                }});
-        //Todo: ver si se puede hacer con Spy()
-        doCallRealMethod().when(jugador1Mock).sumarPuntos(anyInt());
-        doCallRealMethod().when(jugador1Mock).puntos();
-        Jugador jugador2Mock = mock(Jugador.class);
-        when(jugador2Mock.obtenerRespuestas(any(Pregunta.class)))
-                .thenReturn(new ArrayList<>(){{
-                    add(opcion1);
-                    add(opcion3);
-                }});
-        doCallRealMethod().when(jugador2Mock).sumarPuntos(anyInt());
-        doCallRealMethod().when(jugador2Mock).puntos();
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+            add(opcion3);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+            add(opcion3);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Mock);
-        jugadores.add(jugador2Mock);
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
@@ -103,7 +119,7 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(2,jugador1Mock.puntos());
-        assertEquals(2, jugador2Mock.puntos());
+        assertEquals(2,jugador1Spy.puntos());
+        assertEquals(2, jugador2Spy.puntos());
     }
 }

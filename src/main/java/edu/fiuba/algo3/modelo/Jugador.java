@@ -17,10 +17,7 @@ public class Jugador {
 
     public ArrayList<Opcion> obtenerRespuestas(Pregunta pregunta){
         //TODO: CAMBIAR EN PRODUCCION
-        ArrayList<Opcion> respuestas = new ArrayList<>();
-        Opcion opcionElegida = pregunta.seleccionarOpcion(0);
-        respuestas.add(opcionElegida);
-        return respuestas;
+        return null;
     }
 
     public void sumarPuntos(int puntos){

@@ -7,9 +7,9 @@
 name: Java CI with Maven
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "CI-fix" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "CI-fix" ]
 jobs:
   build:
     runs-on: ubuntu-latest

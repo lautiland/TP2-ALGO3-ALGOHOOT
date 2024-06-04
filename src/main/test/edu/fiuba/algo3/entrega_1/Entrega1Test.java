@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class Entrega1Test {
+public class Entrega1Test {
+
     private Jugador jugador1Spy;
     private Jugador jugador2Spy;
 

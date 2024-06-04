@@ -42,7 +42,7 @@ class Entrega1Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new ClassicTF("Verdadero o falso?", opciones);
+        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones);
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -50,8 +50,8 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(1,jugador1Spy.puntos());
-        assertEquals(1, jugador2Spy.puntos());
+        assertEquals(1,jugador1Spy.getPuntos());
+        assertEquals(1, jugador2Spy.getPuntos());
     }
 
     @Test
@@ -82,8 +82,8 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(0,jugador1Spy.puntos());
-        assertEquals(0, jugador2Spy.puntos());
+        assertEquals(0,jugador1Spy.getPuntos());
+        assertEquals(0, jugador2Spy.getPuntos());
     }
 
     @Test
@@ -119,7 +119,7 @@ class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(2,jugador1Spy.puntos());
-        assertEquals(2, jugador2Spy.puntos());
+        assertEquals(2,jugador1Spy.getPuntos());
+        assertEquals(2, jugador2Spy.getPuntos());
     }
 }

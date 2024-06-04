@@ -8,31 +8,46 @@ class Juego {
 }
 
 class Jugador {
+    - nombre : String
     - puntos : Int
-    + Jugador()
-    + obtenerRespuestas(...): Respuesta
-    + setPuntos(puntos : Int): Void
+    + Jugador(nombre : String)
+    + obtenerRespuestas(...): List<Opcion>
     + getPuntos(): Int
+    + sumarPuntos(puntos : Int): Void
 }
 
 abstract Pregunta {
-    + {abstract} verificarRespuesta(respuesta : Respuesta): Int
+    - enunciado : String
+    + Pregunta(enunciado : String, opciones : List<Opcion>)
+    + mostrarPregunta(): Void
+    + {abstract} seleccionarOpcion(indice : Int): Opcion
+    + {abstract} evaluarRespuestas(respuestas : List<Opcion>): Int
 }
 
-class Respuesta {
-    - respuesta : Boolean
-    + Respuesta()
-    + getRespuesta(): Boolean
+Class Opcion {
+    - texto : String
+    - esCorrecta : Bool
+    + Opcion(texto : String, esCorrecta : Bool)
+    + mostrarOpcion(): Void
+    + esCorrecta(): Bool
 }
 
 class ClassicTF {
-    + ClassicTF(pregunta : String, respuesta : Boolean)
-    + verificarRespuesta(respuesta : Respuesta): Int
+    + ClassicTF(pregunta : String, respuesta : Bool)
+    + seleccionarOpcion(indice : Int): Opcion
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class ClassicMC {
+    + ClassicMC(pregunta : String, opciones : List<Opcion>)
+    + seleccionarOpcion(indice : Int): Opcion
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
 }
 
 Juego o-down- "1..*" Pregunta
-Jugador .right.> Respuesta
+Juego o-left- "2..*" Jugador
+Pregunta o-left- "2..*" Opcion
 ClassicTF .up.|> Pregunta
-Juego o-down- "2..*" Jugador
+ClassicMC .up.|> Pregunta
 
 @enduml

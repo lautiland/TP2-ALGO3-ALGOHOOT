@@ -11,7 +11,7 @@ public class Jugador {
         this.puntos = 0;
     }
 
-    public int puntos(){
+    public int getPuntos(){
         return this.puntos;
     }
 

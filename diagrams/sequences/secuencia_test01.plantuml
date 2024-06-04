@@ -5,33 +5,37 @@ skinparam style strictuml
 
 Actor TestCase
 
-create "mockJuan:Jugador"
-TestCase -> "mockJuan:Jugador" : Jugador()
-create "mockDaniel:Jugador"
-TestCase -> "mockDaniel:Jugador" : Jugador()
+create "ocpion1:Opcion"
+TestCase -> "ocpion1:Opcion" : Opcion("Verdadero", true)
+
+create "opcion2:Opcion"
+TestCase -> "opcion2:Opcion" : Opcion("Falso", false)
+
 create "__:ClassicTF__"
-TestCase -> "__:ClassicTF__" : ClassicTF()
+TestCase -> "__:ClassicTF__" : ClassicTF("¿Verdadero o falso?", List<Opcion>)
+
 create "__:Juego__"
-TestCase -> "__:Juego__" : Juego(jugadores :List<Jugador>, preguntas :List<Pregunta>)
+TestCase -> "__:Juego__" : Juego(jugadores : List<Jugador>, preguntas : List<Pregunta>)
 
 TestCase -> "__:Juego__" : hacerPreguntas()
 
-"__:Juego__" -> "mockJuan:Jugador" : obtenerRespuestas(...)
-"__:Juego__" <-- "mockJuan:Jugador" : respuestaJuan
-"__:Juego__" -> "__:ClassicTF__" : verificarRespuesta(respuestaJuan)
+"__:Juego__" -> "jugador1Spy:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "jugador1Spy:Jugador" : [opcion1]
+"__:Juego__" -> "__:ClassicTF__" : evaluarRespuestas([opcion1])
 "__:Juego__" <-- "__:ClassicTF__" : 1
-"__:Juego__" -> "mockJuan:Jugador" : setPuntos(1)
+"__:Juego__" -> "jugador1Spy:Jugador" : sumarPuntos(1)
 
-"__:Juego__" -> "mockDaniel:Jugador" : obtenerRespuestas(...)
-"__:Juego__" <-- "mockDaniel:Jugador" : respuestaDaniel
-"__:Juego__" -> "__:ClassicTF__" : verificarRespuesta(respuestaDaniel)
+"__:Juego__" -> "jugador2Spy:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "jugador2Spy:Jugador" : [opcion2]
+"__:Juego__" -> "__:ClassicTF__" : evaluarRespuestas([opcion2])
 "__:Juego__" <-- "__:ClassicTF__" : 0
-"__:Juego__" -> "mockDaniel:Jugador" : setPuntos(1)
+"__:Juego__" -> "jugador2Spy:Jugador" : setPuntos(1)
 
-TestCase -> "mockJuan:Jugador": getPuntos()
-TestCase <-- "mockJuan:Jugador": 1
-TestCase -> "mockDaniel:Jugador": getPuntos()
-TestCase <-- "mockDaniel:Jugador": 0
+TestCase -> "jugador1Spy:Jugador": getPuntos()
+TestCase <-- "jugador1Spy:Jugador": 1
+
+TestCase -> "jugador2Spy:Jugador": getPuntos()
+TestCase <-- "jugador2Spy:Jugador": 0
 
 TestCase -> TestCase : AssertEquals(1, 1)
 TestCase -> TestCase : AssertEquals(0, 0)

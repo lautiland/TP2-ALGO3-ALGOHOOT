@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT/graph/badge.svg?token=0CU3I0Z2XW)](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT)
+[![CodeQL](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/actions/workflows/codeql.yml/badge.svg)](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/actions/workflows/codeql.yml) [![codecov](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT/graph/badge.svg?token=0CU3I0Z2XW)](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT)
 
 # TP2 Algoritmos 3: AlgoHoot 
 

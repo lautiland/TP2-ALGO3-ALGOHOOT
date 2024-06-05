@@ -20,7 +20,6 @@ public class ClassicMC extends Pregunta{
                 validas++;
             }
         }
-
         return validas;
     }
 }

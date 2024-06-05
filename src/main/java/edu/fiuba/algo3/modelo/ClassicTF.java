@@ -14,13 +14,6 @@ public class ClassicTF extends Pregunta{
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        int validas = 0;
-        for (Opcion respuesta : respuestas) {
-            if (respuesta.esCorrecta()) {
-                validas++;
-            }
-        }
-
-        return validas;
+        return  (respuestas.get(0).esCorrecta()) ? 1 : 0;
     }
 }

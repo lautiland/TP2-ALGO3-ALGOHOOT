@@ -123,4 +123,41 @@ public class Entrega1Test {
         assertEquals(2,jugador1Spy.getPuntos());
         assertEquals(2, jugador2Spy.getPuntos());
     }
+
+    @Test
+    public void test04PreguntaMultipleChoiceClasicaAsignaPuntosCorrectamenteAJugadoresQueRespondieronIncorrectamente(){
+        Opcion opcion1 = new Opcion("Respuesta1", true);
+        Opcion opcion2 = new Opcion("Respuesta2", false);
+        Opcion opcion3 = new Opcion("Respuesta3", true);
+        Opcion opcion4 = new Opcion("Respuesta4", false);
+
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+            add(opcion4);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+            add(opcion4);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+
+        Pregunta pregunta = new ClassicMC("Elija la opcion correcta", opciones);
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.hacerPregunta();
+
+        assertEquals(0,jugador1Spy.getPuntos());
+        assertEquals(0, jugador2Spy.getPuntos());
+    }
 }

@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo;
 import java.util.Objects;
 
 public class Opcion {
-    private String texto;
-    private boolean esCorrecta;
+    private final String texto;
+    private final boolean esCorrecta;
 
     public Opcion(String texto, boolean esCorrecta){
         this.texto = texto;
@@ -12,10 +12,10 @@ public class Opcion {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Opcion opcion = (Opcion) o;
+    public boolean equals(Object objetoAIgualar) {
+        if (this == objetoAIgualar) return true;
+        if (objetoAIgualar == null || getClass() != objetoAIgualar.getClass()) return false;
+        Opcion opcion = (Opcion) objetoAIgualar;
         return esCorrecta == opcion.esCorrecta && Objects.equals(texto, opcion.texto);
     }
 

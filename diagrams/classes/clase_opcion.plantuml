@@ -2,20 +2,6 @@
 
 !theme plain
 
-class Juego {
-    + Juego(jugadores: List<Jugador>, preguntas : List<Pregunta>)
-    + hacerPregunta(): Void
-}
-
-class Jugador {
-    - nombre : String
-    - puntos : Int
-    + Jugador(nombre : String)
-    + obtenerRespuestas(pregunta : Pregunta): List<Opcion>
-    + getPuntos(): Int
-    + modificarPuntos(puntos : Int): Void
-}
-
 abstract Pregunta {
     - enunciado : String
     # Pregunta(enunciado : String, opciones : List<Opcion>, cantidadOpcionesMin : Int, cantidadOpcionesMax : Int
@@ -51,12 +37,14 @@ class PenaltyMC {
     + evaluarRespuestas(respuestas : List<Opcion>): Int
 }
 
-Juego o-down- "1..*" Pregunta
-Juego o-right- "2..*" Jugador
-Pregunta o-left- Opcion
 ClassicTF .up.|> Pregunta
 ClassicMC .up.|> Pregunta
 PenaltyTF .up.|> Pregunta
 PenaltyMC .up.|> Pregunta
+
+ClassicTF o-down- "2" Opcion
+PenaltyTF o-down- "2" Opcion
+ClassicMC o-down- "2..5" Opcion
+PenaltyMC o-down- "2..5" Opcion
 
 @enduml

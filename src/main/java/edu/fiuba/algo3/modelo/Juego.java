@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 public class Juego {
-    private ArrayList<Jugador> jugadores;
-    private ArrayList<Pregunta> preguntas;
+    private final ArrayList<Jugador> jugadores;
+    private final ArrayList<Pregunta> preguntas;
 
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas){
         if (jugadores.size() < 2){

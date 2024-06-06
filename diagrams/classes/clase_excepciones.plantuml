@@ -1,0 +1,33 @@
+@startuml
+
+!theme plain
+
+class Juego {
+    - jugadores : List<Jugador>
+    + Juego(jugadores: List<Jugador>, preguntas : List<Pregunta>)
+    + hacerPregunta(): Void
+}
+
+abstract Pregunta {
+    - opciones : List<Opcion>
+    - enunciado : String
+    # Pregunta(enunciado : String, opciones : List<Opcion>, cantidadOpcionesMin : Int, cantidadOpcionesMax : Int
+    + seleccionarOpcion(indice : Int): Opcion
+    + {abstract} evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+exception CantidadJugadoresInvalida
+exception CantidadOpcionesInvalida
+exception CantidadPreguntasInvalida
+exception Exception
+
+Juego o-down- "1..*" Pregunta
+Juego .up.> CantidadJugadoresInvalida : "instanciate"
+Juego .up.> CantidadPreguntasInvalida : "instanciate"
+Pregunta .up.> CantidadOpcionesInvalida : "instanciate"
+
+CantidadJugadoresInvalida <|-left- Exception
+CantidadOpcionesInvalida <|-up- Exception
+CantidadPreguntasInvalida <|-left- Exception
+
+@enduml

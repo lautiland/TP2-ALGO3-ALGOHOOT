@@ -23,13 +23,13 @@ TestCase -> "__:Juego__" : hacerPreguntas()
 "__:Juego__" <-- "jugador1Spy:Jugador" : [opcion1]
 "__:Juego__" -> "__:ClassicTF__" : evaluarRespuestas([opcion1])
 "__:Juego__" <-- "__:ClassicTF__" : 1
-"__:Juego__" -> "jugador1Spy:Jugador" : sumarPuntos(1)
+"__:Juego__" -> "jugador1Spy:Jugador" : modificarPuntos(1)
 
 "__:Juego__" -> "jugador2Spy:Jugador" : obtenerRespuestas(...)
 "__:Juego__" <-- "jugador2Spy:Jugador" : [opcion2]
 "__:Juego__" -> "__:ClassicTF__" : evaluarRespuestas([opcion2])
 "__:Juego__" <-- "__:ClassicTF__" : 0
-"__:Juego__" -> "jugador2Spy:Jugador" : setPuntos(1)
+"__:Juego__" -> "jugador2Spy:Jugador" : modificarPuntos(1)
 
 TestCase -> "jugador1Spy:Jugador": getPuntos()
 TestCase <-- "jugador1Spy:Jugador": 1

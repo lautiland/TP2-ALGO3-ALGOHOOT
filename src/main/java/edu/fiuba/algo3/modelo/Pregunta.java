@@ -3,10 +3,10 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 abstract public class Pregunta {
-    protected String enunciado;
-    protected ArrayList<Opcion> opciones;
+    protected final String enunciado;
+    protected final ArrayList<Opcion> opciones;
 
-    public Pregunta(String enunciado, ArrayList<Opcion> opciones, int cantidadOpcionesMin, int cantidadOpcionesMax){
+    protected Pregunta(String enunciado, ArrayList<Opcion> opciones, int cantidadOpcionesMin, int cantidadOpcionesMax){
         if (opciones.size() < cantidadOpcionesMin || opciones.size() > cantidadOpcionesMax){
             throw new CantidadOpcionesInvalida("La cantidad de opciones es invalida");
         }

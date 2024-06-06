@@ -13,7 +13,7 @@ public class ClassicTFTest {
     public void test01SeIntentaCrearClassicTFSinSuficientesOpciones() {
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Verdadero", true);
+            Opcion opcion1 = new Opcion("Verdadero", true,1);
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
@@ -26,9 +26,9 @@ public class ClassicTFTest {
     public void test02SeIntentaCrearClassicTFConDemasiadasOpciones(){
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Verdadero", true);
-            Opcion opcion2 = new Opcion("Falso", false);
-            Opcion opcion3 = new Opcion("Verdadero", true);
+            Opcion opcion1 = new Opcion("Verdadero", true,1);
+            Opcion opcion2 = new Opcion("Falso", false,1);
+            Opcion opcion3 = new Opcion("Verdadero", true,1);
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
             opciones.add(opcion2);
@@ -39,8 +39,8 @@ public class ClassicTFTest {
     }
     @Test
     public void test03PuedoSeleccionarUnaPreguntaTFCorrectamente(){
-        Opcion opcion1 = new Opcion("Verdadero", true);
-        Opcion opcion2 = new Opcion("Falso", false);
+        Opcion opcion1 = new Opcion("Verdadero", true,1);
+        Opcion opcion2 = new Opcion("Falso", false,1);
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
@@ -52,8 +52,8 @@ public class ClassicTFTest {
 
     @Test
     public void test04PuedoEvaluarUnaRespuestaTFCorrecta(){
-        Opcion opcion1 = new Opcion("Verdadero", true);
-        Opcion opcion2 = new Opcion("Falso", false);
+        Opcion opcion1 = new Opcion("Verdadero", true,1);
+        Opcion opcion2 = new Opcion("Falso", false,1);
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
@@ -68,8 +68,8 @@ public class ClassicTFTest {
 
     @Test
     public void test05PuedoEvaluarUnaRespuestaTFIncorrecta(){
-        Opcion opcion1 = new Opcion("Verdadero", true);
-        Opcion opcion2 = new Opcion("Falso", false);
+        Opcion opcion1 = new Opcion("Verdadero", true,1);
+        Opcion opcion2 = new Opcion("Falso", false,1);
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);

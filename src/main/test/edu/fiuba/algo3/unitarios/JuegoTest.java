@@ -16,8 +16,8 @@ public class JuegoTest {
             ArrayList<Jugador> jugadores = new ArrayList<>();
             jugadores.add(jugador1);
 
-            Opcion opcion1 = new Opcion("Verdadero", true);
-            Opcion opcion2 = new Opcion("Falso", false);
+            Opcion opcion1 = new Opcion("Verdadero", true,1);
+            Opcion opcion2 = new Opcion("Falso", false,1);
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
             opciones.add(opcion2);

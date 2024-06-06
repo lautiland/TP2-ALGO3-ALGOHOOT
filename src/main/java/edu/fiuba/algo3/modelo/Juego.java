@@ -7,17 +7,23 @@ public class Juego {
     private ArrayList<Pregunta> preguntas;
 
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas){
+        if (jugadores.size() < 2){
+            throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
+        }
+        if (preguntas.isEmpty()){
+            throw new CantidadPreguntasInvalidas("La cantidad de preguntas debe ser al menos 1");
+        }
+
         this.jugadores = jugadores;
         this.preguntas = preguntas;
     }
 
     public void hacerPregunta(){
         Pregunta preguntaActual = preguntas.remove(0);
-        preguntaActual.mostrarPregunta();
         jugadores.forEach(jugador -> {
             ArrayList<Opcion> respuestas = jugador.obtenerRespuestas(preguntaActual);
             int puntaje = preguntaActual.evaluarRespuestas(respuestas);
-            jugador.sumarPuntos(puntaje);
+            jugador.modificarPuntos(puntaje);
         });
     }
 }

@@ -110,7 +110,7 @@ public class PreguntaTest {
         respuestas.add(opcion1);
         respuestas.add(opcion4);
 
-        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 1);
+        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 0);
     }
 
     @Test

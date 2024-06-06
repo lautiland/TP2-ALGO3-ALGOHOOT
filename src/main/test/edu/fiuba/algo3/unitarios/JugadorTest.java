@@ -15,7 +15,7 @@ public class JugadorTest {
     public void test02UnJugadorSumaPuntosCorrectamente(){
         Jugador jugador = new Jugador("Paula");
 
-        jugador.sumarPuntos(5);
+        jugador.modificarPuntos(5);
 
         assert(jugador.getPuntos() == 5);
     }

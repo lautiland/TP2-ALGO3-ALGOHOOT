@@ -20,7 +20,7 @@ public class Jugador {
         return null;
     }
 
-    public void sumarPuntos(int puntos){
+    public void modificarPuntos(int puntos){
         this.puntos += puntos;
     }
 }

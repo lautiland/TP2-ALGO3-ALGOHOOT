@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class ClassicTF extends Pregunta{
     public ClassicTF(String enunciado, ArrayList<Opcion> opciones) {
-        super(enunciado, opciones);
-    }
-
-    @Override
-    public Opcion seleccionarOpcion(int indice) {
-        return this.opciones.get(indice);
+        super(enunciado, opciones, 2,2);
     }
 
     @Override

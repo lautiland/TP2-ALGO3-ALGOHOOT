@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public class PenalidadMC extends Pregunta{
     public PenalidadMC(String enunciado, ArrayList<Opcion> opciones) {
-        super(enunciado, opciones);
-    }
-
-    @Override
-    public Opcion seleccionarOpcion(int indice) {
-        return this.opciones.get(indice);
+        super(enunciado, opciones, 2, 5);
     }
 
     @Override

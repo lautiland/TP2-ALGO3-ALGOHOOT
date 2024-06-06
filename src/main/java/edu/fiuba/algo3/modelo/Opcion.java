@@ -19,10 +19,6 @@ public class Opcion {
         return esCorrecta == opcion.esCorrecta && Objects.equals(texto, opcion.texto);
     }
 
-    public void mostrarOpciones(){
-        System.out.println(this.texto);
-    }
-
     public boolean esCorrecta() {
         return esCorrecta;
     }

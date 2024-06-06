@@ -15,7 +15,8 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Franco Gualdrini** - [FrGcs](https://github.com/FrGcs)
 
 Corrector: **Santiago Valdez**
-
+## Informe 
+El informe del trabajo práctico se puede encontrar [aquí](https://www.overleaf.com/read/hvphqgvmhdpk#1487ae).
 ## Aplicación
 
 La versión más reciente de la aplicación puede encontrarse en la pestaña [releases](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/releases) y ejecutarse en Linux, Windows o Mac de esta forma:

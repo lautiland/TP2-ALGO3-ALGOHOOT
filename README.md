@@ -1,6 +1,7 @@
-[![Static Badge](https://img.shields.io/badge/Github-proyecto_base-00007a?logo=github)](https://github.com/fiuba/algo3_proyecto_base_tp2)
+[![GitHub Release](https://img.shields.io/github/v/release/lautiland/TP2-ALGO3-ALGOHOOT?include_prereleases)](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/releases/latest)
 [![codecov](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT/graph/badge.svg?token=0CU3I0Z2XW)](https://codecov.io/github/lautiland/TP2-ALGO3-ALGOHOOT)
 [![CodeQL](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/actions/workflows/codeql.yml/badge.svg)](https://github.com/lautiland/TP2-ALGO3-ALGOHOOT/actions/workflows/codeql.yml)
+[![Static Badge](https://img.shields.io/badge/Github-proyecto_base-00007a?logo=github)](https://github.com/fiuba/algo3_proyecto_base_tp2)
 
 # TP2 Algoritmos 3: AlgoHoot 
 

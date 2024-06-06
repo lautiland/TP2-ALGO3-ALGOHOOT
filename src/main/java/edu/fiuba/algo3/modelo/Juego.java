@@ -11,7 +11,7 @@ public class Juego {
             throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
         }
         if (preguntas.isEmpty()){
-            throw new CantidadPreguntasInvalidas("La cantidad de preguntas debe ser al menos 1");
+            throw new CantidadPreguntasInvalida("La cantidad de preguntas debe ser al menos 1");
         }
 
         this.jugadores = jugadores;

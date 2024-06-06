@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PenalidadMCTest {
+public class PenaltyMCTest {
     @Test
     public void test01SeIntentaCrearPenalidadMCSinSuficientesOpciones() {
 
@@ -16,7 +16,7 @@ public class PenalidadMCTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta penalidadMC = new PenalidadMC("Elegir las opciones que dicen Si", opciones);
+            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones);
         });
     }
 
@@ -39,7 +39,7 @@ public class PenalidadMCTest {
             opciones.add(opcion5);
             opciones.add(opcion6);
             
-            Pregunta penalidadMC = new PenalidadMC("Elegir las opciones que dicen Si", opciones);
+            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones);
         });
     }
 }

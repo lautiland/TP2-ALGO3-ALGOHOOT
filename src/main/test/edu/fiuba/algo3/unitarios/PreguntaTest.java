@@ -121,7 +121,7 @@ public class PreguntaTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenalidadTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
     }
@@ -134,7 +134,7 @@ public class PreguntaTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenalidadTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -150,7 +150,7 @@ public class PreguntaTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenalidadTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);
@@ -170,7 +170,7 @@ public class PreguntaTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenalidadMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones);
 
         assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
         assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
@@ -188,7 +188,7 @@ public class PreguntaTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenalidadMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -209,7 +209,7 @@ public class PreguntaTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenalidadMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

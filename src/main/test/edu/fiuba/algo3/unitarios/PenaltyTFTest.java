@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PenalidadTFTest {
+public class PenaltyTFTest {
     @Test
     public void test01SeIntentaCrearPenalidadTFSinSuficientesOpciones() {
 
@@ -16,7 +16,7 @@ public class PenalidadTFTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta penalidadTF = new PenalidadTF("Verdadero o Falso", opciones);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones);
         });
     }
 
@@ -33,7 +33,7 @@ public class PenalidadTFTest {
             opciones.add(opcion2);
             opciones.add(opcion3);
             
-            Pregunta penalidadTF = new PenalidadTF("Verdadero o Falso", opciones);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones);
         });
     }
 }

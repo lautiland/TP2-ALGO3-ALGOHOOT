@@ -34,7 +34,7 @@ public class JuegoTest {
 
     @Test
     public void test02NoHayPreguntasEnElJuego(){
-        assertThrows(CantidadPreguntasInvalidas.class, () -> {
+        assertThrows(CantidadPreguntasInvalida.class, () -> {
 
             Jugador jugador1 = new Jugador("Franco");
             Jugador jugador2 = new Jugador("Lautaro");

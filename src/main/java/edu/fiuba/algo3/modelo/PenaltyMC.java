@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public class PenalidadMC extends Pregunta{
-    public PenalidadMC(String enunciado, ArrayList<Opcion> opciones) {
+public class PenaltyMC extends Pregunta{
+    public PenaltyMC(String enunciado, ArrayList<Opcion> opciones) {
         super(enunciado, opciones, 2, 5);
     }
 

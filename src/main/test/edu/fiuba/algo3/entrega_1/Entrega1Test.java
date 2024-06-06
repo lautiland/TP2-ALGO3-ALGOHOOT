@@ -181,7 +181,7 @@ public class Entrega1Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new PenalidadTF("Verdadero o falso?", opciones);
+        Pregunta pregunta = new PenaltyTF("Verdadero o falso?", opciones);
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -213,7 +213,7 @@ public class Entrega1Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new PenalidadTF("Verdadero o falso?", opciones);
+        Pregunta pregunta = new PenaltyTF("Verdadero o falso?", opciones);
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -250,7 +250,7 @@ public class Entrega1Test {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta pregunta = new PenalidadMC("Elija la opcion correcta", opciones);
+        Pregunta pregunta = new PenaltyMC("Elija la opcion correcta", opciones);
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -287,7 +287,7 @@ public class Entrega1Test {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta pregunta = new PenalidadMC("Elija la opcion correcta", opciones);
+        Pregunta pregunta = new PenaltyMC("Elija la opcion correcta", opciones);
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 

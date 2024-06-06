@@ -24,7 +24,7 @@ public class Entrega1Test {
     }
 
     @Test
-    public void test01PreguntaVoFClasicaAsignaPuntosCorrectamente(){
+    public void test01PreguntaTFClasicaAsignaPuntosCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero", true);
         Opcion opcion2 = new Opcion("Falso", false);
         doReturn(new ArrayList<>(){{
@@ -56,7 +56,7 @@ public class Entrega1Test {
     }
 
     @Test
-    public void test02PreguntaVoFClasicaAsignaPuntosCorrectamenteARespuestasIncorrectas(){
+    public void test02PreguntaTFClasicaAsignaPuntosCorrectamenteARespuestasIncorrectas(){
         Opcion opcion1 = new Opcion("Verdadero", false);
         Opcion opcion2 = new Opcion("Falso", true);
         doReturn(new ArrayList<>(){{
@@ -159,5 +159,143 @@ public class Entrega1Test {
 
         assertEquals(0,jugador1Spy.getPuntos());
         assertEquals(0, jugador2Spy.getPuntos());
+    }
+
+    @Test
+    public void test05PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasCorrectas(){
+        Opcion opcion1 = new Opcion("Verdadero", false);
+        Opcion opcion2 = new Opcion("Falso", true);
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+
+        Pregunta pregunta = new PenalidadTF("Verdadero o falso?", opciones);
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.hacerPregunta();
+
+        assertEquals(1,jugador1Spy.getPuntos());
+        assertEquals(1, jugador2Spy.getPuntos());
+    }
+
+    @Test
+    public void test06PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasIncorrectas(){
+        Opcion opcion1 = new Opcion("Verdadero", false);
+        Opcion opcion2 = new Opcion("Falso", true);
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+
+        Pregunta pregunta = new PenalidadTF("Verdadero o falso?", opciones);
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.hacerPregunta();
+
+        assertEquals(-1,jugador1Spy.getPuntos());
+        assertEquals(-1, jugador2Spy.getPuntos());
+    }
+
+    @Test
+    public void test07PreguntaMultipleChoicePenalidadAsignaPuntosCorrectamenteAJugadoresQueRespondieronCorrectamente(){
+        Opcion opcion1 = new Opcion("Respuesta1", true);
+        Opcion opcion2 = new Opcion("Respuesta2", false);
+        Opcion opcion3 = new Opcion("Respuesta3", true);
+        Opcion opcion4 = new Opcion("Respuesta4", false);
+
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+            add(opcion3);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion1);
+            add(opcion3);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+
+        Pregunta pregunta = new PenalidadMC("Elija la opcion correcta", opciones);
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.hacerPregunta();
+
+        assertEquals(2,jugador1Spy.getPuntos());
+        assertEquals(2, jugador2Spy.getPuntos());
+    }
+
+    @Test
+    public void test08PreguntaMultipleChoicePenalidadAsignaPuntosCorrectamenteAJugadoresQueRespondieronIncorrectamente(){
+        Opcion opcion1 = new Opcion("Respuesta1", true);
+        Opcion opcion2 = new Opcion("Respuesta2", false);
+        Opcion opcion3 = new Opcion("Respuesta3", true);
+        Opcion opcion4 = new Opcion("Respuesta4", false);
+
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+            add(opcion4);
+        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
+        doReturn(new ArrayList<>(){{
+            add(opcion2);
+            add(opcion4);
+        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1Spy);
+        jugadores.add(jugador2Spy);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+
+        Pregunta pregunta = new PenalidadMC("Elija la opcion correcta", opciones);
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.hacerPregunta();
+
+        assertEquals(-2,jugador1Spy.getPuntos());
+        assertEquals(-2, jugador2Spy.getPuntos());
     }
 }

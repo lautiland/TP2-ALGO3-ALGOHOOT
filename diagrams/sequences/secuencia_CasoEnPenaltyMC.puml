@@ -1,0 +1,38 @@
+@startuml
+
+!theme plain
+skinparam style strictuml
+
+Actor Usuario
+
+create "o1:Opcion"
+Usuario -> "o1:Opcion" : Opcion("Respuesta1", true)
+
+create "o2:Opcion"
+Usuario -> "o2:Opcion" : Opcion("Respuesta2", false)
+
+create "o3:Opcion"
+Usuario -> "o3:Opcion" : Opcion("Respuesta3", true)
+
+create "o4:Opcion"
+Usuario -> "o4:Opcion" : Opcion("Respuesta4", false)
+
+create "__:PenaltyMC__"
+Usuario -> "__:PenaltyMC__" : PenaltyMC("Elija la o correcta", List<Opcion>)
+
+create "__:Juego__"
+Usuario -> "__:Juego__" : Juego(jugadores : List<Jugador>, preguntas : List<Pregunta>)
+
+Usuario -> "__:Juego__" : hacerPregunta()
+
+
+loop for each player
+    "__:Juego__" -> "__:Jugador__" : obtenerRespuestas(...)
+    "__:Juego__" <-- "__:Jugador__" : respuestaDeJugador
+    "__:Juego__" -> "__:PenaltyMC__" : evaluarRespuestas(respuestaDeJugador)
+    "__:Juego__" <-- "__:PenaltyMC__" : puntosCorrespondientes
+    "__:Juego__" -> "__:Jugador__" : modificarPuntos(puntosCorrespondientes)
+end
+
+
+@enduml

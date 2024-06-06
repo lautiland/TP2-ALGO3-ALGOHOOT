@@ -5,8 +5,8 @@ skinparam style strictuml
 
 Actor TestCase
 
-create "ocpion1:Opcion"
-TestCase -> "ocpion1:Opcion" : Opcion("Verdadero", true)
+create "opcion1:Opcion"
+TestCase -> "opcion1:Opcion" : Opcion("Verdadero", true)
 
 create "opcion2:Opcion"
 TestCase -> "opcion2:Opcion" : Opcion("Falso", false)
@@ -17,7 +17,7 @@ TestCase -> "__:ClassicTF__" : ClassicTF("¿Verdadero o falso?", List<Opcion>)
 create "__:Juego__"
 TestCase -> "__:Juego__" : Juego(jugadores : List<Jugador>, preguntas : List<Pregunta>)
 
-TestCase -> "__:Juego__" : hacerPreguntas()
+TestCase -> "__:Juego__" : hacerPregunta()
 
 "__:Juego__" -> "jugador1Spy:Jugador" : obtenerRespuestas(...)
 "__:Juego__" <-- "jugador1Spy:Jugador" : [opcion1]

@@ -26,8 +26,8 @@ Juego .up.> CantidadJugadoresInvalida : "instanciate"
 Juego .up.> CantidadPreguntasInvalida : "instanciate"
 Pregunta .up.> CantidadOpcionesInvalida : "instanciate"
 
-CantidadJugadoresInvalida <|-left- Exception
-CantidadOpcionesInvalida <|-up- Exception
-CantidadPreguntasInvalida <|-left- Exception
+CantidadJugadoresInvalida -left-|> Exception
+CantidadOpcionesInvalida -up-|> Exception
+CantidadPreguntasInvalida -left-|> Exception
 
 @enduml

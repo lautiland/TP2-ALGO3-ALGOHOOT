@@ -1,0 +1,49 @@
+@startuml
+
+!theme plain
+skinparam style strictuml
+
+Actor TestCase
+
+create "opcion1:Opcion"
+TestCase -> "opcion1:Opcion" : Opcion("Respuesta1", true)
+
+create "opcion2:Opcion"
+TestCase -> "opcion2:Opcion" : Opcion("Respuesta2", false)
+
+create "opcion3:Opcion"
+TestCase -> "opcion3:Opcion" : Opcion("Respuesta3", true)
+
+create "opcion4:Opcion"
+TestCase -> "opcion4:Opcion" : Opcion("Respuesta4", false)
+
+create "__:PenaltyMC__"
+TestCase -> "__:PenaltyMC__" : PenaltyMC("Elija la opcion correcta", List<Opcion>)
+
+create "__:Juego__"
+TestCase -> "__:Juego__" : Juego(jugadores : List<Jugador>, preguntas : List<Pregunta>)
+
+TestCase -> "__:Juego__" : hacerPregunta()
+
+"__:Juego__" -> "jugador1Spy:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "jugador1Spy:Jugador" : [opcion1, opcion3]
+"__:Juego__" -> "__:PenaltyMC__" : evaluarRespuestas([opcion1, opcion3])
+"__:Juego__" <-- "__:PenaltyMC__" : 2
+"__:Juego__" -> "jugador1Spy:Jugador" : modificarPuntos(2)
+
+"__:Juego__" -> "jugador2Spy:Jugador" : obtenerRespuestas(...)
+"__:Juego__" <-- "jugador2Spy:Jugador" : [opcion1, opcion3]
+"__:Juego__" -> "__:PenaltyMC__" : evaluarRespuestas([opcion1, opcion3])
+"__:Juego__" <-- "__:PenaltyMC__" : 2
+"__:Juego__" -> "jugador2Spy:Jugador" : modificarPuntos(2)
+
+TestCase -> "jugador1Spy:Jugador": getPuntos()
+TestCase <-- "jugador1Spy:Jugador": 2
+
+TestCase -> "jugador2Spy:Jugador": getPuntos()
+TestCase <-- "jugador2Spy:Jugador": 2
+
+TestCase -> TestCase : AssertEquals(2, 2)
+TestCase -> TestCase : AssertEquals(2, 2)
+
+@enduml

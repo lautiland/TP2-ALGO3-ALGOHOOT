@@ -5,10 +5,12 @@ import java.util.Objects;
 public class Opcion {
     private final String texto;
     private final boolean esCorrecta;
+    private final int orden;
 
-    public Opcion(String texto, boolean esCorrecta){
+    public Opcion(String texto, boolean esCorrecta, int orden){
         this.texto = texto;
         this.esCorrecta = esCorrecta;
+        this.orden = orden;
     }
 
     @Override
@@ -22,4 +24,10 @@ public class Opcion {
     public boolean esCorrecta() {
         return esCorrecta;
     }
+
+    public int getOrden(){
+        return orden;
+    }
+
 }
+

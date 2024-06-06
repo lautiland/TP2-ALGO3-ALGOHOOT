@@ -25,8 +25,8 @@ public class Entrega1Test {
 
     @Test
     public void test01PreguntaTFClasicaAsignaPuntosCorrectamente(){
-        Opcion opcion1 = new Opcion("Verdadero", true);
-        Opcion opcion2 = new Opcion("Falso", false);
+        Opcion opcion1 = new Opcion("Verdadero", true,1);
+        Opcion opcion2 = new Opcion("Falso", false,1);
         doReturn(new ArrayList<>(){{
             add(opcion1);
         }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
@@ -57,8 +57,8 @@ public class Entrega1Test {
 
     @Test
     public void test02PreguntaTFClasicaAsignaPuntosCorrectamenteARespuestasIncorrectas(){
-        Opcion opcion1 = new Opcion("Verdadero", false);
-        Opcion opcion2 = new Opcion("Falso", true);
+        Opcion opcion1 = new Opcion("Verdadero", false,1);
+        Opcion opcion2 = new Opcion("Falso", true,1);
         doReturn(new ArrayList<>(){{
             add(opcion1);
         }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
@@ -89,10 +89,10 @@ public class Entrega1Test {
 
     @Test
     public void test03PreguntaMultipleChoiceClasicaAsignaPuntosCorrectamente(){
-        Opcion opcion1 = new Opcion("Respuesta1", true);
-        Opcion opcion2 = new Opcion("Respuesta2", false);
-        Opcion opcion3 = new Opcion("Respuesta3", true);
-        Opcion opcion4 = new Opcion("Respuesta4", false);
+        Opcion opcion1 = new Opcion("Respuesta1", true,1);
+        Opcion opcion2 = new Opcion("Respuesta2", false,1);
+        Opcion opcion3 = new Opcion("Respuesta3", true,1);
+        Opcion opcion4 = new Opcion("Respuesta4", false,1);
 
         doReturn(new ArrayList<>(){{
             add(opcion1);
@@ -126,10 +126,10 @@ public class Entrega1Test {
 
     @Test
     public void test04PreguntaMultipleChoiceClasicaAsignaPuntosCorrectamenteAJugadoresQueRespondieronIncorrectamente(){
-        Opcion opcion1 = new Opcion("Respuesta1", true);
-        Opcion opcion2 = new Opcion("Respuesta2", false);
-        Opcion opcion3 = new Opcion("Respuesta3", true);
-        Opcion opcion4 = new Opcion("Respuesta4", false);
+        Opcion opcion1 = new Opcion("Respuesta1", true,1);
+        Opcion opcion2 = new Opcion("Respuesta2", false,1);
+        Opcion opcion3 = new Opcion("Respuesta3", true,1);
+        Opcion opcion4 = new Opcion("Respuesta4", false,1);
 
         doReturn(new ArrayList<>(){{
             add(opcion2);
@@ -163,8 +163,8 @@ public class Entrega1Test {
 
     @Test
     public void test05PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasCorrectas(){
-        Opcion opcion1 = new Opcion("Verdadero", false);
-        Opcion opcion2 = new Opcion("Falso", true);
+        Opcion opcion1 = new Opcion("Verdadero", false,1);
+        Opcion opcion2 = new Opcion("Falso", true,1);
         doReturn(new ArrayList<>(){{
             add(opcion2);
         }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
@@ -195,8 +195,8 @@ public class Entrega1Test {
 
     @Test
     public void test06PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasIncorrectas(){
-        Opcion opcion1 = new Opcion("Verdadero", false);
-        Opcion opcion2 = new Opcion("Falso", true);
+        Opcion opcion1 = new Opcion("Verdadero", false,1);
+        Opcion opcion2 = new Opcion("Falso", true,1);
         doReturn(new ArrayList<>(){{
             add(opcion1);
         }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
@@ -227,10 +227,10 @@ public class Entrega1Test {
 
     @Test
     public void test07PreguntaMultipleChoicePenalidadAsignaPuntosCorrectamenteAJugadoresQueRespondieronCorrectamente(){
-        Opcion opcion1 = new Opcion("Respuesta1", true);
-        Opcion opcion2 = new Opcion("Respuesta2", false);
-        Opcion opcion3 = new Opcion("Respuesta3", true);
-        Opcion opcion4 = new Opcion("Respuesta4", false);
+        Opcion opcion1 = new Opcion("Respuesta1", true,1);
+        Opcion opcion2 = new Opcion("Respuesta2", false,1);
+        Opcion opcion3 = new Opcion("Respuesta3", true,1);
+        Opcion opcion4 = new Opcion("Respuesta4", false,1);
 
         doReturn(new ArrayList<>(){{
             add(opcion1);
@@ -264,10 +264,10 @@ public class Entrega1Test {
 
     @Test
     public void test08PreguntaMultipleChoicePenalidadAsignaPuntosCorrectamenteAJugadoresQueRespondieronIncorrectamente(){
-        Opcion opcion1 = new Opcion("Respuesta1", true);
-        Opcion opcion2 = new Opcion("Respuesta2", false);
-        Opcion opcion3 = new Opcion("Respuesta3", true);
-        Opcion opcion4 = new Opcion("Respuesta4", false);
+        Opcion opcion1 = new Opcion("Respuesta1", true,1);
+        Opcion opcion2 = new Opcion("Respuesta2", false,1);
+        Opcion opcion3 = new Opcion("Respuesta3", true,1);
+        Opcion opcion4 = new Opcion("Respuesta4", false,1);
 
         doReturn(new ArrayList<>(){{
             add(opcion2);

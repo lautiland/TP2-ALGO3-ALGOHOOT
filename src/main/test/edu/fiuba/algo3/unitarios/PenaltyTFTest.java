@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.unitarios;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
+import edu.fiuba.algo3.modelo.pregunta.PenaltyTF;
+import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

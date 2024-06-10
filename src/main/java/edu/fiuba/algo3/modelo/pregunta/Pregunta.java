@@ -1,4 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.pregunta;
+
+import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
+import edu.fiuba.algo3.modelo.Opcion;
 
 import java.util.ArrayList;
 

@@ -16,11 +16,11 @@ public class ClassicMCTest {
     public void test01SeIntentaCrearClassicMCSinSuficientesOpciones() {
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Si", true,1);
+            Opcion opcion1 = new Opcion("Si");
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones);
+            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
         });
     }
 
@@ -29,12 +29,12 @@ public class ClassicMCTest {
     public void test02SeIntentaCrearClassicMCConDemasiadasOpciones(){
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Si", true,1);
-            Opcion opcion2 = new Opcion("No", false,1);
-            Opcion opcion3 = new Opcion("Si", true,1);
-            Opcion opcion4 = new Opcion("Siuuuu", false,1);
-            Opcion opcion5 = new Opcion("Si", true,1);
-            Opcion opcion6 = new Opcion("Si", true,1);
+            Opcion opcion1 = new Opcion("Si");
+            Opcion opcion2 = new Opcion("No");
+            Opcion opcion3 = new Opcion("Si");
+            Opcion opcion4 = new Opcion("Siuuuu");
+            Opcion opcion5 = new Opcion("Si");
+            Opcion opcion6 = new Opcion("Si");
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
             opciones.add(opcion2);
@@ -43,23 +43,23 @@ public class ClassicMCTest {
             opciones.add(opcion5);
             opciones.add(opcion6);
             
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones);
+            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
         });
     }
 
     @Test
     public void test03PuedoSeleccionarUnaPreguntaMCCorrectamente(){
-        Opcion opcion1 = new Opcion("Opcion 1", true,1);
-        Opcion opcion2 = new Opcion("Opcion 2", false,1);
-        Opcion opcion3 = new Opcion("Opcion 3", true,1);
-        Opcion opcion4 = new Opcion("Opcion 4", false,1);
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
 
         assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
         assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
@@ -67,17 +67,17 @@ public class ClassicMCTest {
 
     @Test
     public void test04PuedoEvaluarUnaRespuestaMCCorrecta(){
-        Opcion opcion1 = new Opcion("Opcion 1", true,1);
-        Opcion opcion2 = new Opcion("Opcion 2", false,1);
-        Opcion opcion3 = new Opcion("Opcion 3", true,1);
-        Opcion opcion4 = new Opcion("Opcion 4", false,1);
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -88,17 +88,17 @@ public class ClassicMCTest {
 
     @Test
     public void test05PuedoEvaluarUnaRespuestaMCIncorrecta(){
-        Opcion opcion1 = new Opcion("Opcion 1", true,1);
-        Opcion opcion2 = new Opcion("Opcion 2", false,1);
-        Opcion opcion3 = new Opcion("Opcion 3", true,1);
-        Opcion opcion4 = new Opcion("Opcion 4", false,1);
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

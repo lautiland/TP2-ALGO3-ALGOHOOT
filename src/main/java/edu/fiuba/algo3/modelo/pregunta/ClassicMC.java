@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.pregunta;
-
 import edu.fiuba.algo3.modelo.Opcion;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class ClassicMC extends Pregunta{
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         for (Opcion respuesta : respuestas) {
-            if ( !opcionesCorrectas.contains(respuesta) ) return 0;
+            if (!opcionesCorrectas.contains(respuesta)) return 0;
         }
         return 1;
     }

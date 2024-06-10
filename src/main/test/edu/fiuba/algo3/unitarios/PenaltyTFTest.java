@@ -16,11 +16,11 @@ public class PenaltyTFTest {
     public void test01SeIntentaCrearPenalidadTFSinSuficientesOpciones() {
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Verdadero", true,1);
+            Opcion opcion1 = new Opcion("Verdadero");
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1);
         });
     }
 
@@ -29,40 +29,40 @@ public class PenaltyTFTest {
     public void test02SeIntentaCrearPenalidadTFConDemasiadasOpciones(){
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
-            Opcion opcion1 = new Opcion("Verdadero", true,1);
-            Opcion opcion2 = new Opcion("Falso", false,1);
-            Opcion opcion3 = new Opcion("Verdadero", true,1);
+            Opcion opcion1 = new Opcion("Verdadero");
+            Opcion opcion2 = new Opcion("Falso");
+            Opcion opcion3 = new Opcion("Verdadero");
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
             opciones.add(opcion2);
             opciones.add(opcion3);
             
-            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1);
         });
     }
 
     @Test
     public void test03PuedoSeleccionarUnaPreguntaPenalidadTFCorrectamente(){
-        Opcion opcion1 = new Opcion("Verdadero", true,1);
-        Opcion opcion2 = new Opcion("Falso", false,1);
+        Opcion opcion1 = new Opcion("Verdadero");
+        Opcion opcion2 = new Opcion("Falso");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
     }
 
     @Test
     public void test04PuedoEvaluarUnaRespuestaPenalidadTFCorrecta(){
-        Opcion opcion1 = new Opcion("Verdadero", true,1);
-        Opcion opcion2 = new Opcion("Falso", false,1);
+        Opcion opcion1 = new Opcion("Verdadero");
+        Opcion opcion2 = new Opcion("Falso");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -72,13 +72,13 @@ public class PenaltyTFTest {
 
     @Test
     public void test05PuedoEvaluarUnaRespuestaPenalidadTFIncorrecta(){
-        Opcion opcion1 = new Opcion("Verdadero", true,1);
-        Opcion opcion2 = new Opcion("Falso", false,1);
+        Opcion opcion1 = new Opcion("Verdadero");
+        Opcion opcion2 = new Opcion("Falso");
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);

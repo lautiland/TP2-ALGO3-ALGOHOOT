@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
     public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas) {
-        super(enunciado, opcionesOrdenadas, 2, 5);
+        super(enunciado, opcionesOrdenadas, 2, 6);
     }
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         int i = 0;
         for (Opcion respuesta : respuestas) {
-            if( respuesta != opciones.get(i) ) return 0;
+            if(!(opciones.get(i) == respuesta)) return 0;
+            i++;
         }
         return 1;
     }

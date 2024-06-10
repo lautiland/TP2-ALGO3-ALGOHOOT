@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class ClassicTF extends Pregunta{
     private final Opcion opcionCorrecta;
     public ClassicTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
+
         super(enunciado, opciones, 2,2);
         this.opcionCorrecta = opcionCorrecta;
     }

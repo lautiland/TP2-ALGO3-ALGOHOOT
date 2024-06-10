@@ -1,7 +1,8 @@
 package edu.fiuba.algo3;
 
-public class Main {
-    public static void main(String[] args) {
+import java.io.IOException;
 
+public class Main {
+    public static void main(String[] args) throws IOException {
     }
 }

@@ -5,22 +5,16 @@ import edu.fiuba.algo3.modelo.Opcion;
 import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
-    public OrderedChoice(String enunciado, ArrayList<Opcion> opciones) {
-        super(enunciado, opciones, 2, 5);
+    public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas) {
+        super(enunciado, opcionesOrdenadas, 2, 5);
     }
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        int puntosTotales = 1;
-        int i = 1;
+        int i = 0;
         for (Opcion respuesta : respuestas) {
-            if (respuesta.getOrden() == i) {
-                i++;
-            }else{
-                puntosTotales = 0;
-                break;
-            }
+            if( respuesta != opciones.get(i) ) return 0;
         }
-        return puntosTotales;
+        return 1;
     }
 }

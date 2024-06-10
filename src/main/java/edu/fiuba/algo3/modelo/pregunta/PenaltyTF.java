@@ -5,12 +5,14 @@ import edu.fiuba.algo3.modelo.Opcion;
 import java.util.ArrayList;
 
 public class PenaltyTF extends Pregunta{
-    public PenaltyTF(String enunciado, ArrayList<Opcion> opciones) {
+    private final Opcion opcionCorrecta;
+    public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
         super(enunciado, opciones, 2,2);
+        this.opcionCorrecta = opciones.get(0);
     }
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        return  (respuestas.get(0).esCorrecta()) ? 1 : -1;
+        return  (respuestas.get(0).equals(opcionCorrecta)) ? 1 : -1;
     }
 }

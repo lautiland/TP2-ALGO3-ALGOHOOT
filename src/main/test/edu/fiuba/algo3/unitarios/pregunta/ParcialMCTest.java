@@ -1,8 +1,8 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.pregunta;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
-import edu.fiuba.algo3.modelo.pregunta.ClassicMC;
+import edu.fiuba.algo3.modelo.pregunta.ParcialMC;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
@@ -11,23 +11,23 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ClassicMCTest {
+public class ParcialMCTest {
     @Test
-    public void test01SeIntentaCrearClassicMCSinSuficientesOpciones() {
+    public void test01SeIntentaCrearParcialMCSinSuficientesOpciones() {
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
             Opcion opcion1 = new Opcion("Si");
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
-            classicMC.evaluarRespuestas(opciones);
+            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones);
+            parcialMC.evaluarRespuestas(opciones);
         });
     }
 
 
     @Test
-    public void test02SeIntentaCrearClassicMCConDemasiadasOpciones(){
+    public void test02SeIntentaCrearParcialMCConDemasiadasOpciones(){
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
             Opcion opcion1 = new Opcion("Si");
@@ -43,14 +43,14 @@ public class ClassicMCTest {
             opciones.add(opcion4);
             opciones.add(opcion5);
             opciones.add(opcion6);
-            
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
-            classicMC.evaluarRespuestas(opciones);
+
+            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones);
+            parcialMC.evaluarRespuestas(opciones);
         });
     }
 
     @Test
-    public void test03PuedoSeleccionarUnaPreguntaMCCorrectamente(){
+    public void test03PuedoSeleccionarUnaPreguntaParcialMCCorrectamente(){
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");
@@ -61,14 +61,14 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones);
 
-        assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
-        assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
+        assertEquals(parcialMC.seleccionarOpcion(2), opcion3);
+        assertEquals(parcialMC.seleccionarOpcion(3), opcion4);
     }
 
     @Test
-    public void test04PuedoEvaluarUnaRespuestaMCCorrecta(){
+    public void test04PuedoEvaluarUnaRespuestaParcialMCCorrecta(){
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");
@@ -79,19 +79,17 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
-        respuestas.add(opcion2);
         respuestas.add(opcion3);
-        respuestas.add(opcion4);
 
-        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 1);
+        assertEquals(parcialMC.evaluarRespuestas(respuestas), 2);
     }
 
     @Test
-    public void test05PuedoEvaluarUnaRespuestaMCIncorrecta(){
+    public void test05PuedoEvaluarUnaRespuestaParcialMCIncorrecta(){
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");
@@ -102,12 +100,17 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        ArrayList<Opcion> respuestasCorrectas = new ArrayList<>();
+        respuestasCorrectas.add(opcion2);
+        respuestasCorrectas.add(opcion3);
+
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, respuestasCorrectas);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
         respuestas.add(opcion4);
 
-        assertEquals(0, preguntaMC.evaluarRespuestas(respuestas));
+        assertEquals(parcialMC.evaluarRespuestas(respuestas), 0);
     }
 }
+

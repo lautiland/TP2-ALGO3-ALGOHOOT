@@ -9,8 +9,12 @@ public class Jugador {
     private int puntos;
 
     public Jugador(String nombre){
-        this.nombre = nombre;
         this.puntos = 0;
+        this.nombre = nombre;
+    }
+
+    public String getNombre(){
+        return this.nombre;
     }
 
     public int getPuntos(){
@@ -24,7 +28,6 @@ public class Jugador {
         Por cada opcion posible:
             obtener opcion de índice X
           (Para ordered, o multiple choice)
-
          */
         return null;
     }

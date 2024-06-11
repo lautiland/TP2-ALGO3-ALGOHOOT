@@ -13,8 +13,8 @@ public class GroupChoice extends Pregunta{
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestasGrupo1) {
-        for (Opcion respuesta : respuestasGrupo1) {
-            if (!opcionesGrupo1.contains(respuesta)) return 0;
+        for (Opcion opcion : opcionesGrupo1) {
+            if (!respuestasGrupo1.contains(opcion)) return 0;
         }
         return 1;
     }

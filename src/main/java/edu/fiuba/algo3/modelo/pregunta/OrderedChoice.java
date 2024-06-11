@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
     public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas) {
-        super(enunciado, opcionesOrdenadas, 2, 6);
+        super(enunciado, opcionesOrdenadas, 2, 5);
     }
 
     @Override

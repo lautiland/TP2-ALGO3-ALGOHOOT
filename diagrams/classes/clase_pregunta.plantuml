@@ -1,0 +1,63 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+abstract Pregunta {
+    - enunciado : String
+    # Pregunta(enunciado : String, opciones : List<Opcion>, cantidadOpcionesMin : Int, cantidadOpcionesMax : Int
+    + seleccionarOpcion(indice : Int): Opcion
+    + {abstract} evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class ClassicTF {
+    - opcionCorrecta : Opcion
+    + ClassicTF(pregunta : String, opciones : List<Opcion>, opcionCorrecta : Opcion)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class PenaltyTF {
+    - opcionCorrecta : Opcion
+    + PenaltyTF(pregunta : String, opciones : List<Opcion>, opcionCorrecta : Opcion)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class ClassicMC {
+    - opcionesCorrectas : List<Opcion>
+    + ClassicMC(pregunta : String, opciones : List<Opcion>, opcionesCorrectas : List<Opcion>)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class PenaltyMC {
+    - opcionesCorrectas : List<Opcion>
+    + PenaltyMC(pregunta : String, opciones : List<Opcion>, opcionesCorrectas : List<Opcion>)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class ParcialMC {
+    - opcionesCorrectas : List<Opcion>
+    + ParcialMC(pregunta : String, opciones : List<Opcion>, opcionesCorrectas : List<Opcion>)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class OderedChoice {
+    + OderedChoice(pregunta : String, opcionesOrdenadas : List<Opcion>)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+class GroupChoice {
+    - opcionesGrupo1 : List<Opcion>
+    + GroupChoice(pregunta : String, opciones : List<Opcion>, opcionesGrupo1 : List<Opcion>)
+    + evaluarRespuestas(respuestas : List<Opcion>): Int
+}
+
+ClassicTF .down.|> Pregunta
+ClassicMC .down.|> Pregunta
+PenaltyTF .down.|> Pregunta
+PenaltyMC .down.|> Pregunta
+ParcialMC .up.|> Pregunta
+OderedChoice .up.|> Pregunta
+GroupChoice .up.|> Pregunta
+
+@enduml

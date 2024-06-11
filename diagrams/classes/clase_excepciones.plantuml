@@ -1,6 +1,8 @@
 @startuml
 
-!theme plain
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
 
 class Juego {
     - jugadores : List<Jugador>

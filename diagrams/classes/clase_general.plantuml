@@ -1,6 +1,8 @@
 @startuml
 
-!theme plain
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
 
 class Juego {
     + Juego(jugadores: List<Jugador>, preguntas : List<Pregunta>)
@@ -11,8 +13,9 @@ class Jugador {
     - nombre : String
     - puntos : Int
     + Jugador(nombre : String)
-    + obtenerRespuestas(pregunta : Pregunta): List<Opcion>
     + getPuntos(): Int
+    + getNombre(): String
+    + obtenerRespuestas(pregunta : Pregunta): List<Opcion>
     + modificarPuntos(puntos : Int): Void
 }
 
@@ -23,40 +26,14 @@ abstract Pregunta {
     + {abstract} evaluarRespuestas(respuestas : List<Opcion>): Int
 }
 
-Class Opcion {
+class Opcion {
     - texto : String
-    - esCorrecta : Bool
-    + Opcion(texto : String, esCorrecta : Bool)
-    + esCorrecta(): Bool
+    + Opcion(texto : String)
     + equals(opcion : Object): Bool
 }
 
-class ClassicTF {
-    + ClassicTF(pregunta : String, respuesta : Bool)
-    + evaluarRespuestas(respuestas : List<Opcion>): Int
-}
-
-class PenaltyTF {
-    + PenaltyTF(pregunta : String, respuesta : Bool)
-    + evaluarRespuestas(respuestas : List<Opcion>): Int
-}
-
-class ClassicMC {
-    + ClassicMC(pregunta : String, opciones : List<Opcion>)
-    + evaluarRespuestas(respuestas : List<Opcion>): Int
-}
-
-class PenaltyMC {
-    + PenaltyMC(pregunta : String, opciones : List<Opcion>)
-    + evaluarRespuestas(respuestas : List<Opcion>): Int
-}
-
 Juego o-down- "1..*" Pregunta
-Juego o-right- "2..*" Jugador
-Pregunta o-left- Opcion
-ClassicTF .up.|> Pregunta
-ClassicMC .up.|> Pregunta
-PenaltyTF .up.|> Pregunta
-PenaltyMC .up.|> Pregunta
+Juego o-left- "2..*" Jugador
+Pregunta o-left- "2..*" Opcion
 
 @enduml

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class PenaltyMC extends Pregunta{
     private final ArrayList<Opcion> opcionesCorrectas;
-    public PenaltyMC(String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas  ) {
+    public PenaltyMC(String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas) {
         super(enunciado, opciones, 2, 5);
         this.opcionesCorrectas = opcionesCorrectas;
     }

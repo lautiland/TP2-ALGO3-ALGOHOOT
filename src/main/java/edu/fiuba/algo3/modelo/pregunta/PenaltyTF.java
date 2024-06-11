@@ -8,7 +8,7 @@ public class PenaltyTF extends Pregunta{
     private final Opcion opcionCorrecta;
     public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
         super(enunciado, opciones, 2,2);
-        this.opcionCorrecta = opciones.get(0);
+        this.opcionCorrecta = opcionCorrecta;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class PenaltyMCTest {
             opciones.add(opcion1);
 
             Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones);
+            penalidadMC.evaluarRespuestas(opciones);
         });
     }
 
@@ -44,6 +45,7 @@ public class PenaltyMCTest {
             opciones.add(opcion6);
             
             Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones);
+            penalidadMC.evaluarRespuestas(opciones);
         });
     }
 
@@ -98,13 +100,17 @@ public class PenaltyMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones);
+        ArrayList<Opcion> respuestasCorrectas = new ArrayList<>();
+        respuestasCorrectas.add(opcion2);
+        respuestasCorrectas.add(opcion3);
+
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, respuestasCorrectas);
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
         respuestas.add(opcion4);
 
-        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 0);
+        assertEquals(preguntaMC.evaluarRespuestas(respuestas), -2);
     }
 }
 

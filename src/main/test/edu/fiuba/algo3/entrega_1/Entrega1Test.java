@@ -125,8 +125,8 @@ public class Entrega1Test {
 
         juego.hacerPregunta();
 
-        assertEquals(2,jugador1Spy.getPuntos());
-        assertEquals(2, jugador2Spy.getPuntos());
+        assertEquals(1,jugador1Spy.getPuntos());
+        assertEquals(1, jugador2Spy.getPuntos());
     }
 
     @Test

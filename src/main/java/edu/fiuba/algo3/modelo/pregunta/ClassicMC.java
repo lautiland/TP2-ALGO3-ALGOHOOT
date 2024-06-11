@@ -12,8 +12,8 @@ public class ClassicMC extends Pregunta{
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        for (Opcion respuesta : respuestas) {
-            if (!opcionesCorrectas.contains(respuesta)) return 0;
+        for (Opcion opcionCorrecta : opcionesCorrectas) {
+            if (!respuestas.contains(opcionCorrecta)) return 0;
         }
         return 1;
     }

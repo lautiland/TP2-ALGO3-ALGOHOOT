@@ -21,6 +21,7 @@ public class ClassicMCTest {
             opciones.add(opcion1);
 
             Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
+            classicMC.evaluarRespuestas(opciones);
         });
     }
 
@@ -44,6 +45,7 @@ public class ClassicMCTest {
             opciones.add(opcion6);
             
             Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
+            classicMC.evaluarRespuestas(opciones);
         });
     }
 
@@ -81,9 +83,11 @@ public class ClassicMCTest {
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
+        respuestas.add(opcion2);
         respuestas.add(opcion3);
+        respuestas.add(opcion4);
 
-        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 2);
+        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 1);
     }
 
     @Test
@@ -104,6 +108,6 @@ public class ClassicMCTest {
         respuestas.add(opcion1);
         respuestas.add(opcion4);
 
-        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 0);
+        assertEquals(0, preguntaMC.evaluarRespuestas(respuestas));
     }
 }

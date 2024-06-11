@@ -8,36 +8,32 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class Entrega1Test {
 
-    private Jugador jugador1Spy;
-    private Jugador jugador2Spy;
+    private Jugador jugador1;
+    private Jugador jugador2;
 
     @BeforeEach
     public void beforeEach() {
-        Jugador jugador1 = new Jugador("Juan");
-        Jugador jugador2 = new Jugador("Daniel");
-
-        jugador1Spy = spy(jugador1);
-        jugador2Spy = spy(jugador2);
+       jugador1 = new Jugador("Juan");
+       jugador2 = new Jugador("Daniel");
     }
 
     @Test
     public void test01PreguntaTFClasicaAsignaPuntosCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
 
         ArrayList<Opcion> opciones = new ArrayList<>();
@@ -50,26 +46,26 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(1,jugador1Spy.getPuntos());
-        assertEquals(1, jugador2Spy.getPuntos());
+        assertEquals(1,jugador1.getPuntos());
+        assertEquals(1, jugador2.getPuntos());
     }
 
     @Test
     public void test02PreguntaTFClasicaAsignaPuntosCorrectamenteARespuestasIncorrectas(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
 
         ArrayList<Opcion> opciones = new ArrayList<>();
@@ -82,10 +78,10 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(0,jugador1Spy.getPuntos());
-        assertEquals(0, jugador2Spy.getPuntos());
+        assertEquals(0,jugador1.getPuntos());
+        assertEquals(0, jugador2.getPuntos());
     }
 
     @Test
@@ -95,17 +91,17 @@ public class Entrega1Test {
         Opcion opcion3 = new Opcion("Respuesta3");
         Opcion opcion4 = new Opcion("Respuesta4");
 
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion1);
             add(opcion3);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion1);
             add(opcion3);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
@@ -123,10 +119,10 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(1,jugador1Spy.getPuntos());
-        assertEquals(1, jugador2Spy.getPuntos());
+        assertEquals(1,jugador1.getPuntos());
+        assertEquals(1, jugador2.getPuntos());
     }
 
     @Test
@@ -136,17 +132,17 @@ public class Entrega1Test {
         Opcion opcion3 = new Opcion("Respuesta3");
         Opcion opcion4 = new Opcion("Respuesta4");
 
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion2);
             add(opcion4);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion2);
             add(opcion4);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
@@ -164,26 +160,26 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(0,jugador1Spy.getPuntos());
-        assertEquals(0, jugador2Spy.getPuntos());
+        assertEquals(0,jugador1.getPuntos());
+        assertEquals(0, jugador2.getPuntos());
     }
 
     @Test
     public void test05PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasCorrectas(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion2);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion2);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
 
         ArrayList<Opcion> opciones = new ArrayList<>();
@@ -196,26 +192,26 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(1,jugador1Spy.getPuntos());
-        assertEquals(1, jugador2Spy.getPuntos());
+        assertEquals(1,jugador1.getPuntos());
+        assertEquals(1, jugador2.getPuntos());
     }
 
     @Test
     public void test06PreguntaTFPenalidadAsignaPuntosCorrectamenteARespuestasIncorrectas(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion1);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
 
         ArrayList<Opcion> opciones = new ArrayList<>();
@@ -228,10 +224,10 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(-1,jugador1Spy.getPuntos());
-        assertEquals(-1, jugador2Spy.getPuntos());
+        assertEquals(-1,jugador1.getPuntos());
+        assertEquals(-1, jugador2.getPuntos());
     }
 
     @Test
@@ -241,17 +237,17 @@ public class Entrega1Test {
         Opcion opcion3 = new Opcion("Respuesta3");
         Opcion opcion4 = new Opcion("Respuesta4");
 
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion1);
             add(opcion3);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion1);
             add(opcion3);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
@@ -268,10 +264,10 @@ public class Entrega1Test {
         preguntas.add(pregunta);
 
         Juego juego = new Juego(jugadores,preguntas);
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(2,jugador1Spy.getPuntos());
-        assertEquals(2, jugador2Spy.getPuntos());
+        assertEquals(2,jugador1.getPuntos());
+        assertEquals(2, jugador2.getPuntos());
     }
 
     @Test
@@ -281,17 +277,17 @@ public class Entrega1Test {
         Opcion opcion3 = new Opcion("Respuesta3");
         Opcion opcion4 = new Opcion("Respuesta4");
 
-        doReturn(new ArrayList<>(){{
+        jugador1.responderPregunta(new ArrayList<>(){{
             add(opcion2);
             add(opcion4);
-        }}).when(jugador1Spy).obtenerRespuestas(any(Pregunta.class));
-        doReturn(new ArrayList<>(){{
+        }});
+        jugador2.responderPregunta(new ArrayList<>(){{
             add(opcion2);
             add(opcion4);
-        }}).when(jugador2Spy).obtenerRespuestas(any(Pregunta.class));
+        }});
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1Spy);
-        jugadores.add(jugador2Spy);
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(opcion1);
@@ -309,9 +305,9 @@ public class Entrega1Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.hacerPregunta();
+        juego.evaluarRespuestas();
 
-        assertEquals(-2,jugador1Spy.getPuntos());
-        assertEquals(-2, jugador2Spy.getPuntos());
+        assertEquals(-2,jugador1.getPuntos());
+        assertEquals(-2, jugador2.getPuntos());
     }
 }

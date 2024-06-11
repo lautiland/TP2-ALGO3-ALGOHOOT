@@ -22,10 +22,10 @@ public class Juego {
         this.preguntas = preguntas;
     }
 
-    public void hacerPregunta(){
+    public void evaluarRespuestas(){
         Pregunta preguntaActual = preguntas.remove(0);
         jugadores.forEach(jugador -> {
-            ArrayList<Opcion> respuestas = jugador.obtenerRespuestas(preguntaActual);
+            ArrayList<Opcion> respuestas = jugador.obtenerRespuestas();
             int puntaje = preguntaActual.evaluarRespuestas(respuestas);
             jugador.modificarPuntos(puntaje);
         });

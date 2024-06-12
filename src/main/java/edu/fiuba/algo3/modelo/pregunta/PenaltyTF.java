@@ -13,6 +13,6 @@ public class PenaltyTF extends Pregunta{
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        return  (respuestas.get(0).equals(opcionCorrecta)) ? 1 : -1;
+        return  (respuestas.get(0).equals(opcionCorrecta)) ? PUNTOS_BIEN_RESPONDIDA : PUNTOS_MAL_RESPONDIDA;
     }
 }

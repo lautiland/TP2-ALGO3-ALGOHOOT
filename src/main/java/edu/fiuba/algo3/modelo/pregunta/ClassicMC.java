@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class ClassicMC extends Pregunta{
     private final ArrayList<Opcion> opcionesCorrectas;
     public ClassicMC(String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas) {
-        super(enunciado, opciones, 2,5);
+        super(enunciado, opciones, 2, 5);
         this.opcionesCorrectas = opcionesCorrectas;
     }
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         for (Opcion opcionCorrecta : opcionesCorrectas) {
-            if (!respuestas.contains(opcionCorrecta)) return 0;
+            if (!respuestas.contains(opcionCorrecta)) return PUNTOS_NO_RESPONDIDA;
         }
-        return 1;
+        return PUNTOS_BIEN_RESPONDIDA;
     }
 }

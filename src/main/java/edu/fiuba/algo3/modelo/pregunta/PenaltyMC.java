@@ -15,8 +15,8 @@ public class PenaltyMC extends Pregunta{
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         int puntosTotales = 0;
         for (Opcion respuesta : respuestas) {
-            if (opcionesCorrectas.contains(respuesta)) puntosTotales++;
-            else puntosTotales--;
+            if (opcionesCorrectas.contains(respuesta)) puntosTotales += PUNTOS_BIEN_RESPONDIDA;
+            else puntosTotales += PUNTOS_MAL_RESPONDIDA;
         }
         return puntosTotales;
     }

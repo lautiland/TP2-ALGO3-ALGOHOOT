@@ -7,13 +7,12 @@ import java.util.ArrayList;
 public class ClassicTF extends Pregunta{
     private final Opcion opcionCorrecta;
     public ClassicTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
-
-        super(enunciado, opciones, 2,2);
+        super(enunciado, opciones, 2, 2);
         this.opcionCorrecta = opcionCorrecta;
     }
 
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
-        return  (respuestas.get(0).equals(opcionCorrecta)) ? 1 : 0;
+        return  (respuestas.get(0).equals(opcionCorrecta)) ? PUNTOS_BIEN_RESPONDIDA : PUNTOS_NO_RESPONDIDA;
     }
 }

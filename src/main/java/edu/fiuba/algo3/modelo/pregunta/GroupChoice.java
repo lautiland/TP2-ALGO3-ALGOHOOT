@@ -14,8 +14,8 @@ public class GroupChoice extends Pregunta{
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestasGrupo1) {
         for (Opcion opcion : opcionesGrupo1) {
-            if (!respuestasGrupo1.contains(opcion)) return 0;
+            if (!respuestasGrupo1.contains(opcion)) return PUNTOS_NO_RESPONDIDA;
         }
-        return 1;
+        return PUNTOS_BIEN_RESPONDIDA;
     }
 }

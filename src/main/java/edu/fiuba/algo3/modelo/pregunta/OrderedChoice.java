@@ -13,9 +13,9 @@ public class OrderedChoice extends Pregunta{
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         int i = 0;
         for (Opcion respuesta : respuestas) {
-            if(!(opciones.get(i) == respuesta)) return 0;
+            if(!(opciones.get(i) == respuesta)) return PUNTOS_NO_RESPONDIDA;
             i++;
         }
-        return 1;
+        return PUNTOS_BIEN_RESPONDIDA;
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Jugador {
     private final String nombre;
     private int puntos;
+    private ArrayList<Opcion> respuestasActuales;
 
     public Jugador(String nombre){
         this.puntos = 0;
@@ -21,15 +22,12 @@ public class Jugador {
         return this.puntos;
     }
 
-    public ArrayList<Opcion> obtenerRespuestas(Pregunta pregunta){
-        //TODO: CAMBIAR EN PRODUCCION
-        /*
-        Verificar cantidad de opciones posibles a elegir.
-        Por cada opcion posible:
-            obtener opcion de índice X
-          (Para ordered, o multiple choice)
-         */
-        return null;
+    public void responderPregunta(ArrayList<Opcion> respuestas){
+        this.respuestasActuales = respuestas;
+    }
+
+    public ArrayList<Opcion> obtenerRespuestas(){
+        return respuestasActuales;
     }
 
     public void modificarPuntos(int puntos){

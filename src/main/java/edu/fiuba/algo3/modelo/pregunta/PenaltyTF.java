@@ -5,9 +5,10 @@ import edu.fiuba.algo3.modelo.Opcion;
 import java.util.ArrayList;
 
 public class PenaltyTF extends Pregunta{
+    public static final int CANTIDAD_OPCIONES = 2;
     private final Opcion opcionCorrecta;
     public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
-        super(enunciado, opciones, 2,2);
+        super(enunciado, opciones, CANTIDAD_OPCIONES, CANTIDAD_OPCIONES);
         this.opcionCorrecta = opcionCorrecta;
     }
 

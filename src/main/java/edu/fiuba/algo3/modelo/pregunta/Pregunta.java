@@ -6,12 +6,12 @@ import edu.fiuba.algo3.modelo.Opcion;
 import java.util.ArrayList;
 
 abstract public class Pregunta {
-    protected final String enunciado;
-    protected final ArrayList<Opcion> opciones;
-
     protected final int PUNTOS_MAL_RESPONDIDA = -1;
     protected final int PUNTOS_BIEN_RESPONDIDA = 1;
     protected final int PUNTOS_NO_RESPONDIDA = 0;
+
+    protected final String enunciado;
+    protected final ArrayList<Opcion> opciones;
 
     protected Pregunta(String enunciado, ArrayList<Opcion> opciones, int cantidadOpcionesMin, int cantidadOpcionesMax){
         if (opciones.size() < cantidadOpcionesMin || opciones.size() > cantidadOpcionesMax){

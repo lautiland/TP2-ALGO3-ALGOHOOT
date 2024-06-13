@@ -5,9 +5,12 @@ import edu.fiuba.algo3.modelo.Opcion;
 import java.util.ArrayList;
 
 public class ParcialMC extends Pregunta{
+    public static final int CANTIDAD_OPCIONES_MIN = 2;
+    public static final int CANTIDAD_OPCIONES_MAX = 5;
+
     private final ArrayList<Opcion> opcionesCorrectas;
     public ParcialMC(String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas) {
-        super(enunciado, opciones, 2, 5);
+        super(enunciado, opciones, CANTIDAD_OPCIONES_MIN, CANTIDAD_OPCIONES_MAX);
         this.opcionesCorrectas = opcionesCorrectas;
     }
 

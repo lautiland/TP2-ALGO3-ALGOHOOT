@@ -52,12 +52,12 @@ class GroupChoice {
     + evaluarRespuestas(respuestas : List<Opcion>): Int
 }
 
-ClassicTF .down.|> Pregunta
-ClassicMC .down.|> Pregunta
-PenaltyTF .down.|> Pregunta
-PenaltyMC .down.|> Pregunta
-ParcialMC .up.|> Pregunta
-OderedChoice .up.|> Pregunta
-GroupChoice .up.|> Pregunta
+ClassicTF -down-|> Pregunta
+ClassicMC -down-|> Pregunta
+PenaltyTF -down-|> Pregunta
+PenaltyMC -down-|> Pregunta
+ParcialMC -up-|> Pregunta
+OderedChoice -up-|> Pregunta
+GroupChoice -up-|> Pregunta
 
 @enduml

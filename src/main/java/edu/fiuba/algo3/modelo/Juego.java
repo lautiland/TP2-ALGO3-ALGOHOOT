@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadJugadoresInvalida;
 import edu.fiuba.algo3.modelo.excepciones.CantidadPreguntasInvalida;
+import edu.fiuba.algo3.modelo.modificador.Modificador;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Juego {
             Modificador modificadorActual = jugador.obtenerModificador();
             if( preguntaActual.esCompatibleCon(modificadorActual) ){
                 modificadoresJugadores.put(jugador.getNombre(), modificadorActual);
-            };
+            }
             ArrayList<Opcion> respuestas = jugador.obtenerRespuestas();
             int puntaje = preguntaActual.evaluarRespuestas(respuestas);
             puntosJugadores.put(jugador.getNombre(), puntaje);

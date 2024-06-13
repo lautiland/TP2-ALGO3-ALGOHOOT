@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
+import edu.fiuba.algo3.modelo.modificador.Modificador;
 import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
 import edu.fiuba.algo3.modelo.Opcion;
 
@@ -26,4 +27,6 @@ abstract public class Pregunta {
     }
 
     public abstract int evaluarRespuestas(ArrayList<Opcion> respuestas);
+
+    public abstract boolean esCompatibleCon(Modificador modificadorActual);
 }

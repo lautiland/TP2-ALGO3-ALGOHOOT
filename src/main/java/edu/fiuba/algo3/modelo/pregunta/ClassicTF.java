@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
+import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
 
@@ -14,5 +15,10 @@ public class ClassicTF extends Pregunta{
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas) {
         return  (respuestas.get(0).equals(opcionCorrecta)) ? PUNTOS_BIEN_RESPONDIDA : PUNTOS_NO_RESPONDIDA;
+    }
+
+    @Override
+    public boolean esCompatibleCon(Modificador modificadorActual) {
+        return (!modificadorActual.getClass().getSimpleName().equals("Multiplicador"));
     }
 }

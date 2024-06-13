@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.pregunta.Pregunta;
+import edu.fiuba.algo3.modelo.modificador.Modificador;
+import edu.fiuba.algo3.modelo.modificador.Multiplicador;
 
 import java.util.ArrayList;
 

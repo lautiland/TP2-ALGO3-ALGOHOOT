@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
+import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
 
@@ -17,5 +18,10 @@ public class GroupChoice extends Pregunta{
             if (!respuestasGrupo1.contains(opcion)) return PUNTOS_NO_RESPONDIDA;
         }
         return PUNTOS_BIEN_RESPONDIDA;
+    }
+
+    @Override
+    public boolean esCompatibleCon(Modificador modificadorActual) {
+        return (!modificadorActual.getClass().getSimpleName().equals("Multiplicador"));
     }
 }

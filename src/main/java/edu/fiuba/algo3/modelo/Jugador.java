@@ -8,10 +8,14 @@ public class Jugador {
     private final String nombre;
     private int puntos;
     private ArrayList<Opcion> respuestasActuales;
+    private ArrayList<Modificador> modificadores;
+    private Modificador modificadorActual;
 
     public Jugador(String nombre){
         this.puntos = 0;
         this.nombre = nombre;
+        modificadores.add(new Multiplicador(2));
+        modificadores.add(new Multiplicador(3));
     }
 
     public String getNombre(){
@@ -24,6 +28,14 @@ public class Jugador {
 
     public void responderPregunta(ArrayList<Opcion> respuestas){
         this.respuestasActuales = respuestas;
+    }
+
+
+    public Modificador obtenerModificador(){
+        return modificadorActual;
+    }
+    public void responderModificador(Modificador modificador){
+        modificadorActual = modificador;
     }
 
     public ArrayList<Opcion> obtenerRespuestas(){

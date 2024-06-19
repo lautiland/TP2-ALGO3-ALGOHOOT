@@ -2,16 +2,19 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadJugadoresInvalida;
 import edu.fiuba.algo3.modelo.excepciones.CantidadPreguntasInvalida;
+import edu.fiuba.algo3.modelo.modificador.Anulador;
+import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Juego {
     private final ArrayList<Jugador> jugadores;
     private final ArrayList<Pregunta> preguntas;
+    private final Modificador anulador;
+    private final Modificador exclusividad;
 
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas){
         if (jugadores.size() < 2){
@@ -23,28 +26,48 @@ public class Juego {
 
         this.jugadores = jugadores;
         this.preguntas = preguntas;
+
+        this.anulador = new Anulador();
+        this.exclusividad = new Exclusividad();
+    }
+
+    public void activarAnulador(Jugador jugador){
+        Pregunta preguntaActual = preguntas.get(0);
+        if (preguntaActual.esCompatibleCon(anulador)) {
+            anulador.usar(jugador);
+        }
+    }
+
+    public void activarExclusividad(Jugador jugador){
+        Pregunta preguntaActual = preguntas.get(0);
+        if (preguntaActual.esCompatibleCon(exclusividad)) {
+            exclusividad.usar(jugador);
+        }
+    }
+
+    public void activarMultiplicador(Jugador jugador, int factor){
+        jugador.activarMultiplicador(factor);
+    }
+
+    public void responder(Jugador jugador, ArrayList<Opcion> respuestas){
+        jugador.responderPregunta(respuestas);
     }
 
     public void evaluarRespuestas(){
         Pregunta preguntaActual = preguntas.remove(0);
-        Map<String , Integer> puntosJugadores = new HashMap<>();
-        Map<String , Modificador> modificadoresJugadores = new HashMap<>();
+        HashMap<Jugador, Integer> puntajes = new HashMap<>();
 
         jugadores.forEach(jugador -> {
-            Modificador modificadorActual = jugador.obtenerModificador();
-            if( preguntaActual.esCompatibleCon(modificadorActual) ){
-                modificadoresJugadores.put(jugador.getNombre(), modificadorActual);
-            }
             ArrayList<Opcion> respuestas = jugador.obtenerRespuestas();
-            int puntaje = preguntaActual.evaluarRespuestas(respuestas);
-            puntosJugadores.put(jugador.getNombre(), puntaje);
-            //pide modificador->verifica si puede usarlo->lo añade->pide respuesta->evaluaRespuesta->
+            int puntajeActual = preguntaActual.evaluarRespuestas(respuestas);
+            puntajes.put(jugador, puntajeActual);
         });
-        //recorrer ->->->
-        //verifico cada modificador de cada usuario->nadie uso exclusividad/anulador -> asigno puntos*multipl
-        //alguien uso exclusividad -> puntos a asignar *2 (each time que suceda) -> busco si alguien acertó
-        //-> si fue el único en acertar, puntosnuevos = puntos a asignar, sino, do nothing.
-        // verifico si alguien usó anulador -> si alguien lo usó, todos tienen 0 menos ese que lo usó
-        //Si más de uno lo usó, nadie tiene puntos.
+
+        HashMap<Jugador,Integer> puntajesAnulador = anulador.filtrarPuntos(puntajes);
+        HashMap<Jugador,Integer> puntajesExclusividad = exclusividad.filtrarPuntos(puntajesAnulador);
+
+        puntajesExclusividad.forEach(Jugador::modificarPuntos);
+        anulador.desactivar();
+        exclusividad.desactivar();
     }
 }

@@ -1,22 +1,25 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.modificador.Modificador;
-import edu.fiuba.algo3.modelo.modificador.Multiplicador;
-
 import java.util.ArrayList;
 
 public class Jugador {
     private final String nombre;
     private int puntos;
     private ArrayList<Opcion> respuestasActuales;
-    private ArrayList<Modificador> modificadores;
-    private Modificador modificadorActual;
+    private ArrayList<Multiplicador> multiplicadores;
+    private Multiplicador multiplicadorActual;
 
     public Jugador(String nombre){
         this.puntos = 0;
         this.nombre = nombre;
-        modificadores.add(new Multiplicador(2));
-        modificadores.add(new Multiplicador(3));
+        this.multiplicadores = new ArrayList<>();
+
+        Multiplicador multiplicadorBase = new Multiplicador(1);
+
+        multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(3));
+
+        this.multiplicadorActual = multiplicadorBase;
     }
 
     public String getNombre(){
@@ -31,12 +34,12 @@ public class Jugador {
         this.respuestasActuales = respuestas;
     }
 
-
-    public Modificador obtenerModificador(){
-        return modificadorActual;
-    }
-    public void responderModificador(Modificador modificador){
-        modificadorActual = modificador;
+    public void activarMultiplicador(int factor){
+        multiplicadores.forEach(multiplicador -> {
+            if (multiplicador.getFactor() == factor){
+                this.multiplicadorActual = multiplicador;
+            }
+        });
     }
 
     public ArrayList<Opcion> obtenerRespuestas(){
@@ -44,6 +47,8 @@ public class Jugador {
     }
 
     public void modificarPuntos(int puntos){
-        this.puntos += puntos;
+        // Multiplicador
+        this.puntos += multiplicadorActual.usar(puntos);
+        this.multiplicadorActual = new Multiplicador(1);
     }
 }

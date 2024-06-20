@@ -4,15 +4,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.excepciones.JSONInvalido;
+import edu.fiuba.algo3.modelo.pregunta.*;
 
 import java.io.Reader;
+import java.util.ArrayList;
+
 
 public class JSONReader {
-    private static JsonObject validarJSON(JsonElement jsonElement) {
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
+    private static JsonArray validarJSON(JsonElement jsonElement) {
 
-        JsonArray preguntas = jsonObject.getAsJsonArray("preguntas");
+        JsonArray preguntas = jsonElement.getAsJsonArray();
         for (JsonElement pregunta : preguntas) {
             JsonObject preguntaObject = pregunta.getAsJsonObject();
             if(!preguntaObject.has("ID")) {
@@ -41,28 +44,68 @@ public class JSONReader {
             }
         }
 
-        return jsonObject;
+        return preguntas;
     }
 
-    public static void obtenerPregunta(Reader reader){
+    private static Pregunta parserPregunta(String tipo, String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas, String categoria, String descripcionRespuesta){
+       tipo = tipo.toLowerCase();
+        switch (tipo){
+            case "verdadero falso":
+            case "verdadero falso simple":
+                return new ClassicTF(enunciado, opciones, opcionesCorrectas.get(0), categoria, descripcionRespuesta);
+            case "multiple choice simple":
+                return new ClassicMC(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
+            case "multiple choice puntaje parcial":
+                return new ParcialMC(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
+            case "verdadero falso penalidad":
+                return new PenaltyTF(enunciado, opciones, opcionesCorrectas.get(0), categoria, descripcionRespuesta);
+            case "multiple choice penalidad":
+                return new PenaltyMC(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
+            case "ordered choice":
+                return new OrderedChoice(enunciado, opcionesCorrectas, categoria, descripcionRespuesta);
+            case "group choice":
+                return new GroupChoice(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
+            default:
+                throw new JSONInvalido("Tipo de pregunta invalido");
+        }
+    }
+
+    public static ArrayList<Pregunta> obtenerPregunta(Reader reader){
         JsonElement jsonElement = JsonParser.parseReader(reader);
 
-        JsonObject jsonObject = validarJSON(jsonElement);
-
-        JsonArray preguntas = jsonObject.getAsJsonArray("preguntas");
+        JsonArray preguntas = validarJSON(jsonElement);
+        ArrayList<Pregunta> preguntasList = new ArrayList<>();
         for (JsonElement pregunta : preguntas) {
             JsonObject preguntaObject = pregunta.getAsJsonObject();
-            int id = preguntaObject.get("ID").getAsInt();
             String tema = preguntaObject.get("Tema").getAsString();
+            String textoRespuesta = preguntaObject.get("Texto respuesta").getAsString();
             String tipo = preguntaObject.get("Tipo").getAsString();
             String preguntaTexto = preguntaObject.get("Pregunta").getAsString();
             String respuesta = preguntaObject.get("Respuesta").getAsString();
+            String[] respuestas = respuesta.split(",");
+            ArrayList<Opcion> opciones = new ArrayList<>();
+            ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
             for (int i = 1; i <= 6; i++) {
                 if(preguntaObject.has("Opcion " + i)){
                     String opcion = preguntaObject.get("Opcion " + i).getAsString();
+                    opciones.add(new Opcion(opcion));
                 }
             }
-            String textoRespuesta = preguntaObject.get("Texto respuesta").getAsString();
+            if (tipo.equalsIgnoreCase("group choice")){
+                String[] grupos = respuesta.split(";");
+                String[] grupoA = grupos[0].split(",");
+                grupoA[0] = grupoA[0].substring(3);
+                for (String respuestaActual : grupoA) {
+                    opcionesCorrectas.add(opciones.get(Integer.parseInt(respuestaActual) - 1));
+                }
+            }else{
+                for (String respuestaActual : respuestas) {
+                    opcionesCorrectas.add(opciones.get(Integer.parseInt(respuestaActual) - 1));
+                }
+            }
+            preguntasList.add(parserPregunta(tipo, preguntaTexto, opciones, opcionesCorrectas, tema, textoRespuesta));
         }
+
+        return preguntasList;
     }
 }

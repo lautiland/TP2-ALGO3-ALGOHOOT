@@ -20,7 +20,7 @@ public class ClassicTFTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta classicTF = new ClassicTF("Verdadero o Falso", opciones, opcion1);
+            Pregunta classicTF = new ClassicTF("Verdadero o Falso", opciones, opcion1, "", "");
             classicTF.evaluarRespuestas(opciones);
         });
     }
@@ -38,7 +38,7 @@ public class ClassicTFTest {
             opciones.add(opcion2);
             opciones.add(opcion3);
             
-            Pregunta classicTF = new ClassicTF("Verdadero o Falso", opciones, opcion1);
+            Pregunta classicTF = new ClassicTF("Verdadero o Falso", opciones, opcion1, "", "");
             classicTF.evaluarRespuestas(opciones);
         });
     }
@@ -50,7 +50,7 @@ public class ClassicTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
     }
@@ -63,7 +63,7 @@ public class ClassicTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -79,7 +79,7 @@ public class ClassicTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);

@@ -6,9 +6,9 @@ import edu.fiuba.algo3.modelo.modificador.Modificador;
 import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
-    public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas) {
+    public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas, String categoria, String descripcionRespuesta) {
         super(enunciado, opcionesOrdenadas, 2, 5,
-                opcionesOrdenadas,new evaluadorTernario());
+                opcionesOrdenadas,new evaluadorTernario(), categoria, descripcionRespuesta);
     }
 
     @Override
@@ -17,9 +17,11 @@ public class OrderedChoice extends Pregunta{
         int respuestasIncorrectas = 0;
 
         for (int i = 0; i < respuestas.size(); i++) {
-            if((opcionesCorrectas.get(i) == respuestas.get(i))){
+            if(opcionesCorrectas.get(i).equals(respuestas.get(i))){
                 respuestasCorrectas++;
-            } respuestasIncorrectas++;
+            }else{
+                respuestasIncorrectas++;
+            }
         }
 
         return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);

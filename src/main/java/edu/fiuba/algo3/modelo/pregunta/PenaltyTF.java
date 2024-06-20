@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PenaltyTF extends Pregunta{
-    private final Opcion opcionCorrecta;
-    public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta) {
+    public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta, String categoria, String descripcionRespuesta) {
         super(enunciado, opciones, 2,2,
-                new ArrayList<>(Collections.singletonList(opcionCorrecta)), new evaluadorPenalty());
-        this.opcionCorrecta = opcionCorrecta;
+                new ArrayList<>(Collections.singletonList(opcionCorrecta)), new evaluadorPenalty(), categoria, descripcionRespuesta);
     }
 
 

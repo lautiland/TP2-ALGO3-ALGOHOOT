@@ -20,7 +20,7 @@ public class OrderedChoiceTest {
             ArrayList<Opcion> opcionesOrdenadas = new ArrayList<>();
             opcionesOrdenadas.add(opcion1);
 
-            Pregunta orderedChoice = new OrderedChoice("Elegir las opcionesOrdenadas que dicen Si", opcionesOrdenadas);
+            Pregunta orderedChoice = new OrderedChoice("Elegir las opcionesOrdenadas que dicen Si", opcionesOrdenadas, "", "");
             orderedChoice.evaluarRespuestas(opcionesOrdenadas);
         });
     }
@@ -46,7 +46,7 @@ public class OrderedChoiceTest {
             opcionesOrdenadas.add(opcion6);
             opcionesOrdenadas.add(opcion7);
 
-            Pregunta orderedChoice = new OrderedChoice("Elegir las opciones que dicen Si", opcionesOrdenadas);
+            Pregunta orderedChoice = new OrderedChoice("Elegir las opciones que dicen Si", opcionesOrdenadas, "", "");
             orderedChoice.evaluarRespuestas(opcionesOrdenadas);
         });
     }
@@ -63,7 +63,7 @@ public class OrderedChoiceTest {
         opcionesOrdenadas.add(opcion3);
         opcionesOrdenadas.add(opcion4);
 
-        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas);
+        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas, "", "");
 
         assertEquals(orderedChoice.seleccionarOpcion(2), opcion3);
         assertEquals(orderedChoice.seleccionarOpcion(3), opcion4);
@@ -81,7 +81,7 @@ public class OrderedChoiceTest {
         opcionesOrdenadas.add(opcion3);
         opcionesOrdenadas.add(opcion4);
 
-        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas);
+        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas, "", "");
 
         assertEquals(orderedChoice.evaluarRespuestas(opcionesOrdenadas), 1);
     }
@@ -98,7 +98,7 @@ public class OrderedChoiceTest {
         opcionesOrdenadas.add(opcion3);
         opcionesOrdenadas.add(opcion4);
 
-        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas);
+        Pregunta orderedChoice = new OrderedChoice("Pregunta de multiple choice", opcionesOrdenadas, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

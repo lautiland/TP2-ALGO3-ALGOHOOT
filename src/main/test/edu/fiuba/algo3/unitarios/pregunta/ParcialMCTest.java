@@ -20,7 +20,7 @@ public class ParcialMCTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             parcialMC.evaluarRespuestas(opciones);
         });
     }
@@ -44,7 +44,7 @@ public class ParcialMCTest {
             opciones.add(opcion5);
             opciones.add(opcion6);
 
-            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta parcialMC = new ParcialMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             parcialMC.evaluarRespuestas(opciones);
         });
     }
@@ -61,7 +61,7 @@ public class ParcialMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         assertEquals(parcialMC.seleccionarOpcion(2), opcion3);
         assertEquals(parcialMC.seleccionarOpcion(3), opcion4);
@@ -79,7 +79,7 @@ public class ParcialMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -104,7 +104,7 @@ public class ParcialMCTest {
         respuestasCorrectas.add(opcion2);
         respuestasCorrectas.add(opcion3);
 
-        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, respuestasCorrectas);
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, respuestasCorrectas, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

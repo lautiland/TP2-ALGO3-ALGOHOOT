@@ -20,7 +20,7 @@ public class ClassicMCTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             classicMC.evaluarRespuestas(opciones);
         });
     }
@@ -44,7 +44,7 @@ public class ClassicMCTest {
             opciones.add(opcion5);
             opciones.add(opcion6);
             
-            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta classicMC = new ClassicMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             classicMC.evaluarRespuestas(opciones);
         });
     }
@@ -61,7 +61,7 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
         assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
@@ -79,7 +79,7 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -102,7 +102,7 @@ public class ClassicMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta preguntaMC = new ClassicMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

@@ -20,7 +20,7 @@ public class GroupChoiceTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             groupChoice.evaluarRespuestas(opciones);
         });
     }
@@ -46,7 +46,7 @@ public class GroupChoiceTest {
             opciones.add(opcion6);
             opciones.add(opcion7);
 
-            Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             groupChoice.evaluarRespuestas(opciones);
         });
     }
@@ -63,7 +63,7 @@ public class GroupChoiceTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones);
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones, "", "");
 
         assertEquals(groupChoice.seleccionarOpcion(2), opcion3);
         assertEquals(groupChoice.seleccionarOpcion(3), opcion4);
@@ -81,7 +81,7 @@ public class GroupChoiceTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones);
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -104,7 +104,7 @@ public class GroupChoiceTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones);
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

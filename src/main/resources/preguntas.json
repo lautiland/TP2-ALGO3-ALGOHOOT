@@ -194,20 +194,6 @@
   "Texto respuesta": "El diamante es el material natural de mayor dureza, llegando a 10 en la Escala de Dureza de Mohs"
 },
 {
-  "ID": 17,
-  "Tema": "COMPUTACION",
-  "Tipo": "Ordered choice",
-  "Pregunta": "Ordene cronológicamente los siguientes lenguajes de programación, de los más ANTIGUOS a los más MODERNOS",
-  "Respuesta": "1,3,4,6,5,2",
-  "Opcion 1": "COBOL",
-  "Opcion 2": "Go",
-  "Opcion 3": "Smalltalk",
-  "Opcion 4": "C++",
-  "Opcion 5": "Java",
-  "Opcion 6": "Python",
-  "Texto respuesta": "COBOL(1959), Smalltalk (1972), C++ (1984), Python (1991), Java(1995), GO (2009)"
-},
-{
   "ID": 18,
   "Tema": "DEPORTES",
   "Tipo": "Group Choice",

@@ -20,7 +20,7 @@ public class PenaltyTFTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1, "", "");
             penalidadTF.evaluarRespuestas(opciones);
         });
     }
@@ -38,7 +38,7 @@ public class PenaltyTFTest {
             opciones.add(opcion2);
             opciones.add(opcion3);
             
-            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1);
+            Pregunta penalidadTF = new PenaltyTF("Verdadero o Falso", opciones, opcion1, "", "");
             penalidadTF.evaluarRespuestas(opciones);
         });
     }
@@ -51,7 +51,7 @@ public class PenaltyTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
     }
@@ -64,7 +64,7 @@ public class PenaltyTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -80,7 +80,7 @@ public class PenaltyTFTest {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1);
+        Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);

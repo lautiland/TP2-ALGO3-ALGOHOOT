@@ -20,7 +20,7 @@ public class PenaltyMCTest {
             ArrayList<Opcion> opciones = new ArrayList<>();
             opciones.add(opcion1);
 
-            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             penalidadMC.evaluarRespuestas(opciones);
         });
     }
@@ -44,7 +44,7 @@ public class PenaltyMCTest {
             opciones.add(opcion5);
             opciones.add(opcion6);
             
-            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones);
+            Pregunta penalidadMC = new PenaltyMC("Elegir las opciones que dicen Si", opciones, opciones, "", "");
             penalidadMC.evaluarRespuestas(opciones);
         });
     }
@@ -61,7 +61,7 @@ public class PenaltyMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
         assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
@@ -79,7 +79,7 @@ public class PenaltyMCTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
 
-        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -104,7 +104,7 @@ public class PenaltyMCTest {
         respuestasCorrectas.add(opcion2);
         respuestasCorrectas.add(opcion3);
 
-        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, respuestasCorrectas);
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, respuestasCorrectas, "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

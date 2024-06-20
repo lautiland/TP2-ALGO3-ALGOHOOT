@@ -11,10 +11,12 @@ abstract public class Pregunta {
     protected final ArrayList<Opcion> opciones;
     protected final ArrayList<Opcion> opcionesCorrectas;
     protected evaluadorDePuntajes evaluador;
+    private final String categoria;
+    private final String descripcionRespuesta;
 
     protected Pregunta(String enunciado, ArrayList<Opcion> opciones,
                        int cantidadOpcionesMin, int cantidadOpcionesMax ,
-                       ArrayList<Opcion> opcionesCorrectas, evaluadorDePuntajes evaluador){
+                       ArrayList<Opcion> opcionesCorrectas, evaluadorDePuntajes evaluador, String categoria, String descripcionRespuesta) {
 
         if (opciones.size() < cantidadOpcionesMin || opciones.size() > cantidadOpcionesMax){
             throw new CantidadOpcionesInvalida("La cantidad de opciones es invalida");
@@ -23,7 +25,9 @@ abstract public class Pregunta {
         this.enunciado = enunciado;
         this.opciones = opciones;
         this.opcionesCorrectas = opcionesCorrectas;
-
+        this.evaluador = evaluador;
+        this.categoria = categoria;
+        this.descripcionRespuesta = descripcionRespuesta;
     }
 
     public Opcion seleccionarOpcion(int indice){

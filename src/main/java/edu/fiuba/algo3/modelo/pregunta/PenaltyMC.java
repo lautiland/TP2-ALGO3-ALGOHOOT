@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class PenaltyMC extends Pregunta{
     public PenaltyMC(String enunciado, ArrayList<Opcion> opciones,
-                     ArrayList<Opcion> opcionesCorrectas) {
+                     ArrayList<Opcion> opcionesCorrectas, String categoria, String descripcionRespuesta) {
 
-        super(enunciado, opciones, 2, 5,opcionesCorrectas, new evaluadorPenalty() );
+        super(enunciado, opciones, 2, 5,opcionesCorrectas, new evaluadorPenalty(), categoria, descripcionRespuesta);
     }
 
 

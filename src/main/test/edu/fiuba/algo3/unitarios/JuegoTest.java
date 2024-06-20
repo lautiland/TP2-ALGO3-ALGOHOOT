@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JuegoTest {
@@ -26,7 +27,7 @@ public class JuegoTest {
             opciones.add(opcion1);
             opciones.add(opcion2);
 
-            Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1);
+            Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
             ArrayList<Pregunta> preguntas = new ArrayList<>();
             preguntas.add(preguntaTF);
@@ -51,5 +52,37 @@ public class JuegoTest {
 
             Juego juego = new Juego(jugadores, preguntas);
         });
+    }
+
+    @Test
+    public void test03SeCarganLasPreguntasCorrectamente(){
+        Jugador jugador1 = new Jugador("Franco");
+        Jugador jugador2 = new Jugador("Lautaro");
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Juego juego = new Juego(jugadores);
+        ArrayList<Opcion> respuestaCorrecta = new ArrayList<>();
+        respuestaCorrecta.add(new Opcion("Microondas"));
+        respuestaCorrecta.add(new Opcion("Televisor de tubo CRT"));
+        respuestaCorrecta.add(new Opcion("Heladera"));
+        respuestaCorrecta.add(new Opcion("Imanes del delivery"));
+
+        ArrayList<Opcion> respuestaIncorrecta = new ArrayList<>();
+        respuestaIncorrecta.add(new Opcion("Televisor de tubo CRT"));
+        respuestaIncorrecta.add(new Opcion("Microondas"));
+        respuestaIncorrecta.add(new Opcion("Imanes del delivery"));
+        respuestaIncorrecta.add(new Opcion("Heladera"));
+
+        juego.cargarPreguntas("src/main/resources/preguntas.json");
+
+        jugador1.responderPregunta(respuestaCorrecta);
+        jugador2.responderPregunta(respuestaIncorrecta);
+
+        juego.evaluarRespuestas();
+
+        assertEquals(1, jugador1.getPuntos());
+        assertEquals(0, jugador2.getPuntos());
     }
 }

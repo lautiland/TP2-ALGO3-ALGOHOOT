@@ -40,7 +40,7 @@ public class Entrega2Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion1);
+        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion1, "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -83,7 +83,7 @@ public class Entrega2Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion1);
+        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion1, "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -125,7 +125,7 @@ public class Entrega2Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion2);
+        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion2, "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 

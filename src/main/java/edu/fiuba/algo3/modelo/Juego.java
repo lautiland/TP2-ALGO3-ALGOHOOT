@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadPreguntasInvalida;
 import edu.fiuba.algo3.modelo.modificador.Anulador;
 import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
+import edu.fiuba.algo3.modelo.parser.JuegoParser;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 
 import java.util.ArrayList;
@@ -12,10 +13,22 @@ import java.util.HashMap;
 
 public class Juego {
     private final ArrayList<Jugador> jugadores;
-    private final ArrayList<Pregunta> preguntas;
+    private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
     private final Modificador exclusividad;
 
+    public Juego(ArrayList<Jugador> jugadores){
+        if (jugadores.size() < 2){
+            throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
+        }
+
+        this.jugadores = jugadores;
+
+        this.anulador = new Anulador();
+        this.exclusividad = new Exclusividad();
+    }
+
+    // Este dejará de existir a futuro
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas){
         if (jugadores.size() < 2){
             throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
@@ -29,6 +42,11 @@ public class Juego {
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
+    }
+
+    public void cargarPreguntas(String ruta){
+        JuegoParser parser = new JuegoParser();
+        preguntas = parser.parsear(ruta, "json");
     }
 
     public void activarAnulador(Jugador jugador){

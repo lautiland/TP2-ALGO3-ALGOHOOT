@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class GroupChoice extends Pregunta{
     public GroupChoice(String enunciado, ArrayList<Opcion> opciones,
-                       ArrayList<Opcion> opcionesCorrectas) {
+                       ArrayList<Opcion> opcionesCorrectas, String categoria, String descripcionRespuesta) {
 
-        super(enunciado, opciones, 2, 6,opcionesCorrectas, new evaluadorGrupos() );
+        super(enunciado, opciones, 2, 6,opcionesCorrectas, new evaluadorGrupos(), categoria, descripcionRespuesta);
 
     }
 

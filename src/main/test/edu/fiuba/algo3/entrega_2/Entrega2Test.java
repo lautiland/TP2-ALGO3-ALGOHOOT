@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.pregunta.ClassicTF;
+import edu.fiuba.algo3.modelo.pregunta.GroupChoice;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class Entrega2Test {
     }
 
     @Test
-    public void test02MultiplicadoresFuncionanCorrectamente(){
+    public void test01MultiplicadoresFuncionanCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
 
@@ -69,7 +70,7 @@ public class Entrega2Test {
     }
 
     @Test
-    public void test03AnuladorFuncionaCorrectamente(){
+    public void test02AnuladorFuncionaCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
 
@@ -111,7 +112,7 @@ public class Entrega2Test {
     }
 
     @Test
-    public void test04Exclusividad(){
+    public void test03ExclusividadFuncionaCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero");
         Opcion opcion2 = new Opcion("Falso");
 
@@ -152,4 +153,18 @@ public class Entrega2Test {
         assertEquals(0, jugador2.getPuntos());
         assertEquals(4, jugador3.getPuntos());
     }
+
+    /*
+    PRIMERO PRUEBAS EXTRA PARA LAS NUEVAS CLASES DE PREGUNTA
+    group choice
+    ordered choice
+    parcial mc
+    SEGUNDO PRUEBAS UNITARIAS PARA LOS EVALUADORES.
+    ------ CON ESTO ESTARÍA LAS PRUEBAS--------
+    CREAR ADMINISTRADOR DE JUEGO PARA EL FLUJO DE TURNOS, TABLERO, BLA.
+    -----CON ESTO ESTARÍA TODO LO ESENCIAL PARA NO REPROBAR----
+    CREAR UN OBSERVADOR Y AÑADIRLO AL ADMINISTRADOR DEL JUEGO.
+    IMPORTAR TODOS LOS DATOS INICIO DE JUEGO. ( NO ACCEDER A ELLOS IN GAME, SINO PRE).
+     */
+
 }

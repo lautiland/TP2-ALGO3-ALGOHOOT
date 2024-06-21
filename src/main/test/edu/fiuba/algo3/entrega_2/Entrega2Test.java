@@ -252,18 +252,54 @@ public class Entrega2Test {
 
     }
 
-    /*
-    PRIMERO PRUEBAS EXTRA PARA LAS NUEVAS CLASES DE PREGUNTA
-    ->group choice (solo queda esta)
-    ------ CON ESTO ESTARÍA LAS PRUEBAS--------
-    CREAR ADMINISTRADOR DE JUEGO PARA EL FLUJO DE TURNOS, TABLERO, BLA.
+    @Test
+    public void test06GroupChoiceFuncionaCorrectamente(){
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+        ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
+        opcionesGrupoA.add(opcion1);
+        opcionesGrupoA.add(opcion2);
+        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
+        opcionesGrupoB.add(opcion3);
+        opcionesGrupoB.add(opcion4);
+
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
+                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(groupChoice);
+
+        Juego juego = new Juego(jugadores,preguntas);
+
+        juego.responder(jugador1, new ArrayList<>(){{
+            add(opcion1);
+            add(opcion2);
+            add(opcion3);
+            add(opcion4);
+        }});
+
+        juego.responder(jugador2, new ArrayList<>(){{
+            add(opcion1);
+            add(opcion2);
+            add(opcion4);
+            add(opcion3);
+        }});
 
 
-    -----CON ESTO ESTARÍA TODO LO ESENCIAL PARA NO REPROBAR----
+        juego.evaluarRespuestas();
 
+        assertEquals(1,jugador1.getPuntos());
+        assertEquals(1, jugador2.getPuntos());
 
-    CREAR UN OBSERVADOR Y AÑADIRLO AL ADMINISTRADOR DEL JUEGO.
-    IMPORTAR TODOS LOS DATOS INICIO DE JUEGO. ( NO ACCEDER A ELLOS IN GAME, SINO PRE).
-     */
-
+    }
 }

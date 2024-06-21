@@ -64,7 +64,16 @@ public class JSONReader {
             case "ordered choice":
                 return new OrderedChoice(enunciado, opcionesCorrectas, categoria, descripcionRespuesta);
             case "group choice":
-                return new GroupChoice(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
+                ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
+                ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
+                for(Opcion opcion : opciones){
+                    if(opcionesCorrectas.contains(opcion)){
+                        opcionesGrupoA.add(opcion);
+                    }else{
+                        opcionesGrupoB.add(opcion);
+                    }
+                }
+                return new GroupChoice(enunciado, opciones, opcionesGrupoA,opcionesGrupoB, categoria, descripcionRespuesta);
             default:
                 throw new JSONInvalido("Tipo de pregunta invalido");
         }

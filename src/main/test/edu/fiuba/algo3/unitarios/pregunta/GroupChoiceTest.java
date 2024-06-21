@@ -32,7 +32,7 @@ public class GroupChoiceTest {
 
 
     @Test
-    public void test02SeIntentaCrearGroupChoiceConDemasiadasOpciones(){
+    public void test02SeIntentaCrearGroupChoiceConDemasiadasOpciones() {
 
         assertThrows(CantidadOpcionesInvalida.class, () -> {
             Opcion opcion1 = new Opcion("Si");
@@ -61,13 +61,13 @@ public class GroupChoiceTest {
             opcionesGrupoB.add(opcion7);
 
             Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si",
-                    opciones, opcionesGrupoA,opcionesGrupoB, "", "");
+                    opciones, opcionesGrupoA, opcionesGrupoB, "", "");
             groupChoice.evaluarRespuestas(opciones);
         });
     }
 
     @Test
-    public void test03PuedoSeleccionarUnaPreguntaGCCorrectamente(){
+    public void test03PuedoSeleccionarUnaPreguntaGCCorrectamente() {
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");
@@ -92,7 +92,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void test04PuedoEvaluarUnaRespuestaGCCorrecta(){
+    public void test04PuedoEvaluarUnaRespuestaGCCorrecta() {
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");
@@ -122,7 +122,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void test05PuedoEvaluarUnaRespuestaGCIncorrecta(){
+    public void test05PuedoEvaluarUnaRespuestaGCIncorrecta() {
         Opcion opcion1 = new Opcion("Opcion 1");
         Opcion opcion2 = new Opcion("Opcion 2");
         Opcion opcion3 = new Opcion("Opcion 3");

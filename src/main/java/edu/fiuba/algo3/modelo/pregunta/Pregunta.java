@@ -49,22 +49,6 @@ abstract public class Pregunta {
         return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);
     }
 
-    /*
-    NOTAS PARA EL PARSER:
-    PARA ORDERED CHOICE, LA LISTA DE RESPUESTAS CORRECTAS DEBE ESTAR ORDENADA.
-    PARA GROUP CHOICE, LA LISTA DE RESPUESTAS CORRECTAS DEBE SER SOLO DE EL PRIMER GRUPO.
-     */
-
-    //el usuario elige 2 buenas y habian 3 buenas y 2 malas,
-
-    //parser agarra las respuestas buenas de un solo grupo-> g1.
-
-    //respuestas buenas = [g1: opc, opc, opc]
-
-    //le pido al usuario que ordene en X1 y X2.
-
-    //verifico X1 con G1 -> si todas buenas pertenece a g1 y están bien, si todas malas
-    //pertenece a g2 y está bien. else, están mal
 
 
     protected int calcularPuntaje( int respuestasCorrectas, int respuestasIncorrectas){

@@ -112,5 +112,26 @@ public class PenaltyMCTest {
 
         assertEquals(preguntaMC.evaluarRespuestas(respuestas), -2);
     }
+
+    @Test
+    public void test06PuedoEvaluarUnaRespuestaPenalidadMCCorrectaConTodasCorrectas(){
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+
+        Pregunta preguntaMC = new PenaltyMC("Pregunta de multiple choice", opciones, opciones, "", "");
+
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+        respuestas.add(opcion1);
+        respuestas.add(opcion4);
+
+        assertEquals(preguntaMC.evaluarRespuestas(respuestas), 2);
+    }
 }
 

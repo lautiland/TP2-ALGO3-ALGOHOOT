@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.modelo.pregunta;
+package edu.fiuba.algo3.modelo.evaluadores;
 
-public abstract class evaluadorDePuntajes {
+public abstract class EvaluadorDePuntajes {
 
     protected final int PUNTOS_MAL_RESPONDIDA_PENALIDAD = -1;
     protected final int PUNTOS_BIEN_RESPONDIDA = 1;

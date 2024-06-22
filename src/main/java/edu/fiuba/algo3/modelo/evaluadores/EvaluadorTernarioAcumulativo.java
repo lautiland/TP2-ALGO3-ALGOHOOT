@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.modelo.pregunta;
+package edu.fiuba.algo3.modelo.evaluadores;
 
-public class evaluadorTernarioAcumulativo extends evaluadorDePuntajes {
+public class EvaluadorTernarioAcumulativo extends EvaluadorDePuntajes {
     @Override
     public int calcular(int respuestasCorrectas, int respuestasIncorrectas){
         if(respuestasIncorrectas == 0){

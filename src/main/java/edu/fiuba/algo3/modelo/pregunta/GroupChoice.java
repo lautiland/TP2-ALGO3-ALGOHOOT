@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
+import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class GroupChoice extends Pregunta{
                        String categoria, String descripcionRespuesta) {
 
         super(enunciado, opciones, 2, 6,
-                opcionesCorrectasGrupoA, new evaluadorTernario(), categoria, descripcionRespuesta);
+                opcionesCorrectasGrupoA, new EvaluadorTernario(), categoria, descripcionRespuesta);
         this.opcionesGrupoA = opcionesCorrectasGrupoA;
         this.opcionesGrupoB = opcionesCorrectasGrupoB;
 

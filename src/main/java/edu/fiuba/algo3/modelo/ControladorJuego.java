@@ -19,11 +19,13 @@ public class ControladorJuego {
         preguntas = parser.parsear(InteraccionesConJugadores.pedirRutaArchivo(), "json");
         this.cantidadPreguntas= preguntas.size();
         this.juego = new Juego(jugadores,preguntas);
+        controlarJuego();
     }
     public void controlarJuego(){
         for(int i = 0; i < cantidadPreguntas; i++){
             juego.evaluarRespuestas();
         }
+        finalizarJuego();
     }
 
     public void setJugadores() {
@@ -34,5 +36,8 @@ public class ControladorJuego {
         this.cantidadJugadores = InteraccionesConJugadores.pedirCantidadDeJugadores();
     }
 
+    public void finalizarJuego(){
+        //Mostrar la pantalla de fin de partida, junto con un reiniciar juego/ salir.
+    }
 
 }

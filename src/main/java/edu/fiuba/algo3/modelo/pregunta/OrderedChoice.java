@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
+import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class OrderedChoice extends Pregunta{
     public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas, String categoria, String descripcionRespuesta) {
         super(enunciado, opcionesOrdenadas, 2, 5,
-                opcionesOrdenadas,new evaluadorTernario(), categoria, descripcionRespuesta);
+                opcionesOrdenadas,new EvaluadorTernario(), categoria, descripcionRespuesta);
     }
 
     @Override

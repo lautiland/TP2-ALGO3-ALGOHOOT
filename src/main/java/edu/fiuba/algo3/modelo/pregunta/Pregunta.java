@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.pregunta;
 
+import edu.fiuba.algo3.modelo.evaluadores.EvaluadorDePuntajes;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
 import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
 import edu.fiuba.algo3.modelo.Opcion;
@@ -10,13 +11,13 @@ abstract public class Pregunta {
     protected final String enunciado;
     protected final ArrayList<Opcion> opciones;
     protected final ArrayList<Opcion> opcionesCorrectas;
-    protected evaluadorDePuntajes evaluador;
+    protected EvaluadorDePuntajes evaluador;
     private final String categoria;
     private final String descripcionRespuesta;
 
     protected Pregunta(String enunciado, ArrayList<Opcion> opciones,
                        int cantidadOpcionesMin, int cantidadOpcionesMax ,
-                       ArrayList<Opcion> opcionesCorrectas, evaluadorDePuntajes evaluador, String categoria, String descripcionRespuesta) {
+                       ArrayList<Opcion> opcionesCorrectas, EvaluadorDePuntajes evaluador, String categoria, String descripcionRespuesta) {
 
         if (opciones.size() < cantidadOpcionesMin || opciones.size() > cantidadOpcionesMax){
             throw new CantidadOpcionesInvalida("La cantidad de opciones es invalida");

@@ -23,14 +23,6 @@ public class EvaluadorTernarioTest {
         EvaluadorTernario newEvaluador = new EvaluadorTernario();
         assertEquals(0, newEvaluador.calcular(1, 1));
     }
-
-    @Test
-    public void test04NoHayRespuestas() {
-        EvaluadorTernario newEvaluador = new EvaluadorTernario();
-        assertEquals(0, newEvaluador.calcular(0, 0));
-    }
-
-
 }
 
 

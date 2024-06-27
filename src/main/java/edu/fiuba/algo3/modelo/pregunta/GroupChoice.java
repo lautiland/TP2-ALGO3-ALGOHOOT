@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
+import edu.fiuba.algo3.modelo.modificador.Anulador;
+import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
@@ -50,6 +52,6 @@ public class GroupChoice extends Pregunta{
 
     @Override
     public boolean esCompatibleCon(Modificador modificadorActual) {
-        return (!modificadorActual.getClass().getSimpleName().equals("Multiplicador"));
+        return modificadorActual.equals(new Anulador()) || modificadorActual.equals(new Exclusividad());
     }
 }

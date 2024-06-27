@@ -39,7 +39,7 @@ public class Entrega2Test {
         opciones.add(opcion1);
         opciones.add(opcion2);
 
-        Pregunta pregunta = new ClassicTF("¿Verdadero o falso?", opciones, opcion1, "", "");
+        Pregunta pregunta = new PenaltyTF("¿Verdadero o falso?", opciones, opcion1, "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 

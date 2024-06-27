@@ -11,7 +11,6 @@ public class Exclusividad extends Modificador {
     public Exclusividad(){
         super(2);
         multiplicador = 1;
-
     }
 
     private boolean unSoloJugadorRespondioBien(HashMap<Jugador, Integer> puntajes){

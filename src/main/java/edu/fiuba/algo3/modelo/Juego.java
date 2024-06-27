@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.CantidadPreguntasInvalida;
 import edu.fiuba.algo3.modelo.modificador.Anulador;
 import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
+import edu.fiuba.algo3.modelo.modificador.Multiplicador;
 import edu.fiuba.algo3.modelo.parser.JuegoParser;
 import edu.fiuba.algo3.modelo.pregunta.Pregunta;
 
@@ -16,6 +17,7 @@ public class Juego {
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
     private final Modificador exclusividad;
+    private final ArrayList<Modificador> multiplicadores;
 
     public Juego(ArrayList<Jugador> jugadores){
         if (jugadores.size() < 2){
@@ -26,6 +28,9 @@ public class Juego {
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
+        this.multiplicadores = new ArrayList<>();
+        multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(3));
     }
 
     // Este dejará de existir a futuro
@@ -42,6 +47,9 @@ public class Juego {
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
+        this.multiplicadores = new ArrayList<>();
+        multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(3));
     }
 
     public void cargarPreguntas(String ruta){
@@ -64,11 +72,31 @@ public class Juego {
     }
 
     public void activarMultiplicador(Jugador jugador, int factor){
-        jugador.activarMultiplicador(factor);
+        Pregunta preguntaActual = preguntas.get(0);
+        int i = multiplicadores.indexOf(new Multiplicador(factor));
+        if(i == -1){
+            throw new IllegalArgumentException("El factor ingresado no es válido");
+        }
+
+        Multiplicador multiplicador = (Multiplicador) multiplicadores.get(i);
+
+        if (preguntaActual.esCompatibleCon(multiplicador)) {
+            multiplicador.usar(jugador);
+        }
     }
 
     public void responder(Jugador jugador, ArrayList<Opcion> respuestas){
         jugador.responderPregunta(respuestas);
+    }
+
+    private HashMap<Jugador,Integer> filtrarPuntajes(HashMap<Jugador, Integer> puntajes){
+        HashMap<Jugador,Integer> puntajeFiltrado = anulador.filtrarPuntos(puntajes);
+        puntajeFiltrado = exclusividad.filtrarPuntos(puntajeFiltrado);
+        for (Modificador multiplicador : multiplicadores) {
+            puntajeFiltrado = multiplicador.filtrarPuntos(puntajeFiltrado);
+        }
+
+        return puntajeFiltrado;
     }
 
     public void evaluarRespuestas(){
@@ -81,10 +109,9 @@ public class Juego {
             puntajes.put(jugador, puntajeActual);
         });
 
-        HashMap<Jugador,Integer> puntajesAnulador = anulador.filtrarPuntos(puntajes);
-        HashMap<Jugador,Integer> puntajesExclusividad = exclusividad.filtrarPuntos(puntajesAnulador);
+        HashMap<Jugador,Integer> puntajesFinales = this.filtrarPuntajes(puntajes);
 
-        puntajesExclusividad.forEach(Jugador::modificarPuntos);
+        puntajesFinales.forEach(Jugador::modificarPuntos);
         anulador.desactivar();
         exclusividad.desactivar();
     }

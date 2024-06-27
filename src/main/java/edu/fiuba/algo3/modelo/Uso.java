@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Uso {
-    private Jugador jugador;
+    private final Jugador jugador;
 
     public Uso(Jugador jugador) {
         this.jugador = jugador;

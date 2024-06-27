@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 abstract public class Modificador {
     protected final ArrayList<Uso> usos;
-    protected int maximo;
+    protected final int maximo;
 
     public Modificador(int maximo) {
         this.usos = new ArrayList<>();

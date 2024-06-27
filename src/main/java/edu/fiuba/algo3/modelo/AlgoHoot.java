@@ -316,10 +316,63 @@ public class AlgoHoot extends Application {
         primaryStage.show();
     }*/
 
-    //a partir de aquí test franco/dani
 
-    public void iniciarPartida(String Jugadores){
+    public void mostrarScoreboard(Stage primaryStage, ArrayList<Jugador> jugadores){
 
+        //creacion de Infos de jugadores
+
+        ArrayList<Label> infoJugadores = new ArrayList<>();
+        for(Jugador jugador : jugadores){
+            Label jugadorActual = new Label(jugador.getNombre() +
+                    "  ---->   Puntos:  " + jugador.getPuntos());
+            jugadorActual.setStyle(String.format("-fx-background-color: %s ;" +
+                    " -fx-text-fill: black; -fx-font-size: %spx ;",colorSecundario,20));
+            jugadorActual.setPrefSize(400,70);
+            jugadorActual.setTextAlignment(TextAlignment.CENTER);
+            infoJugadores.add(jugadorActual);
+        }
+
+        Button siguiente = new Button();
+        siguiente.setStyle(String.format("-fx-background-color: %s ;" +
+                " -fx-text-fill: black; -fx-font-size: %spx ;",colorSecundario,sizeTextoTitulo));
+        siguiente.setText("Siguiente Pregunta");
+        siguiente.setMinSize(200, 40);
+        siguiente.setOnAction(e-> {
+            try {
+                System.out.println("¡Se ha presionado el botón!");
+                //Aquí el continuar con la sig pregunta.
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+
+
+        //creación de contenedor fondo de los botones
+        StackPane contenedorBotones = new StackPane();
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
+        contenedorBotones.setMinSize(600,800);
+        contenedorBotones.setMaxSize(700,900);
+
+        //creacion contenedor de botones
+        VBox botonesBox = new VBox();
+        botonesBox.setSpacing(10);
+        for(int i = 0; i < infoJugadores.size(); i++){
+            botonesBox.getChildren().add(infoJugadores.get(i));
+        }
+        botonesBox.setAlignment(Pos.CENTER);
+
+        //Contenedor del juego que tiene al organizador de botones
+        StackPane contenedorJuego = new StackPane();
+        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",colorFondoSecundario));
+        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
+        Scene escena = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
+
+        //stage setting
+        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
+        primaryStage.setTitle("Algo Hoot");
+        primaryStage.setScene(escena);
+        primaryStage.show();
     }
 
     public void iniciarPantallaInicial(Stage primaryStage) throws Exception {
@@ -338,6 +391,26 @@ public class AlgoHoot extends Application {
         iniciarJuego.setOnAction(e-> {
             try {
                 iniciarPantallaDeConsultaJugadores(primaryStage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        Button falsescoreboard = new Button();
+        falsescoreboard.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;",colorSecundario,sizeTextoTitulo));
+        falsescoreboard.setText("FalseScoreboard");
+        falsescoreboard.setMinSize(400, 50);
+        falsescoreboard.setOnAction(e-> {
+            try {
+                Jugador jugador1 = new Jugador("Juan");
+                Jugador jugador2 = new Jugador("Daniel");
+                Jugador jugador3 = new Jugador("Pedro");
+                ArrayList<Jugador> jugadores = new ArrayList<>();
+                jugadores.add(jugador1);
+                jugadores.add(jugador2);
+                jugadores.add(jugador3);
+                mostrarScoreboard(primaryStage,jugadores);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -380,7 +453,7 @@ public class AlgoHoot extends Application {
         //creacion contenedor de botones
         VBox botonesBox = new VBox();
         botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(bienvenida,iniciarJuego,creditos,salir);
+        botonesBox.getChildren().addAll(bienvenida,falsescoreboard, iniciarJuego,creditos,salir);
         botonesBox.setAlignment(Pos.CENTER);
 
         //Contenedor del juego que tiene al organizador de botones
@@ -442,7 +515,9 @@ public class AlgoHoot extends Application {
         iniciarPartida.setMinSize(300, 50);
         iniciarPartida.setOnAction(e-> {
             try {
-                iniciarPartida(addButton.getText());
+                //aqui se inicia la partida y el get text es la cadena de texto que tiene los nombres.
+                //iniciarPartida(addButton.getText());
+                System.out.println("Intentaste iniciar la partida");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -459,7 +534,7 @@ public class AlgoHoot extends Application {
         //creacion contenedor de items
         VBox botonesBox = new VBox();
         botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(accionLabel,preguntaJugadores, addButton, playersList, addPlayer);
+        botonesBox.getChildren().addAll(accionLabel,preguntaJugadores, addButton, playersList, addPlayer,iniciarPartida);
         botonesBox.setAlignment(Pos.CENTER);
 
         //Contenedor del juego que tiene al organizador

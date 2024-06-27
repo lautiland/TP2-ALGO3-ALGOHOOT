@@ -21,12 +21,14 @@ public class ControladorJuego {
         this.juego = new Juego(jugadores,preguntas);
         controlarJuego();
     }
+
     public void controlarJuego(){
         for(int i = 0; i < cantidadPreguntas; i++){
             juego.evaluarRespuestas();
         }
         finalizarJuego();
     }
+
 
     public void setJugadores() {
         this.jugadores = InteraccionesConJugadores.pedirJugadores(cantidadJugadores);

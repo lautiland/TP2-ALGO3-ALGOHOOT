@@ -15,11 +15,7 @@ abstract public class Modificador {
         this.maximo = maximo;
     }
 
-    public Modificador(ArrayList<Uso> usos) {
-        this.usos = usos;
-    }
-
-    public abstract void usarAbstracto(Jugador jugador);
+    protected abstract void usarAbstracto(Jugador jugador);
 
     public void usar(Jugador jugador) {
         Uso u = new Uso(jugador);

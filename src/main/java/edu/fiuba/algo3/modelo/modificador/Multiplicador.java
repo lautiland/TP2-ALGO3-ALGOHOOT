@@ -10,13 +10,13 @@ public class Multiplicador extends Modificador {
     private final ArrayList<Jugador> jugadoresQueUsaron;
 
     public Multiplicador(int factor){
-        super(2);
+        super(1);
         this.factor = factor;
         jugadoresQueUsaron = new ArrayList<>();
     }
 
     @Override
-    public void usarAbstracto(Jugador jugador) {
+    protected void usarAbstracto(Jugador jugador) {
         jugadoresQueUsaron.add(jugador);
     }
 

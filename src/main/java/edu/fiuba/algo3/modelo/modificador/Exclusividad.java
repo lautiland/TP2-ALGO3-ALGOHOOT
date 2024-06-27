@@ -23,8 +23,8 @@ public class Exclusividad extends Modificador {
         return cantidadDeJugadoresQueRespondieronBien == 1;
     }
 
-    public void usarAbstracto(Jugador jugador){
-        multiplicador *= 2;
+    protected void usarAbstracto(Jugador jugador){
+        multiplicador += 1;
     }
 
     public HashMap<Jugador, Integer> filtrarPuntos(HashMap<Jugador, Integer> puntajes){

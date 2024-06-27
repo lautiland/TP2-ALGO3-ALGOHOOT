@@ -149,7 +149,7 @@ public class Entrega2Test {
 
         assertEquals(0,jugador1.getPuntos());
         assertEquals(0, jugador2.getPuntos());
-        assertEquals(4, jugador3.getPuntos());
+        assertEquals(3, jugador3.getPuntos());
     }
 
     @Test

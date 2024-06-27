@@ -3,13 +3,15 @@ import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
 import edu.fiuba.algo3.modelo.modificador.Anulador;
 import edu.fiuba.algo3.modelo.modificador.Exclusividad;
-import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
 
 public class ClassicMC extends Pregunta{
     public ClassicMC(String enunciado, ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesCorrectas, String categoria, String descripcionRespuesta) {
-        super(enunciado, opciones, 2, 5, opcionesCorrectas, new EvaluadorTernario(), categoria, descripcionRespuesta);
+        super(enunciado, opciones, 2, 5, opcionesCorrectas, new EvaluadorTernario(), categoria, descripcionRespuesta, new ArrayList<>(){{
+            add(new Anulador());
+            add(new Exclusividad());
+        }});
     }
 
     @Override
@@ -26,10 +28,5 @@ public class ClassicMC extends Pregunta{
             }
         }
         return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);
-    }
-
-    @Override
-    public boolean esCompatibleCon(Modificador modificadorActual) {
-        return modificadorActual.equals(new Anulador()) || modificadorActual.equals(new Exclusividad());
     }
 }

@@ -4,14 +4,16 @@ import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
 import edu.fiuba.algo3.modelo.modificador.Anulador;
 import edu.fiuba.algo3.modelo.modificador.Exclusividad;
-import edu.fiuba.algo3.modelo.modificador.Modificador;
 
 import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
     public OrderedChoice(String enunciado, ArrayList<Opcion> opcionesOrdenadas, String categoria, String descripcionRespuesta) {
         super(enunciado, opcionesOrdenadas, 2, 5,
-                opcionesOrdenadas,new EvaluadorTernario(), categoria, descripcionRespuesta);
+                opcionesOrdenadas,new EvaluadorTernario(), categoria, descripcionRespuesta, new ArrayList<>(){{
+                    add(new Anulador());
+                    add(new Exclusividad());
+                }});
     }
 
     @Override
@@ -28,10 +30,5 @@ public class OrderedChoice extends Pregunta{
         }
 
         return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);
-    }
-
-    @Override
-    public boolean esCompatibleCon(Modificador modificadorActual) {
-        return modificadorActual.equals(new Anulador()) || modificadorActual.equals(new Exclusividad());
     }
 }

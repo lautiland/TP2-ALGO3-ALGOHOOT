@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadJugadoresInvalida;
 import edu.fiuba.algo3.modelo.excepciones.CantidadPreguntasInvalida;
+import edu.fiuba.algo3.modelo.excepciones.MultiplicadorInvalido;
 import edu.fiuba.algo3.modelo.modificador.Anulador;
 import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 import edu.fiuba.algo3.modelo.modificador.Modificador;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Juego {
+    private static final int NO_ENCONTRADO = -1;
     private final ArrayList<Jugador> jugadores;
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
@@ -74,8 +76,8 @@ public class Juego {
     public void activarMultiplicador(Jugador jugador, int factor){
         Pregunta preguntaActual = preguntas.get(0);
         int i = multiplicadores.indexOf(new Multiplicador(factor));
-        if(i == -1){
-            throw new IllegalArgumentException("El factor ingresado no es válido");
+        if(i == NO_ENCONTRADO){
+            throw new MultiplicadorInvalido();
         }
 
         Multiplicador multiplicador = (Multiplicador) multiplicadores.get(i);

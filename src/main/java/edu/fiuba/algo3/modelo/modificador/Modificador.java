@@ -8,18 +8,14 @@ import java.util.HashMap;
 
 abstract public class Modificador {
     protected final ArrayList<Uso> usos;
-    protected int maximo;
+    protected final int maximo;
 
     public Modificador(int maximo) {
         this.usos = new ArrayList<>();
         this.maximo = maximo;
     }
 
-    public Modificador(ArrayList<Uso> usos) {
-        this.usos = usos;
-    }
-
-    public abstract void usarAbstracto(Jugador jugador);
+    protected abstract void usarAbstracto(Jugador jugador);
 
     public void usar(Jugador jugador) {
         Uso u = new Uso(jugador);
@@ -27,6 +23,12 @@ abstract public class Modificador {
             usos.add(u);
             usarAbstracto(jugador);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        return o != null && getClass() == o.getClass();
     }
 
     public abstract HashMap<Jugador, Integer> filtrarPuntos(HashMap<Jugador, Integer> puntajes);

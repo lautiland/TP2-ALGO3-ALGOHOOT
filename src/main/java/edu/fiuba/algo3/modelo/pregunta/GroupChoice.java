@@ -2,7 +2,8 @@ package edu.fiuba.algo3.modelo.pregunta;
 
 import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernario;
-import edu.fiuba.algo3.modelo.modificador.Modificador;
+import edu.fiuba.algo3.modelo.modificador.Anulador;
+import edu.fiuba.algo3.modelo.modificador.Exclusividad;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,10 @@ public class GroupChoice extends Pregunta{
                        String categoria, String descripcionRespuesta) {
 
         super(enunciado, opciones, 2, 6,
-                opcionesCorrectasGrupoA, new EvaluadorTernario(), categoria, descripcionRespuesta);
+                opcionesCorrectasGrupoA, new EvaluadorTernario(), categoria, descripcionRespuesta, new ArrayList<>(){{
+                    add(new Anulador());
+                    add(new Exclusividad());
+                }});
         this.opcionesGrupoA = opcionesCorrectasGrupoA;
         this.opcionesGrupoB = opcionesCorrectasGrupoB;
 
@@ -44,12 +48,5 @@ public class GroupChoice extends Pregunta{
                 respuestasIncorrectas++;
             }
         }return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);
-    }
-
-
-
-    @Override
-    public boolean esCompatibleCon(Modificador modificadorActual) {
-        return (!modificadorActual.getClass().getSimpleName().equals("Multiplicador"));
     }
 }

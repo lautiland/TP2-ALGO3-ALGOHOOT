@@ -17,6 +17,6 @@ public class JuegoParser {
         } catch (IOException e) {
             throw new JSONInvalido("Error al leer el archivo");
         }
-        return null;
+        throw new JSONInvalido("Formato no soportado");
     }
 }

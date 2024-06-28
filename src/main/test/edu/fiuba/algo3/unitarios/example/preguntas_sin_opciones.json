@@ -1,0 +1,18 @@
+[
+{
+  "ID": 1,
+  "Tema": "CIENCIAS",
+  "Tipo": "Ordered Choice",
+  "Pregunta": "Ordene de MAYOR A MENOR los siguientes objetos hogareños según su nivel de radiación electromagnética emitido (el máximo recomendado es 100 microTeslas)",
+  "Respuesta": "2,1,4,3",
+  "Texto respuesta": "El microondas emite a  3 cm entre 73 y 200µ, y a 30 cm entre 4 a 8 µT. "
+},
+{
+  "ID": 2,
+  "Tema": "ARTE",
+  "Tipo": "Multiple Choice Simple",
+  "Pregunta": "¿Cuál es el disco más vendido de la historia?",
+  "Respuesta": "4",
+  "Texto respuesta": "El disco más vendido de la historia es Thriller, de Michael Jackson. Se estima que ha vendido entre 51 a 65 millones de álbumes."
+}
+]

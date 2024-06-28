@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.unitarios.pregunta;
 
-import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.excepciones.CantidadOpcionesInvalida;
-import edu.fiuba.algo3.modelo.pregunta.ClassicTF;
-import edu.fiuba.algo3.modelo.pregunta.Pregunta;
+import edu.fiuba.algo3.model.*;
+import edu.fiuba.algo3.model.excepciones.CantidadOpcionesInvalida;
+import edu.fiuba.algo3.model.pregunta.ClassicTF;
+import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

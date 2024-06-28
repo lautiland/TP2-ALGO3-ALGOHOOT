@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.unitarios;
 
-import edu.fiuba.algo3.modelo.excepciones.JSONInvalido;
-import edu.fiuba.algo3.modelo.parser.JuegoParser;
-import edu.fiuba.algo3.modelo.pregunta.GroupChoice;
-import edu.fiuba.algo3.modelo.pregunta.Pregunta;
+import edu.fiuba.algo3.model.excepciones.JSONInvalido;
+import edu.fiuba.algo3.model.parser.JuegoParser;
+import edu.fiuba.algo3.model.pregunta.GroupChoice;
+import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

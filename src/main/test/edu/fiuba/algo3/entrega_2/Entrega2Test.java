@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Opcion;
-import edu.fiuba.algo3.modelo.pregunta.*;
+import edu.fiuba.algo3.model.Juego;
+import edu.fiuba.algo3.model.Jugador;
+import edu.fiuba.algo3.model.Opcion;
+import edu.fiuba.algo3.model.pregunta.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

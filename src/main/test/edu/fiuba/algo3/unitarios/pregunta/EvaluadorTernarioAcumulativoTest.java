@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.unitarios.pregunta;
 
-import edu.fiuba.algo3.modelo.evaluadores.EvaluadorTernarioAcumulativo;
+import edu.fiuba.algo3.model.evaluadores.EvaluadorTernarioAcumulativo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

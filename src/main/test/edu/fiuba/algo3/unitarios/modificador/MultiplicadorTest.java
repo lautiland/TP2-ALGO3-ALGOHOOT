@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.unitarios.modificador;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.modificador.Modificador;
-import edu.fiuba.algo3.modelo.modificador.Multiplicador;
+import edu.fiuba.algo3.model.Jugador;
+import edu.fiuba.algo3.model.modificador.Modificador;
+import edu.fiuba.algo3.model.modificador.Multiplicador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

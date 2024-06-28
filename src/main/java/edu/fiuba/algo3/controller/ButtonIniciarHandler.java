@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.controller;
 
-import edu.fiuba.algo3.views.JugadoresView;
+import edu.fiuba.algo3.view.JugadoresView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 
 public class ButtonIniciarHandler implements EventHandler<ActionEvent>{

@@ -1,12 +1,10 @@
 package edu.fiuba.algo3.controller;
 
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.views.JugadoresView;
-import edu.fiuba.algo3.views.JugarTurnoView;
+import edu.fiuba.algo3.model.Juego;
+import edu.fiuba.algo3.model.Jugador;
+import edu.fiuba.algo3.view.JugarTurnoView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 
 import java.util.ArrayList;

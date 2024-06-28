@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.unitarios;
 
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.model.Jugador;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;

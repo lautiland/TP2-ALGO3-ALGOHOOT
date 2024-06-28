@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.unitarios.pregunta;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.evaluadores.EvaluadorPenalty;
+import edu.fiuba.algo3.model.evaluadores.EvaluadorPenalty;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

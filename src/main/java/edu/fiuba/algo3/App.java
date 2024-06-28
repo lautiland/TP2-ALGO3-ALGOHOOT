@@ -1,11 +1,9 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.views.PantallaInicial;
+import edu.fiuba.algo3.view.PantallaInicial;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import edu.fiuba.algo3.views.SceneGui;
+import edu.fiuba.algo3.view.SceneGui;
 
 
 public class App extends Application {

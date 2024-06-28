@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.view;
 
 
-import edu.fiuba.algo3.model.Jugador;
+import edu.fiuba.algo3.controller.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 
 import javafx.scene.layout.StackPane;
 
+import static edu.fiuba.algo3.view.SceneGui.configurarBoton;
+
 public class MultiplicadoresView  {
     Stage STAGE;
 
@@ -23,13 +25,29 @@ public class MultiplicadoresView  {
     }
 
     public Scene getScene(Stage stage) {
-        Button x2 = new Button("x2");
-        Button x3 = new Button("x3");
-        Button exclusividad = new Button("Exclusividad");
-        Button anulador = new Button("Anulador");
-        Button ninguno = new Button("Ninguno");
 
         Label labelScreen = new Label("Que modificador vas a utilizar?");
+
+        Button x2 = new Button("x2");
+        configurarBoton(x2);
+        x2.setOnAction(new Buttonx2Handler(STAGE));
+
+        Button x3 = new Button("x3");
+        configurarBoton(x3);
+        x3.setOnAction(new Buttonx3Handler(STAGE));
+
+        Button exclusividad = new Button("Exclusividad");
+        configurarBoton(exclusividad);
+        exclusividad.setOnAction(new ButtonExclusividadHandler(STAGE));
+
+
+        Button anulador = new Button("Anulador");
+        configurarBoton(anulador);
+        anulador.setOnAction(new ButtonAnuladorHandler(STAGE));
+
+        Button ninguno = new Button("Ninguno");
+        configurarBoton(ninguno);
+        ninguno.setOnAction(new ButtonNingunoHandler(STAGE));
 
         labelScreen.setTranslateY(100);
         labelScreen.setTranslateX(200);

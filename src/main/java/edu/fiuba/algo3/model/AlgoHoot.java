@@ -501,7 +501,7 @@ public class AlgoHoot extends Application {
             String playerName = preguntaJugadores.getText();
             if (!playerName.isEmpty()) {
                 addPlayer.setText(addPlayer.getText() + "\n" + playerName);
-                preguntaJugadores.clear();
+//                preguntaJugadores.clear();
             }
         });
 

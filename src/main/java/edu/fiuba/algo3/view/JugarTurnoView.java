@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.view;
 
+import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
 import edu.fiuba.algo3.model.Jugador;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
@@ -33,6 +34,7 @@ public class JugarTurnoView  extends SceneGui {
 
         Button buttonContinuar = new Button("Siguiente turno");
         configurarBoton(buttonContinuar);
+        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage));
 
         player.setStyle("-fx-font-size: 24px;");
         labelScreen.setStyle("-fx-font-size: 24px;");

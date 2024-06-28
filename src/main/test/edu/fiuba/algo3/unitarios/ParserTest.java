@@ -6,6 +6,7 @@ import edu.fiuba.algo3.model.pregunta.GroupChoice;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,10 +77,11 @@ public class ParserTest {
 
     @Test
     public void test09PuedoParsearUnaPreguntaTipoGroupChoiceCorrectamente(){
+        //FileReader file = new FileReader(); // recibe un string que tiene todo el archivo
         JuegoParser parser = new JuegoParser();
 
         ArrayList<Pregunta> preguntas = parser.parsear(RUTA_EJEMPLOS+ "pregunta_group_choice.json", FORMATO);
 
-       assertTrue(preguntas.get(0) instanceof GroupChoice);
+        assertTrue(preguntas.get(0) instanceof GroupChoice);
     }
 }

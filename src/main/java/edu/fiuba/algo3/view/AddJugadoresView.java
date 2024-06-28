@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.view;
 
+import edu.fiuba.algo3.controller.ButtonAddJugadorHanlder;
 import edu.fiuba.algo3.controller.ButtonIniciarPartidaHandler;
 import edu.fiuba.algo3.model.Jugador;
 import javafx.geometry.Pos;
@@ -13,11 +14,11 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class JugadoresView extends SceneGui {
+public class AddJugadoresView extends SceneGui {
 
     public Stage STAGE;
 
-    public JugadoresView(Stage stage) {
+    public AddJugadoresView(Stage stage) {
         STAGE = stage;
     }
 
@@ -25,6 +26,7 @@ public class JugadoresView extends SceneGui {
 
         //Creacion de botones pantalla principal
         ArrayList<Jugador> jugadores = new ArrayList<>();
+
         TextField preguntaJugadores = new TextField();
         preguntaJugadores.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
                 " -fx-font-size: %spx ;",colorPrimario,sizeTextoTitulo));
@@ -32,15 +34,13 @@ public class JugadoresView extends SceneGui {
         preguntaJugadores.setMaxWidth(450);
 
         Button addButton = new Button("Agregar Jugador");
-        addButton.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
-                " -fx-font-size: %spx ;",colorSecundario,15));
-        addButton.setMaxSize(120,60);
+        configurarBoton(addButton);
+        addButton.setOnAction(new ButtonAddJugadorHanlder(STAGE,jugadores,preguntaJugadores));
 
         Label accionLabel = new Label("Ingresa el nombre del jugador:");
         accionLabel.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
                 " -fx-font-size: %spx ;",colorPrimario,15));
         accionLabel.setPrefSize(320,60);
-
 
         Label playersList = new Label("Jugadores Agregados:");
         playersList.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
@@ -51,23 +51,12 @@ public class JugadoresView extends SceneGui {
         addPlayer.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: white;" +
                 " -fx-font-size: %spx ;",colorFondoSecundario,11));
         addPlayer.setMaxSize(300,500);
-        addButton.setOnAction(e -> {
-            String playerName = preguntaJugadores.getText();
-            if (!playerName.isEmpty()) {
-
-                Jugador jugador = new Jugador(addPlayer.getText());
-                jugadores.add(jugador);
-                addPlayer.setText(addPlayer.getText() + "\n" + playerName);
-                preguntaJugadores.clear();
-            }
-        });
 
         Button iniciarPartida = new Button("Iniciar Partida");
         configurarBoton(iniciarPartida);
         iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores));
 
         //creación de contenedor fondo
-
         StackPane contenedorBotones = new StackPane();
         contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
         contenedorBotones.setMinSize(600,800);

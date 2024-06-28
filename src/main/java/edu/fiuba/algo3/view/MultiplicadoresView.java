@@ -16,13 +16,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 public class MultiplicadoresView  {
-    Jugador jugador;
+    Stage STAGE;
 
-    public MultiplicadoresView(Jugador jugador_actual) {
-        jugador = jugador_actual;
+    public MultiplicadoresView(Stage stage) {
+        STAGE = stage;
     }
 
-    public void show(Stage stage) {
+    public Scene getScene(Stage stage) {
         Button x2 = new Button("x2");
         Button x3 = new Button("x3");
         Button exclusividad = new Button("Exclusividad");
@@ -58,8 +58,6 @@ public class MultiplicadoresView  {
 
         Scene scene = new Scene(root, 800, 600);
 
-        stage.setTitle("Algo Hoot");
-        stage.setScene(scene);
-        stage.show();
+        return scene;
     }
 }

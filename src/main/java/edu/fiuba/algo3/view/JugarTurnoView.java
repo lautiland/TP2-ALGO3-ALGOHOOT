@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 
 public class JugarTurnoView  extends SceneGui {
 
-
     Stage stage;
     Jugador jugador;
 
@@ -33,6 +32,7 @@ public class JugarTurnoView  extends SceneGui {
         player.setTranslateX(450);
 
         Button buttonContinuar = new Button("Siguiente turno");
+        configurarBoton(buttonContinuar);
 
         player.setStyle("-fx-font-size: 24px;");
         labelScreen.setStyle("-fx-font-size: 24px;");

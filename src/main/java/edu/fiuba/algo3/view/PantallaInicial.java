@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonIniciarHandler;
+import edu.fiuba.algo3.controller.ButtonSalirHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,18 +32,9 @@ public class PantallaInicial extends SceneGui {
         configurarBoton(iniciarJuego);
         iniciarJuego.setOnAction(new ButtonIniciarHandler(stage));
 
-        Button salir = new Button();
-        salir.setStyle(String.format("-fx-background-color: %s ;" +
-                " -fx-text-fill: black; -fx-font-size: %spx ;",colorSecundario,sizeTextoTitulo));
-        salir.setText("Salir");
-        salir.setMinSize(200, 40);
-        salir.setOnAction(e-> {
-            try {
-                stage.close();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        Button salir = new Button("Salir");
+        configurarBoton(salir);
+        salir.setOnAction(new ButtonSalirHandler(stage));
 
         //creación de contenedor fondo de los botones
         StackPane contenedorBotones = new StackPane();
@@ -65,6 +57,5 @@ public class PantallaInicial extends SceneGui {
         //stage setting
         contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
         return escena;
-
     }
 }

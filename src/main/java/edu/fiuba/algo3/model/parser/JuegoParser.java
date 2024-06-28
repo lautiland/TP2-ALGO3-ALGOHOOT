@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class JuegoParser {
     public ArrayList<Pregunta> parsear(String ruta, String formato) {
-        try (Reader reader = new FileReader(ruta)) {
+        try (Reader reader = new FileReader(ruta)) { // FileReader afuera
             if (formato.equals("json")){
                 return JSONReader.obtenerPregunta(reader);
             }

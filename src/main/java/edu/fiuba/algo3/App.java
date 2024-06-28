@@ -26,7 +26,7 @@ public class App extends Application {
     }
 
     private void configurarVentana(Stage stage) {
-        stage.setTitle("AlgoRoma");
+        stage.setTitle("Algo Hoot");
 
         float width = 800;
         float height = 600;

@@ -10,26 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class Credito  extends Application {
-    //constantes
-    String colorPrimario = "#fecea8";
-    String colorFondoPrimario = "#99b898";
-    String colorFondoSecundario = "#2a363b";
-    String colorSecundario = "#ff847c";
-    String colorTerciario = "#e84a5f";
-    int sizeTextoTitulo = 20;
-    int AnchoJuego = 800;
-    int AltoJuego = 600;
+public class Credito  extends SceneGui {
 
-    public static void main(String[] args) {
-        launch(args);
+    Stage stage;
+
+    public Credito(Stage stage) {
+        this.stage = stage;
     }
 
-    public void start(Stage stage) throws Exception {
-        iniciarPantallaDeCreditos(stage);
-    }
-
-    public void iniciarPantallaDeCreditos(Stage primaryStage) throws Exception {
+    public Scene getScene(Stage stage) {
 
         //Creacion de botones pantalla principal
 
@@ -94,10 +83,6 @@ public class Credito  extends Application {
         contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
         Scene escena = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
 
-        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
-
-        primaryStage.setTitle("Algo Hoot");
-        primaryStage.setScene(escena);
-        primaryStage.show();
+        return escena;
     }
 }

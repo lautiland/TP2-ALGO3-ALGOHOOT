@@ -1,14 +1,21 @@
 package edu.fiuba.algo3.view;
 
+import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
+import edu.fiuba.algo3.controller.ButtonFalseHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -24,39 +31,35 @@ import javafx.scene.layout.StackPane;
 
 public class PreguntaView extends SceneGui {
 
-    Stage stage;
+    static Stage stage;
     public PreguntaView(Stage stage_actual) {
         stage = stage_actual;
     }
 
-    public Scene getScene() {
+    public static void getRootFalseTrueQuestion(StackPane root) {
 
-        Label labelScreen = new Label("Pregunta:");
-        Label pregunta = new Label("Esta es una pregunta de prueba");
-
-
-
-        // hay que ver el tema de que preguntas es:
-
-
-        // Pregunta Verdadero y falso:
         Button falseBtn = new Button("False");
-        Button trueBtn = new Button("True");
+        configurarBoton(falseBtn);
+        falseBtn.setOnAction(new ButtonFalseHandler(stage));
 
-        // Multiple choice:
+        Button trueBtn = new Button("True");
+        configurarBoton(falseBtn);
+        trueBtn.setOnAction(new ButtonFalseHandler(stage));
+
+        falseBtn.setTranslateY(300);
+        falseBtn.setTranslateX(200);
+
+        trueBtn.setTranslateY(300);
+        trueBtn.setTranslateX(500);
+
+        root.getChildren().addAll(falseBtn, trueBtn);
+    }
+
+    public static void getRootMultipleChoiceQuestion(StackPane root) {
+
         CheckBox opcion1 = new CheckBox("Opcion 1");
         CheckBox opcion2 = new CheckBox("Opcion 2");
         CheckBox opcion3 = new CheckBox("Opcion 3");
-
-
-        // Aca seria el tema de order choice, aca hay que hacer la logica
-        // de ver que pregunta esta seleccionado para poder moverlo con la
-        // flechas:
-        ObservableList<CheckBox> opciones = FXCollections.observableArrayList(
-                new CheckBox("Opción 1"),
-                new CheckBox("Opción 2"),
-                new CheckBox("Opción 3")
-        );
 
         opcion1.setTranslateY(200);
         opcion1.setTranslateX(50);
@@ -70,30 +73,56 @@ public class PreguntaView extends SceneGui {
         opcion3.setTranslateX(50);
         opcion3.setStyle("-fx-font-size: 18px;");
 
+        root.getChildren().addAll(opcion1, opcion2, opcion3);
+    }
+
+    public static void getRootOrdererChoiceQuestion(StackPane root) {
+
+        Button option1 = new Button("Option 1");
+        option1.setLayoutX(450);
+        option1.setLayoutY(450);
+        configurarBoton(option1);
+
+        Button option2 = new Button("Option 2");
+        option2.setLayoutX(350);
+        option2.setLayoutY(300);
+        configurarBoton(option2);
+
+        root.getChildren().addAll(option1, option2);
+    }
+
+    public static void getRootGroupChoiceQuestion(StackPane root) {
+        Button falseBtn = new Button("False");
+        configurarBoton(falseBtn);
+        falseBtn.setOnAction(new ButtonFalseHandler(stage));
+
+        Button trueBtn = new Button("True");
+        configurarBoton(trueBtn);
+        trueBtn.setOnAction(new ButtonFalseHandler(stage));
+
+        root.getChildren().addAll(falseBtn, trueBtn);
+    }
+
+    public Scene getScene() {
+
+        Label labelScreen = new Label("Pregunta:");
         labelScreen.setTranslateY(50);
         labelScreen.setTranslateX(50);
         labelScreen.setStyle("-fx-font-size: 36px;");
 
-
+        Label pregunta = new Label("Esta es una pregunta de prueba");
         pregunta.setTranslateY(150);
         pregunta.setTranslateX(50);
         pregunta.setStyle("-fx-font-size: 24px;");
 
-        falseBtn.setTranslateY(300);
-        falseBtn.setTranslateX(200);
-
-        trueBtn.setTranslateY(300);
-        trueBtn.setTranslateX(500);
-
-        StackPane  root = new StackPane();
+        StackPane root = new StackPane();
+        getRootFalseTrueQuestion(root);
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_LEFT);
+        root.getChildren().addAll(labelScreen, pregunta);
 
-        //root.getChildren().addAll(labelScreen,falseBtn,trueBtn,pregunta);
-        //root.getChildren().addAll(labelScreen,pregunta,opcion1,opcion2,opcion3);
-        root.getChildren().addAll(labelScreen, pregunta, listView);
-
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, AnchoJuego, AltoJuego);
         return scene;
     }
 }
+

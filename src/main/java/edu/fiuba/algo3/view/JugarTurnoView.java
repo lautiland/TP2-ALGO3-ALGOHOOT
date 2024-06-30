@@ -34,7 +34,7 @@ public class JugarTurnoView  extends SceneGui {
 
         Button buttonContinuar = new Button("Siguiente turno");
         configurarBoton(buttonContinuar);
-        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage));
+        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage, new MultiplicadoresView(stage)));
 
         player.setStyle("-fx-font-size: 24px;");
         labelScreen.setStyle("-fx-font-size: 24px;");

@@ -17,13 +17,13 @@ import javafx.scene.layout.StackPane;
 
 import static edu.fiuba.algo3.view.SceneGui.configurarBoton;
 
-public class MultiplicadoresView  {
+public class MultiplicadoresView extends SceneGui  {
     Stage STAGE;
 
     public MultiplicadoresView(Stage stage) {
         STAGE = stage;
     }
-
+    @Override
     public Scene getScene(Stage stage) {
 
         Label labelScreen = new Label("Que modificador vas a utilizar?");

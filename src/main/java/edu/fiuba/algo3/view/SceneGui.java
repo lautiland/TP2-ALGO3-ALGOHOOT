@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.view;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 abstract public class SceneGui {
     protected static final String colorPrimario = "#fecea8";
@@ -19,6 +22,9 @@ abstract public class SceneGui {
         AltoJuego=alto;
     }
 
+    public Scene getScene(Stage stage){
+        return new Scene( new StackPane(), AnchoJuego, AltoJuego);
+    }
     protected static void configurarBoton(Button boton){
 
         boton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);

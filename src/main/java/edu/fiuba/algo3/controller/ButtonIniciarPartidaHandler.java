@@ -3,6 +3,8 @@ package edu.fiuba.algo3.controller;
 import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.Jugador;
 import edu.fiuba.algo3.view.JugarTurnoView;
+import edu.fiuba.algo3.view.ResultadosPorRondaView;
+import edu.fiuba.algo3.view.ResultadosView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
@@ -21,9 +23,10 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent actionEvent) {
 
+        boolean final_de_ronda = false;
         Juego juego = new Juego(jugadores);
         for (Jugador jugador : jugadores){
-            JugarTurnoView jugadorView = new JugarTurnoView(STAGE,jugador);
+            JugarTurnoView jugadorView = new JugarTurnoView(STAGE, jugador);
             try {
                 STAGE.setScene(jugadorView.getScene());
             } catch (Exception ex) {
@@ -31,5 +34,7 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
 
             }
         }
+        ResultadosView resultados_ronda = new ResultadosView(STAGE, jugadores);
+        STAGE.setScene(resultados_ronda.getScene());
     }
 }

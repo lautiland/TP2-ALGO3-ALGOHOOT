@@ -34,7 +34,7 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
 
             }
         }
-        ResultadosView resultados_ronda = new ResultadosView(STAGE, jugadores);
-        STAGE.setScene(resultados_ronda.getScene());
+        //ResultadosView resultados_ronda = new ResultadosView(STAGE, jugadores);
+        //STAGE.setScene(resultados_ronda.getScene());
     }
 }

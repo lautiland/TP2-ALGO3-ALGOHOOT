@@ -6,6 +6,9 @@ import edu.fiuba.algo3.model.pregunta.GroupChoice;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,10 +18,11 @@ public class ParserTest {
     private final String RUTA_EJEMPLOS = "src/main/test/edu/fiuba/algo3/unitarios/example/";
 
     @Test
-    public void test01SePuedeParsearUnArchivoJSONCorrectamente(){
+    public void test01SePuedeParsearUnArchivoJSONCorrectamente() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        ArrayList<Pregunta> preguntas = parser.parsear(RUTA_EJEMPLOS+"preguntas.json", FORMATO);
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+"preguntas.json");
+        ArrayList<Pregunta> preguntas = parser.parsear(archivo, FORMATO);
 
         // Getters en preguntas para chequear si se parsearon bien?
 
@@ -26,59 +30,59 @@ public class ParserTest {
     }
 
     @Test
-    public void test02NoSePuedeParsearUnArchivoInexistente(){
+    public void test03NoSePuedeParsearUnFormatoInvalido() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+"preguntasInexistente.json", FORMATO));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+"preguntas.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, "xml"));
     }
 
     @Test
-    public void test03NoSePuedeParsearUnFormatoInvalido(){
+    public void test04NoPuedoParsearUnArchivoConTemaFaltante() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+"preguntas.json", "xml"));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "preguntas_sin_tema.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
     }
 
     @Test
-    public void test04NoPuedoParsearUnArchivoConTemaFaltante(){
+    public void test05NoPuedoParsearUnArchivoConTipoFaltante() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+ "preguntas_sin_tema.json", FORMATO));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "preguntas_sin_tipo.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
     }
 
     @Test
-    public void test05NoPuedoParsearUnArchivoConTipoFaltante(){
+    public void test06NoPuedoParsearUnArchivoConPreguntaFaltante() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+ "preguntas_sin_tipo.json", FORMATO));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+"preguntas_sin_preguntas.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
     }
 
     @Test
-    public void test06NoPuedoParsearUnArchivoConPreguntaFaltante(){
+    public void test07NoPuedoParsearUnArchivoConRespuestasFaltantes() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+"preguntas_sin_pregunta.json", FORMATO));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "preguntas_sin_respuestas.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
     }
 
     @Test
-    public void test07NoPuedoParsearUnArchivoConRespuestasFaltantes(){
+    public void test08NoPuedoParsearUnArchivoConOpcionesFaltantes() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+ "preguntas_sin_respuestas.json", FORMATO));
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "preguntas_sin_opciones.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
     }
 
     @Test
-    public void test08NoPuedoParsearUnArchivoConOpcionesFaltantes(){
+    public void test09PuedoParsearUnaPreguntaTipoGroupChoiceCorrectamente() throws FileNotFoundException {
         JuegoParser parser = new JuegoParser();
 
-        assertThrows(JSONInvalido.class, () -> parser.parsear(RUTA_EJEMPLOS+ "preguntas_sin_opciones.json", FORMATO));
-    }
-
-    @Test
-    public void test09PuedoParsearUnaPreguntaTipoGroupChoiceCorrectamente(){
-        JuegoParser parser = new JuegoParser();
-
-        ArrayList<Pregunta> preguntas = parser.parsear(RUTA_EJEMPLOS+ "pregunta_group_choice.json", FORMATO);
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "pregunta_group_choice.json");
+        ArrayList<Pregunta> preguntas = parser.parsear(archivo, FORMATO);
 
        assertTrue(preguntas.get(0) instanceof GroupChoice);
     }

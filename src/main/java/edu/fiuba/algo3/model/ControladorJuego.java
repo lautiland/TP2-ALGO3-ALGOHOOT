@@ -12,14 +12,14 @@ public class ControladorJuego {
     private int cantidadPreguntas;
 
     public void iniciarJuego(){
-        setCantidadJugadores();
+        /*setCantidadJugadores();
         setJugadores();
         ArrayList<Pregunta> preguntas;
         JuegoParser parser = new JuegoParser();
         preguntas = parser.parsear(InteraccionesConJugadores.pedirRutaArchivo(), "json");
         this.cantidadPreguntas= preguntas.size();
         this.juego = new Juego(jugadores,preguntas);
-        controlarJuego();
+        controlarJuego();*/
     }
 
     public void controlarJuego(){

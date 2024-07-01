@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.model;
 
-import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalida;
+import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalido;
 import edu.fiuba.algo3.model.excepciones.CantidadPreguntasInvalida;
 import edu.fiuba.algo3.model.excepciones.MultiplicadorInvalido;
 import edu.fiuba.algo3.model.modificador.Anulador;
@@ -10,11 +10,13 @@ import edu.fiuba.algo3.model.modificador.Multiplicador;
 import edu.fiuba.algo3.model.parser.JuegoParser;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Juego {
     private static final int NO_ENCONTRADO = -1;
+    private static final int CANTIDAD_JUGADORES_MINIMOS = 2;
     private final ArrayList<Jugador> jugadores;
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
@@ -22,8 +24,8 @@ public class Juego {
     private final ArrayList<Modificador> multiplicadores;
 
     public Juego(ArrayList<Jugador> jugadores){
-        if (jugadores.size() < 2){
-            throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
+        if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
+            throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
         }
 
         this.jugadores = jugadores;
@@ -31,14 +33,14 @@ public class Juego {
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
         this.multiplicadores = new ArrayList<>();
-        multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(CANTIDAD_JUGADORES_MINIMOS));
         multiplicadores.add(new Multiplicador(3));
     }
 
     // Este dejará de existir a futuro
-    public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas){
-        if (jugadores.size() < 2){
-            throw new CantidadJugadoresInvalida("La cantidad de jugadores debe ser al menos 2");
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
+        if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
+            throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
         }
         if (preguntas.isEmpty()){
             throw new CantidadPreguntasInvalida("La cantidad de preguntas debe ser al menos 1");
@@ -50,13 +52,13 @@ public class Juego {
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
         this.multiplicadores = new ArrayList<>();
-        multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(CANTIDAD_JUGADORES_MINIMOS));
         multiplicadores.add(new Multiplicador(3));
     }
 
-    public void cargarPreguntas(String ruta){
+    public void cargarPreguntas(Reader archivo){
         JuegoParser parser = new JuegoParser();
-        preguntas = parser.parsear(ruta, "json");
+        preguntas = parser.parsear(archivo, "json");
     }
 
     public void activarAnulador(Jugador jugador){

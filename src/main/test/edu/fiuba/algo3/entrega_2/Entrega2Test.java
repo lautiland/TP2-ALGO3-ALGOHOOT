@@ -224,7 +224,7 @@ public class Entrega2Test {
         opcionesOrdenadas.add(opcion3);
         opcionesOrdenadas.add(opcion4);
 
-        Pregunta pregunta = new OrderedChoice("Pregunta de ordered choice", opcionesOrdenadas, "", "");
+        Pregunta pregunta = new OrderedChoice("Pregunta de ordered choice",opcionesOrdenadas, opcionesOrdenadas, "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
@@ -284,15 +284,11 @@ public class Entrega2Test {
         juego.responder(jugador1, new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
-            add(opcion3);
-            add(opcion4);
         }});
 
         juego.responder(jugador2, new ArrayList<>(){{
-            add(opcion1);
-            add(opcion2);
-            add(opcion4);
             add(opcion3);
+            add(opcion4);
         }});
 
 

@@ -22,6 +22,7 @@ public class Juego {
     private final Modificador anulador;
     private final Modificador exclusividad;
     private final ArrayList<Modificador> multiplicadores;
+    private Pregunta preguntaActual;
 
     public Juego(ArrayList<Jugador> jugadores){
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
@@ -48,6 +49,7 @@ public class Juego {
 
         this.jugadores = jugadores;
         this.preguntas = preguntas;
+        preguntaActual = preguntas.remove(0);
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
@@ -59,24 +61,22 @@ public class Juego {
     public void cargarPreguntas(Reader archivo){
         JuegoParser parser = new JuegoParser();
         preguntas = parser.parsear(archivo, "json");
+        preguntaActual = preguntas.remove(0);
     }
 
     public void activarAnulador(Jugador jugador){
-        Pregunta preguntaActual = preguntas.get(0);
         if (preguntaActual.esCompatibleCon(anulador)) {
             anulador.usar(jugador);
         }
     }
 
     public void activarExclusividad(Jugador jugador){
-        Pregunta preguntaActual = preguntas.get(0);
         if (preguntaActual.esCompatibleCon(exclusividad)) {
             exclusividad.usar(jugador);
         }
     }
 
     public void activarMultiplicador(Jugador jugador, int factor){
-        Pregunta preguntaActual = preguntas.get(0);
         int i = multiplicadores.indexOf(new Multiplicador(factor));
         if(i == NO_ENCONTRADO){
             throw new MultiplicadorInvalido();
@@ -103,8 +103,20 @@ public class Juego {
         return puntajeFiltrado;
     }
 
+    public Pregunta obtenerPreguntaActual(){
+        return preguntaActual;
+    }
+
+    public boolean siguientePregunta(){
+        if (preguntas.isEmpty()){
+            return false;
+        }
+
+        preguntaActual = preguntas.remove(0);
+        return true;
+    }
+
     public void evaluarRespuestas(){
-        Pregunta preguntaActual = preguntas.remove(0);
         HashMap<Jugador, Integer> puntajes = new HashMap<>();
 
         jugadores.forEach(jugador -> {
@@ -118,5 +130,6 @@ public class Juego {
         puntajesFinales.forEach(Jugador::modificarPuntos);
         anulador.desactivar();
         exclusividad.desactivar();
+        multiplicadores.forEach(Modificador::desactivar);
     }
 }

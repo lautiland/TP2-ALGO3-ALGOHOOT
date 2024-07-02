@@ -34,7 +34,7 @@ public class Juego {
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
         this.multiplicadores = new ArrayList<>();
-        multiplicadores.add(new Multiplicador(CANTIDAD_JUGADORES_MINIMOS));
+        multiplicadores.add(new Multiplicador(2));
         multiplicadores.add(new Multiplicador(3));
     }
 

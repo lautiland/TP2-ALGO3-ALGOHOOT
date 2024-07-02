@@ -42,7 +42,6 @@ public class JugarTurnoView  extends SceneGui {
 
         root.getChildren().addAll(player, labelScreen, buttonContinuar);
 
-        Scene scene = new Scene(root, AnchoJuego, AltoJuego);
-        return scene;
+        return new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

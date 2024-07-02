@@ -3,6 +3,7 @@ package edu.fiuba.algo3.unitarios;
 import edu.fiuba.algo3.model.*;
 import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalido;
 import edu.fiuba.algo3.model.excepciones.CantidadPreguntasInvalida;
+import edu.fiuba.algo3.model.excepciones.MultiplicadorInvalido;
 import edu.fiuba.algo3.model.pregunta.ClassicTF;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JuegoTest {
+
     @Test
     public void test01CantidadDeJugadoresInvalida() {
         Jugador jugador1 = new Jugador("Franco");
@@ -36,9 +38,17 @@ public class JuegoTest {
         assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores, preguntas));
     }
 
+    @Test
+    public void test02CantidadDeJugadoresInvalida() {
+        Jugador jugador1 = new Jugador("Franco");
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+
+        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores));
+    }
 
     @Test
-    public void test02NoHayPreguntasEnElJuego(){
+    public void test03NoHayPreguntasEnElJuego(){
         Jugador jugador1 = new Jugador("Franco");
         Jugador jugador2 = new Jugador("Lautaro");
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -50,7 +60,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void test03SeCarganLasPreguntasCorrectamente() throws FileNotFoundException {
+    public void test04SeCarganLasPreguntasCorrectamente() throws FileNotFoundException {
         Jugador jugador1 = new Jugador("Franco");
         Jugador jugador2 = new Jugador("Lautaro");
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -80,5 +90,17 @@ public class JuegoTest {
 
         assertEquals(1, jugador1.getPuntos());
         assertEquals(0, jugador2.getPuntos());
+    }
+
+    @Test
+    public void test05MultiplicadorInvalido() {
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        Jugador jugador1 = new Jugador("Franco");
+        Jugador jugador2 = new Jugador("Lautaro");
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        Juego juego = new Juego(jugadores);
+
+        assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador(jugador1, 6));
     }
 }

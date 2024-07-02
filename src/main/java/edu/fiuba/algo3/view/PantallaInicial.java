@@ -23,7 +23,7 @@ public class PantallaInicial extends SceneGui {
 
         //creacion de Botones
         Label bienvenida = new Label("Bienvenido a AlgoHoot");
-        bienvenida.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black; -fx-font-size: %spx ;",colorPrimario,40));
+        bienvenida.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_PRIMARIO,40));
         bienvenida.setPrefSize(600,200);
         bienvenida.setTextAlignment(TextAlignment.CENTER);
 
@@ -33,7 +33,7 @@ public class PantallaInicial extends SceneGui {
 
         Button salir = new Button();
         salir.setStyle(String.format("-fx-background-color: %s ;" +
-                " -fx-text-fill: black; -fx-font-size: %spx ;",colorSecundario,sizeTextoTitulo));
+                " -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_SECUNDARIO, TITULO_SIZE));
         salir.setText("Salir");
         salir.setMinSize(200, 40);
         salir.setOnAction(e-> {
@@ -46,7 +46,7 @@ public class PantallaInicial extends SceneGui {
 
         //creación de contenedor fondo de los botones
         StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_PRIMARIO));
         contenedorBotones.setMinSize(600,800);
         contenedorBotones.setMaxSize(700,900);
 
@@ -58,9 +58,9 @@ public class PantallaInicial extends SceneGui {
 
         //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",colorFondoSecundario));
+        contenedorJuego.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_SECUNDARIO));
         contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene escena = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
+        Scene escena = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         //stage setting
         contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);

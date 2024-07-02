@@ -112,5 +112,30 @@ public class ParcialMCTest {
 
         assertEquals(parcialMC.evaluarRespuestas(respuestas), 0);
     }
+
+    @Test
+    public void test06PuedoEvaluarSoloUnaRespuestaCorrectaParcialMC(){
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+
+        ArrayList<Opcion> respuestasCorrectas = new ArrayList<>();
+        respuestasCorrectas.add(opcion2);
+        respuestasCorrectas.add(opcion3);
+
+        Pregunta parcialMC = new ParcialMC("Pregunta de multiple choice", opciones, respuestasCorrectas, "", "");
+
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+        respuestas.add(opcion3);
+        respuestas.add(opcion1);
+
+        assertEquals(parcialMC.evaluarRespuestas(respuestas), 0);
+    }
 }
 

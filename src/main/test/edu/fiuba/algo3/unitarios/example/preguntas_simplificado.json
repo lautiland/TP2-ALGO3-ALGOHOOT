@@ -1,0 +1,89 @@
+[
+{
+  "ID": 1,
+  "Tema": "CIENCIAS",
+  "Tipo": "Ordered Choice",
+  "Pregunta": "Ordene de MAYOR A MENOR los siguientes objetos hogareños según su nivel de radiación electromagnética emitido (el máximo recomendado es 100 microTeslas)",
+  "Respuesta": "2,1,4,3",
+  "Opcion 1": "Televisor de tubo CRT",
+  "Opcion 2": "Microondas",
+  "Opcion 3": "Imanes del delivery",
+  "Opcion 4": "Heladera",
+
+  "Texto respuesta": "El microondas emite a  3 cm entre 73 y 200µ, y a 30 cm entre 4 a 8 µT. "
+},
+{
+  "ID": 2,
+  "Tema": "ARTE",
+  "Tipo": "Multiple Choice Simple",
+  "Pregunta": "¿Cuál es el disco más vendido de la historia?",
+  "Respuesta": "4,1",
+  "Opcion 1": "Revolver (Los Beatles)",
+  "Opcion 2": "Greatest Hits (Queen)",
+  "Opcion 3": "mp3 (Emilia)",
+  "Opcion 4": "Thriller (Michael Jackson)",
+  "Opcion 5": "Back to Black (Amy Winehouse)",
+  "Texto respuesta": "El disco más vendido de la historia es Thriller, de Michael Jackson. Se estima que ha vendido entre 51 a 65 millones de álbumes."
+},
+{
+  "ID": 3,
+  "Tema": "CIENCIAS",
+  "Tipo": "Verdadero Falso",
+  "Pregunta": "El punto de ebullición del agua a 3300m del mar es 100 grados centígrados",
+  "Respuesta": "2",
+  "Opcion 1": "Verdadero",
+  "Opcion 2": "Falso",
+  "Texto respuesta": "En la altura, la temperatura de ebullición es menor por la mayor presión atmosférica"
+},
+{
+  "ID": 8,
+  "Tema": "DEPORTES",
+  "Tipo": "Multiple Choice Puntaje Parcial",
+  "Pregunta": "Qué disciplinas no forman parte del DECATLON?",
+  "Respuesta": "3,5",
+  "Opcion 1": "Lanzamiento de disco",
+  "Opcion 2": "Salto en largo",
+  "Opcion 3": "Maratón",
+  "Opcion 4": "Lanzamiento de jabalina",
+  "Opcion 5": "Ciclismo",
+  "Texto respuesta": "Ni maratón ni ciclismo forman parte del decatlón."
+},
+{
+  "ID": 10,
+  "Tema": "HISTORIA",
+  "Tipo": "Verdadero Falso Penalidad",
+  "Pregunta": "Nueva Orleans en Luisiana, Estados Unidos, fue colonia española",
+  "Respuesta": "1",
+  "Opcion 1": "Verdadero",
+  "Opcion 2": "Falso",
+  "Texto respuesta": "Desde 1762 hasta 1800 los territorios en torno al río Misisipi fueron españoles."
+},
+{
+  "ID": 11,
+  "Tema": "CIENCIAS",
+  "Tipo": "Multiple Choice Penalidad",
+  "Pregunta": "Para la mecánica cuántica, la luz ¿es una partícula o una onda?",
+  "Respuesta": "4,2",
+  "Opcion 1": "Onda",
+  "Opcion 2": "Partícula",
+  "Opcion 3": "Ninguna",
+  "Opcion 4": "Ambas",
+  "Texto respuesta": "La luz se comporta como una partícula o como una onda, segun la mecánica cuántica"
+},
+{
+  "ID": 18,
+  "Tema": "DEPORTES",
+  "Tipo": "Group Choice",
+  "Pregunta": "Asigne las siguientes leyendas del deporte nacional a disciplina grupales (Fútbol, Básquet, Voley, Rugby,) o individuales (atletismo, tenis, artes marciales, ajedrez, etc):",
+  "Respuesta": "A: 1,2,5; B:3,4,6",
+  "Opcion 1": "Lio Messi",
+  "Opcion 2": "Manu Ginóbili",
+  "Opcion 3": "Juan Martín del Potro",
+  "Opcion 4": "Miguel Najdorf",
+  "Opcion 5": "Hugo Conte",
+  "Opcion 6": "José Meolans",
+  "Grupo A": "Deportes Grupales",
+  "Grupo B": "Deportes Individuales",
+  "Texto respuesta": "say no more..."
+}
+]

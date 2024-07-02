@@ -22,21 +22,17 @@ public class AddJugadoresView extends SceneGui {
         STAGE = stage;
     }
 
-    public Scene getScene() throws Exception {
+    public Scene getScene() {
 
         //Creacion de botones pantalla principal
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         TextField preguntaJugadores = new TextField();
-        preguntaJugadores.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
-                " -fx-font-size: %spx ;",colorPrimario,sizeTextoTitulo));
-        preguntaJugadores.setPromptText("Mi nombre");
-        preguntaJugadores.setMaxWidth(450);
 
-        Label addPlayer = new Label();
-        addPlayer.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: white;" +
-                " -fx-font-size: %spx ;",colorFondoSecundario,11));
-        addPlayer.setMaxSize(300,500);
+        preguntaJugadores.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;", COLOR_PRIMARIO, TITULO_SIZE));
+        preguntaJugadores.setPromptText("Nombre del Jugador");
+        preguntaJugadores.setMaxWidth(450);
 
         Button addButton = new Button("Agregar Jugador");
         configurarBoton(addButton);
@@ -56,6 +52,29 @@ public class AddJugadoresView extends SceneGui {
                 " -fx-font-size: %spx ;",colorTerciario,15));
         playersList.setMaxSize(200,70);
 
+        Label addPlayer = new Label();
+        addPlayer.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: white;" +
+                " -fx-font-size: %spx ;",colorFondoSecundario,11));
+        addPlayer.setMaxSize(300,500);
+
+        Button addButton = new Button("Agregar Jugador");
+        configurarBoton(addButton);
+        addButton.setOnAction(new ButtonAddJugadorHanlder(STAGE,jugadores,addPlayer,preguntaJugadores));
+
+        Button iniciarPartida = new Button("Iniciar Partida");
+        configurarBoton(iniciarPartida);
+        iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores));
+
+        Label accionLabel = new Label("Ingresar el nombre de los jugadores");
+        accionLabel.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;", COLOR_PRIMARIO,15));
+        accionLabel.setPrefSize(320,60);
+
+        Label playersList = new Label("Jugadores Agregados:");
+        playersList.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;",colorTerciario,15));
+        playersList.setMaxSize(200,70);
+
         //creación de contenedor fondo
         StackPane contenedorBotones = new StackPane();
         contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
@@ -64,18 +83,12 @@ public class AddJugadoresView extends SceneGui {
 
         //creacion contenedor de items
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(accionLabel,preguntaJugadores, addButton, playersList, addPlayer,iniciarPartida);
-        botonesBox.setAlignment(Pos.CENTER);
+        botonesBox.getChildren().addAll(accionLabel, preguntaJugadores, playersList, addPlayer, addButton, iniciarPartida);
 
-        //Contenedor del juego que tiene al organizador
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",colorFondoSecundario));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene escena = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
 
-        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
+        configurarBackground(contenedorJuego, botonesBox);
 
-        return escena;
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

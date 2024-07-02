@@ -56,6 +56,10 @@ abstract public class Pregunta {
         return evaluador.calcular(respuestasCorrectas,respuestasIncorrectas);
     }
 
+    public ArrayList<Opcion> obtenerOpciones(){
+        return opciones;
+    }
+
     public boolean esCompatibleCon(Modificador modificadorActual) {
         return modificadoresCompatibles.contains(modificadorActual);
     }

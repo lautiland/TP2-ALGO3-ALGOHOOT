@@ -62,7 +62,7 @@ public class JSONReader {
             case "multiple choice penalidad":
                 return new PenaltyMC(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
             case "ordered choice":
-                return new OrderedChoice(enunciado, opcionesCorrectas, categoria, descripcionRespuesta);
+                return new OrderedChoice(enunciado,opciones , opcionesCorrectas, categoria, descripcionRespuesta);
             case "group choice":
                 ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
                 ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();

@@ -107,7 +107,7 @@ public class PreguntaView extends SceneGui {
         root.getChildren().forEach(this::makeDraggable);
     }
 
-    public static void getRootGroupChoiceQuestion(Pane root) {
+    public void getRootGroupChoiceQuestion(Pane root) {
         Button falseBtn = new Button("False");
         configurarBoton(falseBtn);
         falseBtn.setOnAction(new ButtonFalseHandler(stage));

@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class PantallaInicial extends SceneGui {
@@ -22,20 +21,17 @@ public class PantallaInicial extends SceneGui {
     public Scene getScene() {
 
         //creacion de Botones
-        Label bienvenida = new Label("Bienvenido a AlgoHoot");
-        bienvenida.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_PRIMARIO,40));
+        Label bienvenida = new Label("AlgoHoot");
+        bienvenida.setStyle(String.format("-fx-background-color: %s; -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_PRIMARIO, 50));
         bienvenida.setPrefSize(600,200);
-        bienvenida.setTextAlignment(TextAlignment.CENTER);
+        bienvenida.setAlignment(Pos.CENTER);
 
         Button iniciarJuego = new Button("Comenzar Juego");
         configurarBoton(iniciarJuego);
         iniciarJuego.setOnAction(new ButtonIniciarHandler(stage));
 
-        Button salir = new Button();
-        salir.setStyle(String.format("-fx-background-color: %s ;" +
-                " -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_SECUNDARIO, TITULO_SIZE));
-        salir.setText("Salir");
-        salir.setMinSize(200, 40);
+        Button salir = new Button("Salir");
+        configurarBoton(salir);
         salir.setOnAction(e-> {
             try {
                 stage.close();
@@ -44,27 +40,13 @@ public class PantallaInicial extends SceneGui {
             }
         });
 
-        //creación de contenedor fondo de los botones
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
-
-        //creacion contenedor de botones
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
         botonesBox.getChildren().addAll(bienvenida, iniciarJuego,salir);
-        botonesBox.setAlignment(Pos.CENTER);
-
-        //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_SECUNDARIO));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene escena = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        //stage setting
-        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
-        return escena;
+        configurarBackground(contenedorJuego, botonesBox);
+
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     }
 }

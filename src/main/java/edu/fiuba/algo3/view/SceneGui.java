@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 abstract public class SceneGui {
     protected static final String COLOR_PRIMARIO = "#fecea8";
@@ -19,11 +22,36 @@ abstract public class SceneGui {
         WINDOW_HEIGHT = alto;
     }
 
-    protected static void configurarBoton(Button boton){
+    protected void configurarBoton(Button boton){
 
         boton.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
         boton.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
                 " -fx-font-size: %spx ;", COLOR_SECUNDARIO, TITULO_SIZE));
+        boton.setOnMouseEntered(e -> boton.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;" +
+                " -fx-border-color: black;" +
+                "-fx-border-width: 2px;" +
+                "-fx-border-style: solid;", COLOR_TERCIARIO, TITULO_SIZE)));
+        boton.setOnMouseExited(e -> boton.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
+                " -fx-font-size: %spx ;" +
+                "-fx-border-width: 0;", COLOR_SECUNDARIO, TITULO_SIZE)));
+
         boton.setMinSize(400, 50);
+    }
+
+    protected void configurarBackground(StackPane contenedorJuego, VBox botonesBox) {
+        StackPane contenedorBotones = new StackPane();
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_PRIMARIO));
+        contenedorBotones.setMinSize(600,800);
+        contenedorBotones.setMaxSize(700,900);
+
+
+        botonesBox.setSpacing(10);
+        botonesBox.setAlignment(Pos.CENTER);
+
+        contenedorJuego.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_SECUNDARIO));
+        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
+
+        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
     }
 }

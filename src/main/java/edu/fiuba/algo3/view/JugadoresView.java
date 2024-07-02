@@ -26,26 +26,26 @@ public class JugadoresView extends SceneGui {
         //Creacion de botones pantalla principal
         ArrayList<Jugador> jugadores = new ArrayList<>();
         TextField preguntaJugadores = new TextField();
+
         preguntaJugadores.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
                 " -fx-font-size: %spx ;", COLOR_PRIMARIO, TITULO_SIZE));
-        preguntaJugadores.setPromptText("Mi nombre");
+        preguntaJugadores.setPromptText("Nombre del Jugador");
         preguntaJugadores.setMaxWidth(450);
 
-        Button addButton = new Button("Agregar Jugador");
-        addButton.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
-                " -fx-font-size: %spx ;", COLOR_SECUNDARIO,15));
-        addButton.setMaxSize(120,60);
+        Button addButton = new Button("Agregar");
+        configurarBoton(addButton);
 
-        Label accionLabel = new Label("Ingresa el nombre del jugador:");
+        Label accionLabel = new Label("Ingresar el nombre de los jugadores");
         accionLabel.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
                 " -fx-font-size: %spx ;", COLOR_PRIMARIO,15));
         accionLabel.setPrefSize(320,60);
+        accionLabel.setAlignment(Pos.CENTER);
 
 
-        Label playersList = new Label("Jugadores Agregados:");
-        playersList.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +
-                " -fx-font-size: %spx ;", COLOR_TERCIARIO,15));
-        playersList.setMaxSize(200,70);
+        Label playersList = new Label("Jugadores actuales");
+        playersList.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: white;" +
+                " -fx-font-size: %spx ;", COLOR_FONDO_SECUNDARIO,15));
+        playersList.setMaxSize(300,70);
 
         Label addPlayer = new Label();
         addPlayer.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: white;" +
@@ -57,7 +57,11 @@ public class JugadoresView extends SceneGui {
 
                 Jugador jugador = new Jugador(addPlayer.getText());
                 jugadores.add(jugador);
-                addPlayer.setText(addPlayer.getText() + "\n" + playerName);
+                if (addPlayer.getText().isEmpty()) {
+                    addPlayer.setText(playerName);
+                } else {
+                    addPlayer.setText(addPlayer.getText() + "\n" + playerName);
+                }
                 preguntaJugadores.clear();
             }
         });
@@ -66,27 +70,14 @@ public class JugadoresView extends SceneGui {
         configurarBoton(iniciarPartida);
         iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores));
 
-        //creación de contenedor fondo
-
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
-
         //creacion contenedor de items
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(accionLabel,preguntaJugadores, addButton, playersList, addPlayer,iniciarPartida);
-        botonesBox.setAlignment(Pos.CENTER);
+        botonesBox.getChildren().addAll(accionLabel, preguntaJugadores, playersList, addPlayer, addButton, iniciarPartida);
 
-        //Contenedor del juego que tiene al organizador
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_SECUNDARIO));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene escena = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        contenedorJuego.setLayoutX((contenedorJuego.getWidth() - contenedorJuego.getWidth()) / 2);
+        configurarBackground(contenedorJuego, botonesBox);
 
-        return escena;
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

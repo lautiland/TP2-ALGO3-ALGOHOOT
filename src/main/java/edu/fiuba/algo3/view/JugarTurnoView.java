@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
+import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.Jugador;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
@@ -15,16 +16,16 @@ import javafx.scene.layout.StackPane;
 public class JugarTurnoView  extends SceneGui {
 
     Stage stage;
-    Jugador jugador;
+    Juego juego;
 
-    public JugarTurnoView(Stage stage_actual,Jugador jugador_actual) {
+    public JugarTurnoView(Stage stage_actual,Juego juego) {
         stage = stage_actual;
-        jugador = jugador_actual;
+        this.juego = juego;
     }
 
     public Scene getScene() {
         Label labelScreen = new Label("Turno del jugador: ");
-        Label player = new Label(jugador.getNombre());
+        Label player = new Label(juego.getJugadorActual().getNombre());
 
         labelScreen.setTranslateY(200);
         labelScreen.setTranslateX(200);

@@ -8,6 +8,7 @@ import edu.fiuba.algo3.model.pregunta.ClassicTF;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
@@ -44,7 +45,7 @@ public class JuegoTest {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
 
-        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores));
+        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores,new FileReader("src/main/resources/preguntas.json")));
     }
 
     @Test
@@ -67,8 +68,7 @@ public class JuegoTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
-        Juego juego = new Juego(jugadores);
-        Reader archivo = new FileReader("src/main/resources/preguntas.json");
+        Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"));
         ArrayList<Opcion> respuestaCorrecta = new ArrayList<>();
         respuestaCorrecta.add(new Opcion("Microondas"));
         respuestaCorrecta.add(new Opcion("Televisor de tubo CRT"));
@@ -81,8 +81,6 @@ public class JuegoTest {
         respuestaIncorrecta.add(new Opcion("Imanes del delivery"));
         respuestaIncorrecta.add(new Opcion("Heladera"));
 
-        juego.cargarPreguntas(archivo);
-
         jugador1.responderPregunta(respuestaCorrecta);
         jugador2.responderPregunta(respuestaIncorrecta);
 
@@ -93,13 +91,13 @@ public class JuegoTest {
     }
 
     @Test
-    public void test05MultiplicadorInvalido() {
+    public void test05MultiplicadorInvalido() throws FileNotFoundException {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugador jugador1 = new Jugador("Franco");
         Jugador jugador2 = new Jugador("Lautaro");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-        Juego juego = new Juego(jugadores);
+        Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"));
 
         assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador(jugador1, 6));
     }

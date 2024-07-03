@@ -29,10 +29,7 @@ public class IntegracionTest {
             }
         };
 
-        Juego juego = new Juego(jugadores);
-        Reader archivo = new FileReader(ARCHIVO_PREGUNTAS);
-
-        juego.cargarPreguntas(archivo);
+        Juego juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS));
 
         ArrayList<Opcion> opciones = juego.obtenerPreguntaActual().obtenerOpciones();
         ArrayList<Opcion> respuesta1  = new ArrayList<>();

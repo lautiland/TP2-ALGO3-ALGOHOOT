@@ -135,6 +135,9 @@ public class PreguntaView extends SceneGui {
         Button continuar = new Button("Continuar");
         configurarBoton(continuar);
         //continar.setOnAction(new ButtonContinuarHanlder(stage, new ResultadosPorRondaView(stage)));
+        // aca tengo pregunta:
+        // if(Pregunta pregunta.getType() ==  TF) getRootflase...
+        // if(pregunta == OC) getRootOrdewr...
 
         Pane root = new Pane();
         //getRootFalseTrueQuestion(root);
@@ -145,7 +148,7 @@ public class PreguntaView extends SceneGui {
 
         //creación de contenedor fondo de los botones
         StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
         contenedorBotones.setMinSize(600,800);
         contenedorBotones.setMaxSize(700,900);
 
@@ -157,9 +160,9 @@ public class PreguntaView extends SceneGui {
 
         //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",colorFondoSecundario));
+        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
         contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene scene = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
+        Scene scene = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
         return scene;
     }
 }

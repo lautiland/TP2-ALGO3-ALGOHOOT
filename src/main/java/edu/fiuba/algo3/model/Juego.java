@@ -24,12 +24,13 @@ public class Juego {
     private final ArrayList<Modificador> multiplicadores;
     private Pregunta preguntaActual;
 
-    public Juego(ArrayList<Jugador> jugadores){
+    public Juego(ArrayList<Jugador> jugadores, Reader archivo){
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
             throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
         }
 
         this.jugadores = jugadores;
+        cargarPreguntas(archivo);
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
@@ -38,7 +39,7 @@ public class Juego {
         multiplicadores.add(new Multiplicador(3));
     }
 
-    // Este dejará de existir a futuro
+    // Este contructor esta pensado para que los jugadores puedan crear sus preguntas y preguntar a los otros (no esta en el alcance de tp):
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
             throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
@@ -62,6 +63,13 @@ public class Juego {
         JuegoParser parser = new JuegoParser();
         preguntas = parser.parsear(archivo, "json");
         preguntaActual = preguntas.remove(0);
+    }
+
+    public Jugador getJugadorActual(){
+        Jugador jugadorActual = jugadores.get(0);
+        jugadores.remove(0);
+        jugadores.add(jugadorActual);
+        return jugadorActual;
     }
 
     public void activarAnulador(Jugador jugador){

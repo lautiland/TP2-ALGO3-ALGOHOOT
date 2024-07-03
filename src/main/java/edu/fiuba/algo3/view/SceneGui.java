@@ -26,7 +26,7 @@ abstract public class SceneGui {
     }
 
     public Scene getScene(Stage stage){
-        return new Scene( new StackPane(), AnchoJuego, AltoJuego);
+        return new Scene( new StackPane(), WINDOW_WIDTH, WINDOW_HEIGHT);
     }
     protected static void configurarBoton(Button boton){
 

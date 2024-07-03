@@ -63,7 +63,7 @@ public class ResultadosPorRondaView extends SceneGui {
         }
         //creación de contenedor fondo de los botones
         StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",colorFondoPrimario));
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
         contenedorBotones.setMinSize(600,800);
         contenedorBotones.setMaxSize(700,900);
 
@@ -75,9 +75,9 @@ public class ResultadosPorRondaView extends SceneGui {
 
         //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",colorFondoSecundario));
+        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
         contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene scene = new Scene(contenedorJuego, AnchoJuego, AltoJuego);
+        Scene scene = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
         return scene;
     }
 }

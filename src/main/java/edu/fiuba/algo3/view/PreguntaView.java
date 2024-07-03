@@ -2,6 +2,10 @@ package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
 import edu.fiuba.algo3.controller.ButtonFalseHandler;
+import edu.fiuba.algo3.controller.OpcionHandler;
+import edu.fiuba.algo3.model.Juego;
+import edu.fiuba.algo3.model.Opcion;
+import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -30,13 +34,17 @@ import javafx.scene.control.Label;
 
 import javafx.scene.layout.StackPane;
 
+import java.util.ArrayList;
+
 
 public class PreguntaView extends SceneGui {
 
     private double startX, startY;
     static Stage stage;
-    public PreguntaView(Stage stage_actual) {
+    private final Juego juego;
+    public PreguntaView(Stage stage_actual, Juego juego_actual) {
         stage = stage_actual;
+        juego = juego_actual;
     }
 
     private void makeDraggable(Node node){
@@ -70,25 +78,21 @@ public class PreguntaView extends SceneGui {
         root.getChildren().addAll(falseBtn, trueBtn);
     }
 
-    public static void getRootMultipleChoiceQuestion(Pane root) {
+    public void getRootMultipleChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas) {
+        VBox opcionesBox = new VBox();
+        opcionesBox.setAlignment(Pos.CENTER);
+        opcionesBox.setPadding(new Insets(20,200,20, 200));
+        opcionesBox.setSpacing(10);
 
-        CheckBox opcion1 = new CheckBox("Opcion 1");
-        CheckBox opcion2 = new CheckBox("Opcion 2");
-        CheckBox opcion3 = new CheckBox("Opcion 3");
-
-        opcion1.setTranslateY(200);
-        opcion1.setTranslateX(50);
-        opcion1.setStyle("-fx-font-size: 18px;");
-
-        opcion2.setTranslateY(250);
-        opcion2.setTranslateX(50);
-        opcion2.setStyle("-fx-font-size: 18px;");
-
-        opcion3.setTranslateY(300);
-        opcion3.setTranslateX(50);
-        opcion3.setStyle("-fx-font-size: 18px;");
-
-        root.getChildren().addAll(opcion1, opcion2, opcion3);
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        for(Opcion opcion : opciones){
+            CheckBox checkBox = new CheckBox(opcion.getTexto());
+            checkBox.setOnAction(new OpcionHandler(respuestas, opcion.getTexto()));
+            checkBox.setAlignment(Pos.TOP_LEFT);
+            checkBox.setMaxWidth(Double.MAX_VALUE);
+            opcionesBox.getChildren().add(checkBox);
+        }
+        root.getChildren().add(opcionesBox);
     }
 
     public void getRootOrdererChoiceQuestion(Pane root) {
@@ -121,49 +125,44 @@ public class PreguntaView extends SceneGui {
     }
 
     public Scene getScene() {
+        Pregunta preguntaActual = juego.obtenerPreguntaActual();
 
-        Label labelScreen = new Label("Pregunta:");
-        labelScreen.setTranslateY(50);
-        labelScreen.setTranslateX(50);
-        labelScreen.setStyle("-fx-font-size: 36px;");
-
-        Label pregunta = new Label("Esta es una pregunta de prueba");
-        pregunta.setTranslateY(150);
-        pregunta.setTranslateX(50);
+        Label pregunta = new Label(preguntaActual.getEnunciado());
         pregunta.setStyle("-fx-font-size: 24px;");
 
         Button continuar = new Button("Continuar");
         configurarBoton(continuar);
+
         //continar.setOnAction(new ButtonContinuarHanlder(stage, new ResultadosPorRondaView(stage)));
         // aca tengo pregunta:
         // if(Pregunta pregunta.getType() ==  TF) getRootflase...
         // if(pregunta == OC) getRootOrdewr...
 
-        Pane root = new Pane();
-        //getRootFalseTrueQuestion(root);
-        getRootOrdererChoiceQuestion(root);
-        root.setPadding(new Insets(20));
-        //root.setAlignment(Pos.TOP_LEFT);
-        root.getChildren().addAll(labelScreen, pregunta);
-
-        //creación de contenedor fondo de los botones
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
-
-        //creacion contenedor de items
+        //creación de contenedor fondo
+        ArrayList<Opcion> respuestas = new ArrayList<>();
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(labelScreen, pregunta, root);
+        botonesBox.getChildren().add(pregunta);
         botonesBox.setAlignment(Pos.CENTER);
+        botonesBox.setFillWidth(true);
 
-        //Contenedor del juego que tiene al organizador de botones
+        continuar.setOnAction( e -> {
+            for (Opcion opcion : respuestas) {
+                System.out.println(opcion.getTexto() + " seleccionada");
+            }
+        });
+
+        if(preguntaActual.getClass().getSimpleName().equalsIgnoreCase("ClassicMC")){
+            getRootMultipleChoiceQuestion(preguntaActual, botonesBox, respuestas);
+        }
+        // Mas casos...
+
+        botonesBox.getChildren().add(continuar);
+
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene scene = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
-        return scene;
+
+        configurarBackground(contenedorJuego, botonesBox);
+
+        return new Scene(contenedorJuego, 800,600);
     }
 }
 

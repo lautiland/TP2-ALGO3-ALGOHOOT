@@ -52,6 +52,14 @@ abstract public class Pregunta {
         return calcularPuntaje(respuestasCorrectas,respuestasIncorrectas);
     }
 
+    public String getEnunciado(){
+        return enunciado;
+    }
+
+    public ArrayList<Opcion> getOpciones(){
+        return opcionesCorrectas;
+    }
+
     protected int calcularPuntaje( int respuestasCorrectas, int respuestasIncorrectas){
         return evaluador.calcular(respuestasCorrectas,respuestasIncorrectas);
     }

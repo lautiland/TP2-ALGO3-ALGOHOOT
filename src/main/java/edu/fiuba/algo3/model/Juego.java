@@ -3,6 +3,7 @@ package edu.fiuba.algo3.model;
 import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalido;
 import edu.fiuba.algo3.model.excepciones.CantidadPreguntasInvalida;
 import edu.fiuba.algo3.model.excepciones.MultiplicadorInvalido;
+import edu.fiuba.algo3.model.excepciones.NombreJugadorInvalido;
 import edu.fiuba.algo3.model.modificador.Anulador;
 import edu.fiuba.algo3.model.modificador.Exclusividad;
 import edu.fiuba.algo3.model.modificador.Modificador;
@@ -79,6 +80,16 @@ public class Juego {
         if (preguntaActual.esCompatibleCon(exclusividad)) {
             exclusividad.usar(jugadores.get(0));
         }
+    }
+
+    public int obtenerPuntaje(String nombreJugador){
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equals(nombreJugador)){
+                return jugador.getPuntos();
+            }
+        }
+
+        throw new NombreJugadorInvalido();
     }
 
     public void activarMultiplicador(int factor){

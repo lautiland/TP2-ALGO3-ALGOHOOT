@@ -27,8 +27,9 @@ public class ButtonAddJugadorHanlder implements EventHandler<ActionEvent>{
         String playerName = jugador.getText();
         if (!playerName.isEmpty()) {
             Jugador jugadorActual = new Jugador(playerName);
-            label.setText(label.getText() + "\n" + playerName);
+            label.setText(label.getText() + playerName + "\n");
             jugadores.add(jugadorActual);
+            jugador.clear();
             if (jugadores.size() > 1) {
                 iniciarPartida.setDisable(false);
             }

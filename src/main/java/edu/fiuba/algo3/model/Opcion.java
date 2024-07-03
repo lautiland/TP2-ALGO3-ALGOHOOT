@@ -9,9 +9,16 @@ public class Opcion {
         this.texto = texto;
     }
 
-    public boolean equals(Opcion objetoAIgualar) {
-        return (Objects.equals(objetoAIgualar.texto, texto));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Opcion opcion = (Opcion) o;
+        return Objects.equals(texto, opcion.texto);
     }
 
+    public String getTexto(){
+        return texto;
+    }
 }
 

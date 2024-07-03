@@ -3,6 +3,7 @@ package edu.fiuba.algo3.view;
 import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
 import edu.fiuba.algo3.model.Juego;
 import javafx.geometry.Insets;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,18 +24,12 @@ public class JugarTurnoView  extends SceneGui {
     }
 
     public Scene getScene() {
-        Label labelScreen = new Label("Turno del jugador: ");
-        Label player = new Label(juego.getJugadorActual());
-
-        labelScreen.setTranslateY(200);
-        labelScreen.setTranslateX(200);
-
-        player.setTranslateY(200);
-        player.setTranslateX(450);
+        Label labelScreen = new Label("Turno del jugador: " + juego.getJugadorActual());
+        Label player = new Label("Puntos: " + juego.obtenerPuntaje(juego.getJugadorActual()));
 
         Button buttonContinuar = new Button("Continuar");
         configurarBoton(buttonContinuar);
-        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage, new MultiplicadoresView(stage, juego.obtenerPreguntaActual())));
+        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage, new MultiplicadoresView(stage, juego)));
 
         player.setStyle("-fx-font-size: 24px;");
         labelScreen.setStyle("-fx-font-size: 24px;");
@@ -44,6 +39,21 @@ public class JugarTurnoView  extends SceneGui {
 
         root.getChildren().addAll(player, labelScreen, buttonContinuar);
 
-        return new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        //creación de contenedor fondo
+        StackPane contenedorBotones = new StackPane();
+        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
+        contenedorBotones.setMinSize(600,800);
+        contenedorBotones.setMaxSize(700,900);
+
+        //creacion contenedor de items
+        VBox botonesBox = new VBox();
+        botonesBox.getChildren().addAll(labelScreen, player, buttonContinuar);
+
+        StackPane contenedorJuego = new StackPane();
+
+        configurarBackground(contenedorJuego, botonesBox);
+
+
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

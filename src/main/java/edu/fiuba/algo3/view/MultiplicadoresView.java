@@ -2,11 +2,13 @@ package edu.fiuba.algo3.view;
 
 
 import edu.fiuba.algo3.controller.*;
+import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.modificador.Anulador;
 import edu.fiuba.algo3.model.modificador.Exclusividad;
 import edu.fiuba.algo3.model.modificador.Multiplicador;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -21,34 +23,36 @@ import javafx.scene.layout.StackPane;
 
 public class MultiplicadoresView extends SceneGui  {
     Stage STAGE;
-    Pregunta pregunta;
+    Juego juego;
 
-    public MultiplicadoresView(Stage stage, Pregunta pregunta) {
+    public MultiplicadoresView(Stage stage, Juego juego) {
         STAGE = stage;
-        this.pregunta = pregunta;
+        this.juego = juego;
     }
+
     @Override
     public Scene getScene(Stage stage) {
-
+        Pregunta pregunta = juego.obtenerPreguntaActual();
         Label labelScreen = new Label("Que modificador vas a utilizar?");
+        labelScreen.setPadding(new Insets(0, 0, 20, 0));
 
         Button x2 = new Button("x2");
         configurarBoton(x2);
-        x2.setOnAction(new Buttonx2Handler(STAGE));
+        x2.setOnAction(new Buttonx2Handler(STAGE, juego));
         if(!pregunta.esCompatibleCon(new Multiplicador(2))){
             x2.setDisable(true);
         }
 
         Button x3 = new Button("x3");
         configurarBoton(x3);
-        x3.setOnAction(new Buttonx3Handler(STAGE));
+        x3.setOnAction(new Buttonx3Handler(STAGE, juego));
         if(!pregunta.esCompatibleCon(new Multiplicador(3))){
             x3.setDisable(true);
         }
 
         Button exclusividad = new Button("Exclusividad");
         configurarBoton(exclusividad);
-        exclusividad.setOnAction(new ButtonExclusividadHandler(STAGE));
+        exclusividad.setOnAction(new ButtonExclusividadHandler(STAGE, juego));
         if(!pregunta.esCompatibleCon(new Exclusividad())){
             exclusividad.setDisable(true);
         }
@@ -56,40 +60,27 @@ public class MultiplicadoresView extends SceneGui  {
 
         Button anulador = new Button("Anulador");
         configurarBoton(anulador);
-        anulador.setOnAction(new ButtonAnuladorHandler(STAGE));
+        anulador.setOnAction(new ButtonAnuladorHandler(STAGE, juego));
         if(!pregunta.esCompatibleCon(new Anulador())){
             anulador.setDisable(true);
         }
 
         Button ninguno = new Button("Ninguno");
         configurarBoton(ninguno);
-        ninguno.setOnAction(new ButtonNingunoHandler(STAGE));
+        ninguno.setOnAction(new ButtonNingunoHandler(STAGE, juego));
 
-        labelScreen.setTranslateY(100);
-        labelScreen.setTranslateX(200);
+        ninguno.setTranslateY(20);
+
         labelScreen.setStyle("-fx-font-size: 32px;");
 
-        x2.setTranslateY(300);
-        x2.setTranslateX(200);
+        //creacion contenedor de items
+        VBox botonesBox = new VBox();
+        botonesBox.getChildren().addAll(labelScreen, x2, x3, exclusividad,anulador,ninguno);
 
-        x3.setTranslateY(300);
-        x3.setTranslateX(500);
+        StackPane contenedorJuego = new StackPane();
 
-        exclusividad.setTranslateY(400);
-        exclusividad.setTranslateX(200);
+        configurarBackground(contenedorJuego, botonesBox);
 
-        anulador.setTranslateY(400);
-        anulador.setTranslateX(500);
-
-        ninguno.setTranslateY(500);
-        ninguno.setTranslateX(350);
-
-        StackPane  root = new StackPane();
-        root.setPadding(new Insets(20));
-        root.setAlignment(Pos.TOP_LEFT);
-
-        root.getChildren().addAll(anulador, ninguno, x2, x3, exclusividad,labelScreen);
-
-        return new Scene(root, 800, 600);
+        return new Scene(contenedorJuego, 800, 600);
     }
 }

@@ -66,7 +66,7 @@ public class JuegoTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
-        Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"));
+        Juego juego = new Juego(jugadores,new FileReader("src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json"));
         ArrayList<Opcion> respuestaCorrecta = new ArrayList<>();
         respuestaCorrecta.add(new Opcion("Microondas"));
         respuestaCorrecta.add(new Opcion("Televisor de tubo CRT"));

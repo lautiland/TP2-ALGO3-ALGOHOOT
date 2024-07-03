@@ -2,24 +2,24 @@ package edu.fiuba.algo3.controller;
 
 import edu.fiuba.algo3.model.Jugador;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 
 public class ButtonAddJugadorHanlder implements EventHandler<ActionEvent>{
-    private final Stage STAGE;
     ArrayList<Jugador> jugadores;
     TextField jugador;
     Label label;
+    Button iniciarPartida;
 
-    public ButtonAddJugadorHanlder(Stage stage, ArrayList<Jugador> jugadores_actuales, Label label, TextField jugador_nombre ){
-        this.STAGE = stage;
+    public ButtonAddJugadorHanlder(ArrayList<Jugador> jugadores_actuales, Label label, TextField jugador_nombre, Button iniciarPartida){
         jugadores = jugadores_actuales;
         jugador = jugador_nombre;
         this.label=label;
+        this.iniciarPartida = iniciarPartida;
     }
 
     @Override
@@ -29,6 +29,9 @@ public class ButtonAddJugadorHanlder implements EventHandler<ActionEvent>{
             Jugador jugadorActual = new Jugador(playerName);
             label.setText(label.getText() + "\n" + playerName);
             jugadores.add(jugadorActual);
+            if (jugadores.size() > 1) {
+                iniciarPartida.setDisable(false);
+            }
         }
     }
 

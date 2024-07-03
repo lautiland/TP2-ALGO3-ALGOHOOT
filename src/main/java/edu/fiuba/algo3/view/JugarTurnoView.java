@@ -2,7 +2,6 @@ package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
 import edu.fiuba.algo3.model.Juego;
-import edu.fiuba.algo3.model.Jugador;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
@@ -25,7 +24,7 @@ public class JugarTurnoView  extends SceneGui {
 
     public Scene getScene() {
         Label labelScreen = new Label("Turno del jugador: ");
-        Label player = new Label(juego.getJugadorActual().getNombre());
+        Label player = new Label(juego.getJugadorActual());
 
         labelScreen.setTranslateY(200);
         labelScreen.setTranslateX(200);
@@ -33,9 +32,9 @@ public class JugarTurnoView  extends SceneGui {
         player.setTranslateY(200);
         player.setTranslateX(450);
 
-        Button buttonContinuar = new Button("Siguiente turno");
+        Button buttonContinuar = new Button("Continuar");
         configurarBoton(buttonContinuar);
-        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage, new MultiplicadoresView(stage)));
+        buttonContinuar.setOnAction(new ButtonContinuarHanlder(stage, new MultiplicadoresView(stage, juego.obtenerPreguntaActual())));
 
         player.setStyle("-fx-font-size: 24px;");
         labelScreen.setStyle("-fx-font-size: 24px;");

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
     private final Stage STAGE;
     ArrayList<Jugador> jugadores;
-    private final static String ARCHIVO_PREGUNTAS =  "src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json";
+    private final static String ARCHIVO_PREGUNTAS =  "src/main/resources/preguntas.json";
 
     public ButtonIniciarPartidaHandler(Stage stage, ArrayList<Jugador> jugadores_actual){
         this.STAGE = stage;
@@ -24,9 +24,7 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
 
     @Override
     public void handle(ActionEvent actionEvent) {
-
-        boolean final_de_ronda = false;
-        Juego juego = null;
+        Juego juego;
         try {
             juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS));
         } catch (FileNotFoundException e) {

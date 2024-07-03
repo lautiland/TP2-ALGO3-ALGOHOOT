@@ -2,6 +2,10 @@ package edu.fiuba.algo3.view;
 
 
 import edu.fiuba.algo3.controller.*;
+import edu.fiuba.algo3.model.modificador.Anulador;
+import edu.fiuba.algo3.model.modificador.Exclusividad;
+import edu.fiuba.algo3.model.modificador.Multiplicador;
+import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -15,13 +19,13 @@ import javafx.scene.control.Label;
 
 import javafx.scene.layout.StackPane;
 
-import static edu.fiuba.algo3.view.SceneGui.configurarBoton;
-
 public class MultiplicadoresView extends SceneGui  {
     Stage STAGE;
+    Pregunta pregunta;
 
-    public MultiplicadoresView(Stage stage) {
+    public MultiplicadoresView(Stage stage, Pregunta pregunta) {
         STAGE = stage;
+        this.pregunta = pregunta;
     }
     @Override
     public Scene getScene(Stage stage) {
@@ -31,19 +35,31 @@ public class MultiplicadoresView extends SceneGui  {
         Button x2 = new Button("x2");
         configurarBoton(x2);
         x2.setOnAction(new Buttonx2Handler(STAGE));
+        if(!pregunta.esCompatibleCon(new Multiplicador(2))){
+            x2.setDisable(true);
+        }
 
         Button x3 = new Button("x3");
         configurarBoton(x3);
         x3.setOnAction(new Buttonx3Handler(STAGE));
+        if(!pregunta.esCompatibleCon(new Multiplicador(3))){
+            x3.setDisable(true);
+        }
 
         Button exclusividad = new Button("Exclusividad");
         configurarBoton(exclusividad);
         exclusividad.setOnAction(new ButtonExclusividadHandler(STAGE));
+        if(!pregunta.esCompatibleCon(new Exclusividad())){
+            exclusividad.setDisable(true);
+        }
 
 
         Button anulador = new Button("Anulador");
         configurarBoton(anulador);
         anulador.setOnAction(new ButtonAnuladorHandler(STAGE));
+        if(!pregunta.esCompatibleCon(new Anulador())){
+            anulador.setDisable(true);
+        }
 
         Button ninguno = new Button("Ninguno");
         configurarBoton(ninguno);
@@ -74,8 +90,6 @@ public class MultiplicadoresView extends SceneGui  {
 
         root.getChildren().addAll(anulador, ninguno, x2, x3, exclusividad,labelScreen);
 
-        Scene scene = new Scene(root, 800, 600);
-
-        return scene;
+        return new Scene(root, 800, 600);
     }
 }

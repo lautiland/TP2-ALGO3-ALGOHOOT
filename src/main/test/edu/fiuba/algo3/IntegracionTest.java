@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,9 +47,9 @@ public class IntegracionTest {
         respuesta3.add(opciones.get(1));
         respuesta3.add(opciones.get(0));
 
-        juego.responder(jugador1, respuesta1); // 1 punto
-        juego.responder(jugador2, respuesta2);
-        juego.responder(jugador3, respuesta3);
+        juego.responder(respuesta1); // 1 punto
+        juego.responder(respuesta2);
+        juego.responder(respuesta3);
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -66,9 +65,9 @@ public class IntegracionTest {
         respuesta3.add(opciones.get(3));
         respuesta3.add(opciones.get(0));
 
-        juego.responder(jugador1, respuesta1); // 1 punto
-        juego.responder(jugador2, respuesta2);
-        juego.responder(jugador3, respuesta3); // 1 punto
+        juego.responder(respuesta1); // 1 punto
+        juego.responder(respuesta2);
+        juego.responder(respuesta3); // 1 punto
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -77,11 +76,11 @@ public class IntegracionTest {
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(1));
 
-        juego.responder(jugador1, respuesta1); // Se le anula
-        juego.responder(jugador2, respuesta1); // 1 punto
-        juego.responder(jugador3, respuesta1); // Se le anula
+        juego.responder(respuesta1); // Se le anula
+        juego.activarAnulador();
+        juego.responder(respuesta1); // 1 punto
+        juego.responder(respuesta1); // Se le anula
 
-        juego.activarAnulador(jugador2);
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -96,9 +95,9 @@ public class IntegracionTest {
         respuesta3 = new ArrayList<>();
         respuesta3.add(opciones.get(2));
 
-        juego.responder(jugador1, respuesta1); // 2 punto
-        juego.responder(jugador2, respuesta2); // 0 puntos
-        juego.responder(jugador3, respuesta3); // 1 punto
+        juego.responder(respuesta1); // 2 punto
+        juego.responder(respuesta2); // 0 puntos
+        juego.responder(respuesta3); // 1 punto
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -109,13 +108,13 @@ public class IntegracionTest {
         respuesta3 = new ArrayList<>();
         respuesta3.add(opciones.get(1));
 
-        juego.responder(jugador1, respuesta1); // 1 puntos
-        juego.responder(jugador2, respuesta1); // 1 puntos
-        juego.responder(jugador3, respuesta3); // 0 puntos
+        juego.activarMultiplicador( 3); // 3 puntos
+        juego.responder(respuesta1); // 1 puntos
+        juego.activarMultiplicador( 2); // 2 puntos
+        juego.responder(respuesta1); // 1 puntos
+        juego.activarMultiplicador( 2); // -2 puntos
+        juego.responder(respuesta3); // 0 puntos
 
-        juego.activarMultiplicador(jugador1, 3); // 3 puntos
-        juego.activarMultiplicador(jugador2, 2); // 2 puntos
-        juego.activarMultiplicador(jugador3, 2); // -2 puntos
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -129,9 +128,9 @@ public class IntegracionTest {
         respuesta3.add(opciones.get(3));
         respuesta3.add(opciones.get(1));
 
-        juego.responder(jugador1, respuesta1); // 1-1=0 puntos
-        juego.responder(jugador2, respuesta2); // 0 puntos
-        juego.responder(jugador3, respuesta3); // 2 puntos
+        juego.responder(respuesta1); // 1-1=0 puntos
+        juego.responder(respuesta2); // 0 puntos
+        juego.responder(respuesta3); // 2 puntos
 
         juego.evaluarRespuestas();
         juego.siguientePregunta();
@@ -150,12 +149,12 @@ public class IntegracionTest {
         respuesta3.add(opciones.get(1));
         respuesta3.add(opciones.get(2));
 
-        juego.responder(jugador1, respuesta1); // 0 punto
-        juego.responder(jugador2, respuesta2); // 1 * 3 = 3 puntos
-        juego.responder(jugador3, respuesta3); // 0 puntos
+        juego.activarExclusividad();
+        juego.responder(respuesta1); // 0 punto
+        juego.responder(respuesta2); // 1 * 3 = 3 puntos
+        juego.activarExclusividad();
+        juego.responder(respuesta3); // 0 puntos
 
-        juego.activarExclusividad(jugador1);
-        juego.activarExclusividad(jugador3);
 
         juego.evaluarRespuestas();
 

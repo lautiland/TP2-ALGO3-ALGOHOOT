@@ -45,20 +45,20 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.activarMultiplicador( 2);
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.activarMultiplicador( 3);
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.responder(jugador3, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.activarMultiplicador(jugador1, 2);
-        juego.activarMultiplicador(jugador2, 3);
 
         juego.evaluarRespuestas();
 
@@ -88,19 +88,19 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion2);
         }});
 
-        juego.responder(jugador3, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.activarAnulador(jugador1);
+        juego.activarAnulador();
 
         juego.evaluarRespuestas();
 
@@ -130,20 +130,20 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
-        juego.responder(jugador3, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion2);
         }});
 
-        juego.activarExclusividad(jugador1);
-        juego.activarExclusividad(jugador2);
+        juego.activarExclusividad();
+        juego.activarExclusividad();
 
         juego.evaluarRespuestas();
 
@@ -183,19 +183,19 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
             add(opcion3);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
             add(opcion4);
         }});
 
-        juego.responder(jugador3, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
         }});
@@ -230,14 +230,14 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
             add(opcion3);
             add(opcion4);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
             add(opcion4);
@@ -281,12 +281,12 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
-        juego.responder(jugador1, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion1);
             add(opcion2);
         }});
 
-        juego.responder(jugador2, new ArrayList<>(){{
+        juego.responder(new ArrayList<>(){{
             add(opcion3);
             add(opcion4);
         }});

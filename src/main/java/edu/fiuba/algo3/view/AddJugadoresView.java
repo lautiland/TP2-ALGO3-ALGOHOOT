@@ -3,7 +3,6 @@ package edu.fiuba.algo3.view;
 import edu.fiuba.algo3.controller.ButtonAddJugadorHanlder;
 import edu.fiuba.algo3.controller.ButtonIniciarPartidaHandler;
 import edu.fiuba.algo3.model.Jugador;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,13 +43,14 @@ public class AddJugadoresView extends SceneGui {
                 " -fx-font-size: %spx ;",COLOR_FONDO_SECUNDARIO,11));
         addPlayer.setMaxSize(300,500);
 
-        Button addButton = new Button("Agregar Jugador");
-        configurarBoton(addButton);
-        addButton.setOnAction(new ButtonAddJugadorHanlder(STAGE,jugadores,addPlayer,preguntaJugadores));
-
         Button iniciarPartida = new Button("Iniciar Partida");
         configurarBoton(iniciarPartida);
         iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores));
+        iniciarPartida.setDisable(true);
+
+        Button addButton = new Button("Agregar Jugador");
+        configurarBoton(addButton);
+        addButton.setOnAction(new ButtonAddJugadorHanlder(jugadores,addPlayer,preguntaJugadores, iniciarPartida));
 
         Label playersList = new Label("Jugadores Agregados:");
         playersList.setStyle(String.format("-fx-background-color: %s ; -fx-text-fill: black;" +

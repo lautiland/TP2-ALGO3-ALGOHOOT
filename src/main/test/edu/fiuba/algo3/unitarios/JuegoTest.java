@@ -8,10 +8,8 @@ import edu.fiuba.algo3.model.pregunta.ClassicTF;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -99,6 +97,6 @@ public class JuegoTest {
         jugadores.add(jugador2);
         Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"));
 
-        assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador(jugador1, 6));
+        assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador( 6));
     }
 }

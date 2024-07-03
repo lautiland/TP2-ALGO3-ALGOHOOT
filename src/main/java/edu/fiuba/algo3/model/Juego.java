@@ -65,26 +65,23 @@ public class Juego {
         preguntaActual = preguntas.remove(0);
     }
 
-    public Jugador getJugadorActual(){
-        Jugador jugadorActual = jugadores.get(0);
-        jugadores.remove(0);
-        jugadores.add(jugadorActual);
-        return jugadorActual;
+    public String getJugadorActual(){
+        return jugadores.get(0).getNombre();
     }
 
-    public void activarAnulador(Jugador jugador){
+    public void activarAnulador(){
         if (preguntaActual.esCompatibleCon(anulador)) {
-            anulador.usar(jugador);
+            anulador.usar(jugadores.get(0));
         }
     }
 
-    public void activarExclusividad(Jugador jugador){
+    public void activarExclusividad(){
         if (preguntaActual.esCompatibleCon(exclusividad)) {
-            exclusividad.usar(jugador);
+            exclusividad.usar(jugadores.get(0));
         }
     }
 
-    public void activarMultiplicador(Jugador jugador, int factor){
+    public void activarMultiplicador(int factor){
         int i = multiplicadores.indexOf(new Multiplicador(factor));
         if(i == NO_ENCONTRADO){
             throw new MultiplicadorInvalido();
@@ -93,12 +90,15 @@ public class Juego {
         Multiplicador multiplicador = (Multiplicador) multiplicadores.get(i);
 
         if (preguntaActual.esCompatibleCon(multiplicador)) {
-            multiplicador.usar(jugador);
+            multiplicador.usar(jugadores.get(0));
         }
     }
 
-    public void responder(Jugador jugador, ArrayList<Opcion> respuestas){
-        jugador.responderPregunta(respuestas);
+    public void responder(ArrayList<Opcion> respuestas){
+        Jugador jugadorActual = jugadores.remove(0);
+        jugadores.add(jugadorActual);
+
+        jugadorActual.responderPregunta(respuestas);
     }
 
     private HashMap<Jugador,Integer> filtrarPuntajes(HashMap<Jugador, Integer> puntajes){

@@ -8,6 +8,9 @@ import edu.fiuba.algo3.model.modificador.Exclusividad;
 import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
+    public static final int CANTIDAD_OPCIONES_MIN = 2;
+    public static final int CANTIDAD_OPCIONES_MAX = 6;  //distinto a consigna por necesidad de JSON
+
     public OrderedChoice(String enunciado,
                          ArrayList<Opcion> opciones,
                          ArrayList<Opcion> opcionesOrdenadas,
@@ -15,8 +18,8 @@ public class OrderedChoice extends Pregunta{
                          String descripcionRespuesta) {
         super(enunciado,
                 opciones,
-                2,
-                5,
+                CANTIDAD_OPCIONES_MIN,
+                CANTIDAD_OPCIONES_MAX,
                 opcionesOrdenadas,
                 new EvaluadorTernario(),
                 categoria,

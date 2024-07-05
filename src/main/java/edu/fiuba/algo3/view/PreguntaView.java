@@ -6,6 +6,7 @@ import edu.fiuba.algo3.model.Opcion;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -64,20 +65,45 @@ public class PreguntaView extends SceneGui {
         root.getChildren().add(opcionesBox);
     }
 
-//    public void getRootOrdererChoiceQuestion(Pane root) {
-//        //TODO: adaptar ordered
-//        Button option1 = new Button("Option 1");
-//        option1.setLayoutX(450);
-//        option1.setLayoutY(450);
-//        configurarBoton(option1);
-//
-//        Button option2 = new Button("Option 2");
-//        option2.setLayoutX(350);
-//        option2.setLayoutY(300);
-//        configurarBoton(option2);
-//
-//        root.getChildren().addAll(option1, option2);
-//    }
+    public void getRootOrdererChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        for(Opcion opcion : opciones){
+            HBox hBox = new HBox();
+            int numeroDeOpcion = opciones.indexOf(opcion);
+            numeroDeOpcion ++;
+            Label labelOpcion = new Label(numeroDeOpcion + ". " + opcion.getTexto());
+            labelOpcion.setStyle("-fx-font-size: 18px;");
+
+            hBox.getChildren().add(labelOpcion);
+            hBox.setAlignment(Pos.CENTER);
+            root.getChildren().add(hBox);
+        }
+
+        HBox cajaOrdenar = new HBox();
+
+        Label labelOrdenar = new Label("Ordenar: ");
+        labelOrdenar.setStyle("-fx-font-size: 12px;");
+        labelOrdenar.setTranslateX(-10);
+
+        TextField textField = new TextField();
+        textField.setPromptText("1, 2, 3, ...");
+        textField.setMinSize((double) BTN_WIDTH *0.75, BTN_HEIGHT);
+        textField.setPrefSize((double) BTN_WIDTH *0.75, BTN_HEIGHT);
+
+        Button validar = new Button("Validar");
+        configurarBoton(validar);
+        validar.setMinSize((double) BTN_WIDTH *0.75, BTN_HEIGHT*1.5);
+        validar.setPrefSize((double) BTN_WIDTH *0.75, BTN_HEIGHT*1.5);
+        validar.setOnAction(new ButtonOrdenarHandler(textField, opciones, respuestas, confirmar, validar));
+        validar.setTranslateX(10);
+
+        cajaOrdenar.getChildren().addAll(labelOrdenar, textField, validar);
+        cajaOrdenar.setAlignment(Pos.CENTER);
+
+        root.getChildren().add(cajaOrdenar);
+    }
 
     public void getRootGroupChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
         HBox opcionesBoxH = new HBox();
@@ -175,6 +201,8 @@ public class PreguntaView extends SceneGui {
             getRootFalseTrueQuestion(opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("group choice")) {
             getRootGroupChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
+        } else if (tipoDePregunta.equalsIgnoreCase("ordered choice")) {
+            getRootOrdererChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
         }
 
         opcionesBox.getChildren().add(confirmar);

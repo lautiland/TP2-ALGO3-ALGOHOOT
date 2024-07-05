@@ -87,6 +87,7 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
+        juego.activarAnulador();
         juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
@@ -99,7 +100,6 @@ public class Entrega2Test {
             add(opcion1);
         }});
 
-        juego.activarAnulador();
 
         juego.evaluarRespuestas();
 
@@ -129,10 +129,12 @@ public class Entrega2Test {
 
         Juego juego = new Juego(jugadores,preguntas);
 
+        juego.activarExclusividad();
         juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
 
+        juego.activarExclusividad();
         juego.responder(new ArrayList<>(){{
             add(opcion1);
         }});
@@ -141,8 +143,6 @@ public class Entrega2Test {
             add(opcion2);
         }});
 
-        juego.activarExclusividad();
-        juego.activarExclusividad();
 
         juego.evaluarRespuestas();
 

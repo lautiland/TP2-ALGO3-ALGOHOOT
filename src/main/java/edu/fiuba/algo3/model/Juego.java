@@ -19,7 +19,7 @@ public class Juego {
     private static final int NO_ENCONTRADO = -1;
     private static final int CANTIDAD_JUGADORES_MINIMOS = 2;
     private final ArrayList<Jugador> jugadores;
-    private ArrayList<Jugador> turnoJugadores;
+    private final ArrayList<Jugador> turnoJugadores;
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
     private final Modificador exclusividad;
@@ -55,6 +55,7 @@ public class Juego {
         this.jugadores = jugadores;
         this.preguntas = preguntas;
         preguntaActual = preguntas.remove(0);
+        this.turnoJugadores = new ArrayList<>(jugadores);
 
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();

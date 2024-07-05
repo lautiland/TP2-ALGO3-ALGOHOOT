@@ -48,5 +48,6 @@ public class Multiplicador extends Modificador {
     @Override
     public void desactivar() {
         jugadoresQueUsaron.clear();
+        usadasEstaRonda = 0;
     }
 }

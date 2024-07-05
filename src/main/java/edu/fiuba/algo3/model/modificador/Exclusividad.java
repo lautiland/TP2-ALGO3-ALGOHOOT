@@ -41,5 +41,6 @@ public class Exclusividad extends Modificador {
 
     public void desactivar(){
         multiplicador = 1;
+        usadasEstaRonda = 0;
     }
 }

@@ -195,18 +195,17 @@ public class Juego {
         return nombres;
     }
 
-    public boolean siguientePregunta(){
+    public void siguientePregunta(){
         anulador.desactivar();
         exclusividad.desactivar();
         multiplicadores.forEach(Modificador::desactivar);
         turnoJugadores.addAll(jugadores);
 
-        if (preguntas.isEmpty()){
-            return false;
-        }
-
         preguntaActual = preguntas.remove(0);
-        return true;
+    }
+
+    public boolean estaJuegoTerminado(){
+        return preguntas.isEmpty();
     }
 
     public void evaluarRespuestas(){

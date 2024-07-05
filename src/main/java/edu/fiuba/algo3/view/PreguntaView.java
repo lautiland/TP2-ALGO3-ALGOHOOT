@@ -4,7 +4,6 @@ import edu.fiuba.algo3.controller.*;
 import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.Opcion;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 
 public class PreguntaView extends SceneGui {
 
-    private double startX, startY;
     static Stage stage;
     private final Juego juego;
 
@@ -52,6 +50,9 @@ public class PreguntaView extends SceneGui {
 
     public void getRootMultipleChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
         VBox opcionesBox = new VBox();
+        opcionesBox.setAlignment(Pos.CENTER);
+        opcionesBox.setPadding(new Insets(20,200,20, 200));
+        opcionesBox.setSpacing(10);
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         for(Opcion opcion : opciones){
@@ -137,9 +138,9 @@ public class PreguntaView extends SceneGui {
         confirmar.setOnAction(new ButtonConfirmarHandler(stage, juego, respuestas));
 
         String tipoDePregunta = preguntaActual.getTipoDePregunta();
-        if(tipoDePregunta.equalsIgnoreCase("multiple choice clasico")){
+        if(tipoDePregunta.equalsIgnoreCase("multiple choice clasico") || tipoDePregunta.equalsIgnoreCase("multiple choice parcial") || tipoDePregunta.equalsIgnoreCase("multiple choice con penalidad")){
             getRootMultipleChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
-        } else if (tipoDePregunta.equalsIgnoreCase("true false clasico")) {
+        } else if (tipoDePregunta.equalsIgnoreCase("true false clasico") || tipoDePregunta.equalsIgnoreCase("true false con penalidad")) {
             getRootFalseTrueQuestion(opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("group choice")) {
             getRootGroupChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);

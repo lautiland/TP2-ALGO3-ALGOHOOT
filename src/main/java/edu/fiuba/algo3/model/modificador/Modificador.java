@@ -9,12 +9,12 @@ import java.util.HashMap;
 abstract public class Modificador {
     protected final ArrayList<Uso> usos;
     protected final int maximo;
-    private int cantVecesUsadas;
+    protected int usadasEstaRonda;
 
     public Modificador(int maximo) {
         this.usos = new ArrayList<>();
         this.maximo = maximo;
-        cantVecesUsadas = 0;
+        usadasEstaRonda = 0;
     }
 
     protected abstract void usarAbstracto(Jugador jugador);
@@ -23,7 +23,7 @@ abstract public class Modificador {
         Uso u = new Uso(jugador);
         if (u.contarMisEquivalentes(usos) < maximo) {
             usos.add(u);
-            cantVecesUsadas++;
+            usadasEstaRonda++;
             usarAbstracto(jugador);
         }
     }
@@ -40,7 +40,7 @@ abstract public class Modificador {
     }
 
     public int getUsadosEsteTurno() {
-        return cantVecesUsadas;
+        return usadasEstaRonda;
     }
 
     public abstract String toString();

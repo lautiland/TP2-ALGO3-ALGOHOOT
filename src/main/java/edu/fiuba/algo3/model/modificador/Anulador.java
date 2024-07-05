@@ -42,5 +42,6 @@ public class Anulador extends Modificador {
     public void desactivar(){
         activo = false;
         nadieRecibePuntos = false;
+        usadasEstaRonda = 0;
     }
 }

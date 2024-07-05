@@ -39,6 +39,10 @@ abstract public class Pregunta {
         this.modificadoresCompatibles = modificadoresCompatibles;
     }
 
+    public String getDescripcionRespuesta(){
+        return descripcionRespuesta;
+    }
+
     public abstract String getTipoDePregunta();
 
     public Opcion seleccionarOpcion(int indice){

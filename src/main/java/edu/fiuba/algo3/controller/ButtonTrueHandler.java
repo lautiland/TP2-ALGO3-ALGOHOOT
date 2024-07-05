@@ -23,7 +23,7 @@ public class ButtonTrueHandler implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent actionEvent) {
         RESPUESTAS.clear();
-        RESPUESTAS.add(new Opcion("Verdadero"));
+        RESPUESTAS.add(new Opcion(TRUE_BTN.getText()));
         TRUE_BTN.setDisable(true);
         FALSE_BTN.setDisable(false);
         CONFIRMAR.setDisable(false);

@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.view;
 
-import edu.fiuba.algo3.controller.ButtonConfirmarHandler;
-import edu.fiuba.algo3.controller.ButtonFalseHandler;
-import edu.fiuba.algo3.controller.ButtonTrueHandler;
-import edu.fiuba.algo3.controller.OpcionHandler;
+import edu.fiuba.algo3.controller.*;
 import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.Opcion;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -38,24 +36,12 @@ public class PreguntaView extends SceneGui {
         juego = juego_actual;
     }
 
-    private void makeDraggable(Node node){
-        node.setOnMousePressed(e -> {
-            startX = e.getSceneX()-node.getTranslateX();
-            startY = e.getSceneY()-node.getTranslateY();
-        });
-
-        node.setOnMouseDragged(e->{
-            node.setTranslateX(e.getSceneX()-startX);
-            node.setTranslateY(e.getSceneY()-startY);
-        });
-    }
-
     public static void getRootFalseTrueQuestion(VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
 
-        Button falseBtn = new Button("False");
-        configurarBoton(falseBtn);
-        Button trueBtn = new Button("True");
+        Button trueBtn = new Button("Verdadero");
         configurarBoton(trueBtn);
+        Button falseBtn = new Button("Falso");
+        configurarBoton(falseBtn);
 
         falseBtn.setOnAction(new ButtonFalseHandler(trueBtn, falseBtn, respuestas, confirmar));
         trueBtn.setOnAction(new ButtonTrueHandler(trueBtn, falseBtn, respuestas, confirmar));
@@ -66,9 +52,6 @@ public class PreguntaView extends SceneGui {
 
     public void getRootMultipleChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
         VBox opcionesBox = new VBox();
-        opcionesBox.setAlignment(Pos.CENTER);
-        opcionesBox.setPadding(new Insets(20,200,20, 200));
-        opcionesBox.setSpacing(10);
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         for(Opcion opcion : opciones){
@@ -94,23 +77,42 @@ public class PreguntaView extends SceneGui {
         configurarBoton(option2);
 
         root.getChildren().addAll(option1, option2);
-        root.getChildren().forEach(this::makeDraggable);
     }
 
-//    public void getRootGroupChoiceQuestion(Pane root) {
-            //TODO: adaptar group
+    public void getRootGroupChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
+        HBox opcionesBoxH = new HBox();
+        VBox opcionesBoxV = new VBox();
 
-//        Button falseBtn = new Button("False");
-//        configurarBoton(falseBtn);
-//        falseBtn.setOnAction(new ButtonFalseHandler());
-//
-//        Button trueBtn = new Button("True");
-//        configurarBoton(trueBtn);
-//        trueBtn.setOnAction(new ButtonFalseHandler(stage));
-//
-//        root.getChildren().addAll(falseBtn, trueBtn);
-//        root.getChildren().forEach(this::makeDraggable);
-//    }
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        for(Opcion opcion : opciones){
+            HBox hBox = new HBox();
+
+            Label labelOpcion = new Label(opcion.getTexto());
+            labelOpcion.setStyle("-fx-font-size: 12px;");
+
+            Button grupo1 = new Button();
+            configurarBoton(grupo1);
+            grupo1.setPrefSize(BTN_HEIGHT, BTN_HEIGHT);
+            grupo1.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
+
+            Button grupo2 = new Button();
+            configurarBoton(grupo2);
+            grupo2.setPrefSize(BTN_HEIGHT, BTN_HEIGHT);
+            grupo2.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
+
+            grupo1.setOnAction(new ButtonGroupChoiceHandler(grupo1, grupo2, respuestas));
+            grupo2.setOnAction(new ButtonGroupChoiceHandler(grupo2, grupo1, respuestas));
+
+            hBox.getChildren().addAll(labelOpcion, grupo1, grupo2);
+            hBox.setAlignment(Pos.CENTER_RIGHT);
+            opcionesBoxV.getChildren().add(hBox);
+        }
+        opcionesBoxV.maxWidth(WINDOW_WIDTH*0.75);
+        opcionesBoxH.getChildren().add(opcionesBoxV);
+        opcionesBoxH.setAlignment(Pos.CENTER);
+
+        root.getChildren().add(opcionesBoxH);
+    }
 
     public Scene getScene() {
         Pregunta preguntaActual = juego.obtenerPreguntaActual();
@@ -118,11 +120,11 @@ public class PreguntaView extends SceneGui {
         Label pregunta = new Label(preguntaActual.getEnunciado());
         pregunta.setWrapText(true);
         pregunta.setMaxWidth(WINDOW_WIDTH*0.75);
-        Label labelTipoDePregunta = new Label(preguntaActual.getTipoDePregunta());
-        labelTipoDePregunta.setStyle("-fx-font-size: 12px;");
         pregunta.setStyle("-fx-font-size: 24px;");
 
-        //creación de contenedor fondo
+        Label labelTipoDePregunta = new Label(preguntaActual.getTipoDePregunta());
+        labelTipoDePregunta.setStyle("-fx-font-size: 12px;");
+
         ArrayList<Opcion> respuestas = new ArrayList<>();
         VBox opcionesBox = new VBox();
         opcionesBox.getChildren().addAll(pregunta, labelTipoDePregunta);
@@ -139,6 +141,8 @@ public class PreguntaView extends SceneGui {
             getRootMultipleChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("true false clasico")) {
             getRootFalseTrueQuestion(opcionesBox, respuestas, confirmar);
+        } else if (tipoDePregunta.equalsIgnoreCase("group choice")) {
+            getRootGroupChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
         }
 
         opcionesBox.getChildren().add(confirmar);

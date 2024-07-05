@@ -32,6 +32,9 @@ public class MultiplicadoresView extends SceneGui  {
 
     @Override
     public Scene getScene(Stage stage) {
+
+        //TODO: verificar si el jugador puede usar el multiplicador y desactivar los que no
+
         Pregunta pregunta = juego.obtenerPreguntaActual();
         Label labelScreen = new Label("Que modificador vas a utilizar?");
         labelScreen.setPadding(new Insets(0, 0, 20, 0));

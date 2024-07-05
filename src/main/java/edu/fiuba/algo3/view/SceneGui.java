@@ -9,14 +9,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 abstract public class SceneGui {
+
+    //TODO: cambiar colores
     protected static final String COLOR_PRIMARIO = "#fecea8";
     protected static final String COLOR_FONDO_PRIMARIO = "#99b898";
     protected static final String COLOR_FONDO_SECUNDARIO = "#2a363b";
     protected static final String COLOR_SECUNDARIO = "#ff847c";
     protected static final String COLOR_TERCIARIO = "#e84a5f";
     protected static final int TITULO_SIZE = 20;
-    private static final int BTN_WIDTH = 150;
-    private static final int BTN_HEIGHT = 30;
+    protected static final int BTN_WIDTH = 150;
+    protected static final int BTN_HEIGHT = 30;
     protected static float WINDOW_WIDTH;
     protected static float WINDOW_HEIGHT;
 

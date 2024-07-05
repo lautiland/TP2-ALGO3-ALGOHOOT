@@ -31,7 +31,10 @@ public class ResultadosPorRondaView extends SceneGui {
         Label labelScreen = new Label("Resultados Por Ronda");
         labelScreen.setStyle("-fx-font-size: 36px;");
 
-        //Label descripcion = new Label("Puntajes de la ronda:");
+        Label descripcion = new Label(juego.obtenerPreguntaActual().getDescripcionRespuesta());
+        labelScreen.setStyle("-fx-font-size: 30px;");
+        descripcion.setWrapText(true);
+        descripcion.setMaxWidth(WINDOW_WIDTH*0.75);
 
 
         Button siguienteRonda = new Button("Siguiente ronda");
@@ -39,8 +42,6 @@ public class ResultadosPorRondaView extends SceneGui {
         siguienteRonda.setOnAction(new ButtonSiguienteRondaHandler(stage, juego));
 
         Label points = new Label("");
-        points.setTranslateY(0);
-        points.setTranslateX(0);
         points.setStyle("-fx-font-size: 24px;");
         ArrayList<String> nombresJugadores = juego.obtenerNombresJugadores();
         for (String nombreJugador : nombresJugadores) {
@@ -50,10 +51,8 @@ public class ResultadosPorRondaView extends SceneGui {
         }
 
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
-        //TODO: agregar descripcion
-        botonesBox.getChildren().addAll(labelScreen, points, siguienteRonda);
-        botonesBox.setAlignment(Pos.CENTER);
+
+        botonesBox.getChildren().addAll(labelScreen, descripcion, points, siguienteRonda);
 
         StackPane contenedorJuego = new StackPane();
 

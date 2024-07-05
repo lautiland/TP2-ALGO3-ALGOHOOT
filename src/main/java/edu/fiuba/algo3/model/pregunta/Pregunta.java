@@ -68,6 +68,10 @@ abstract public class Pregunta {
         return enunciado;
     }
 
+    public String getCategoria(){
+        return categoria;
+    }
+
     public ArrayList<Opcion> getOpciones(){
         return opcionesCorrectas;
     }

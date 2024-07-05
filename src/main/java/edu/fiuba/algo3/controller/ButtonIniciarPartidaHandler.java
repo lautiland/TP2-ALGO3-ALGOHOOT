@@ -27,6 +27,7 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
         Juego juego;
         try {
             juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS));
+            juego.mezclarPreguntas();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

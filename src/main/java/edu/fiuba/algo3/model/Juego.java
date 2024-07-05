@@ -101,6 +101,24 @@ public class Juego {
         multiplicadores.add(new Multiplicador(3));
     }
 
+    public void mezclarPreguntas(){
+        preguntas.add(preguntaActual);
+        ArrayList<Pregunta> preguntasMezcladas = new ArrayList<>();
+        String categoriaAnterior = "";
+        while (!preguntas.isEmpty()){
+            int i = (int) (Math.random() * preguntas.size());
+            Pregunta pregunta = preguntas.remove(i);
+            if (!pregunta.getCategoria().equals(categoriaAnterior)){
+                preguntasMezcladas.add(pregunta);
+                categoriaAnterior = pregunta.getCategoria();
+            }else{
+                preguntas.add(pregunta);
+            }
+        }
+        preguntas = preguntasMezcladas;
+        preguntaActual = preguntas.remove(0);
+    }
+
     public void cargarPreguntas(Reader archivo){
         JuegoParser parser = new JuegoParser();
         preguntas = parser.parsear(archivo, "json");

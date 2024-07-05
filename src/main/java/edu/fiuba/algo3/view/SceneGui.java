@@ -5,17 +5,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 abstract public class SceneGui {
 
-    //TODO: cambiar colores
-    protected static final String COLOR_PRIMARIO = "#fecea8";
-    protected static final String COLOR_FONDO_PRIMARIO = "#99b898";
-    protected static final String COLOR_FONDO_SECUNDARIO = "#2a363b";
-    protected static final String COLOR_SECUNDARIO = "#ff847c";
-    protected static final String COLOR_TERCIARIO = "#e84a5f";
+    protected static final String COLOR_PRIMARIO = "#d6eaf8";
+    protected static final String COLOR_FONDO_PRIMARIO = "#d6dbdf";
+    protected static final String COLOR_FONDO_SECUNDARIO = "#2e4053";
+    protected static final String COLOR_SECUNDARIO = "#a9cce3";
+    protected static final String COLOR_TERCIARIO = "#a9dfbf";
     protected static final int TITULO_SIZE = 20;
     protected static final int BTN_WIDTH = 150;
     protected static final int BTN_HEIGHT = 30;

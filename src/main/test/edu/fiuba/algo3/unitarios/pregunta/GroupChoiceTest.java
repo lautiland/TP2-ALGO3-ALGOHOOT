@@ -174,7 +174,7 @@ public class GroupChoiceTest {
         respuestas.add(opcion3);
         respuestas.add(opcion4);
 
-        assertEquals(groupChoice.evaluarRespuestas(respuestas), 1);
+        assertEquals(groupChoice.evaluarRespuestas(respuestas), 0);
     }
 
     @Test
@@ -230,6 +230,88 @@ public class GroupChoiceTest {
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion4);
 
-        assertEquals(groupChoice.evaluarRespuestas(respuestas), 1);
+        assertEquals(groupChoice.evaluarRespuestas(respuestas), 0);
+    }
+
+    @Test
+    public void test09PuedoEvaluarUnaRespuestaVacia() {
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+        ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
+        opcionesGrupoA.add(opcion1);
+        opcionesGrupoA.add(opcion2);
+        opcionesGrupoA.add(opcion3);
+        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
+        opcionesGrupoB.add(opcion4);
+
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
+                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+
+        assertEquals(groupChoice.evaluarRespuestas(respuestas), 0);
+    }
+
+    @Test
+    public void test10PuedoEvaluarUnaRespuestaConGrupoAVacio() {
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+        ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
+        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
+        opcionesGrupoB.add(opcion1);
+        opcionesGrupoB.add(opcion2);
+        opcionesGrupoB.add(opcion3);
+        opcionesGrupoB.add(opcion4);
+
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
+                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+        respuestas.add(opcion2);
+        respuestas.add(opcion3);
+
+        assertEquals(groupChoice.evaluarRespuestas(respuestas), 0);
+    }
+
+    @Test
+    public void test11PuedoEvaluarUnaRespuestaConGrupoBVacio() {
+        Opcion opcion1 = new Opcion("Opcion 1");
+        Opcion opcion2 = new Opcion("Opcion 2");
+        Opcion opcion3 = new Opcion("Opcion 3");
+        Opcion opcion4 = new Opcion("Opcion 4");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+        opciones.add(opcion4);
+        ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
+        opcionesGrupoA.add(opcion1);
+        opcionesGrupoA.add(opcion2);
+        opcionesGrupoA.add(opcion3);
+        opcionesGrupoA.add(opcion4);
+        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
+
+        Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
+                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+        respuestas.add(opcion1);
+        respuestas.add(opcion3);
+
+        assertEquals(groupChoice.evaluarRespuestas(respuestas), 0);
     }
 }

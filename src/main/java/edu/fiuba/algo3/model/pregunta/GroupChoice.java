@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.model.pregunta;
 
 import edu.fiuba.algo3.model.Opcion;
-import edu.fiuba.algo3.model.evaluadores.EvaluadorGroup;
+import edu.fiuba.algo3.model.evaluadores.EvaluadorTernario;
 import edu.fiuba.algo3.model.modificador.Anulador;
 import edu.fiuba.algo3.model.modificador.Exclusividad;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class GroupChoice extends Pregunta{
     private final ArrayList<Opcion> opcionesGrupoA;
-    private final ArrayList<Opcion> opcionesGrupoB;
 
     public GroupChoice(String enunciado,
                        ArrayList<Opcion> opciones,
@@ -23,13 +22,12 @@ public class GroupChoice extends Pregunta{
                 2,
                 6,
                 opcionesCorrectasGrupoA,
-                new EvaluadorGroup(),
+                new EvaluadorTernario(),
                 categoria,
                 descripcionRespuesta,
                 new ArrayList<>(){{add(new Anulador());add(new Exclusividad());}});
 
         this.opcionesGrupoA = opcionesCorrectasGrupoA;
-        this.opcionesGrupoB = opcionesCorrectasGrupoB;
     }
 
     @Override
@@ -40,17 +38,20 @@ public class GroupChoice extends Pregunta{
     @Override
     public int evaluarRespuestas(ArrayList<Opcion> respuestas){
 
-        int correctasGrupoA = 0;
         int correctasGrupoB = 0;
 
-        for(Opcion respuesta : respuestas){
-            if(opcionesGrupoA.contains(respuesta)){
-                correctasGrupoA++;
-            }else{
+        for(Opcion respuesta : opcionesGrupoA){
+            if(!respuestas.contains(respuesta)){
                 correctasGrupoB++;
             }
         }
 
-        return calcularPuntaje(correctasGrupoA, correctasGrupoB);
+        for(Opcion respuesta : respuestas){
+            if(!opcionesGrupoA.contains(respuesta)){
+                correctasGrupoB++;
+            }
+        }
+
+        return calcularPuntaje(0, correctasGrupoB);
     }
 }

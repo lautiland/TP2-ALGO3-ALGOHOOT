@@ -83,6 +83,9 @@ public class PreguntaView extends SceneGui {
     public void getRootGroupChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
         HBox opcionesBoxH = new HBox();
         VBox opcionesBoxV = new VBox();
+        int cantidadDeOpcionesTotales = pregunta.obtenerOpciones().size();
+        ArrayList<Opcion> respuestas2 = new ArrayList<>();
+
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         for(Opcion opcion : opciones){
@@ -90,23 +93,32 @@ public class PreguntaView extends SceneGui {
 
             Label labelOpcion = new Label(opcion.getTexto());
             labelOpcion.setStyle("-fx-font-size: 12px;");
+            labelOpcion.setPadding(new Insets(0, 10, 0, 10));
 
+            VBox vBoxGrupo1 = new VBox();
             Button grupo1 = new Button();
             configurarBoton(grupo1);
             grupo1.setPrefSize(BTN_HEIGHT, BTN_HEIGHT);
             grupo1.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
+            vBoxGrupo1.getChildren().add(grupo1);
+            vBoxGrupo1.setPadding(new Insets(0, 10, 0, 10));
 
+            VBox vBoxGrupo2 = new VBox();
             Button grupo2 = new Button();
             configurarBoton(grupo2);
             grupo2.setPrefSize(BTN_HEIGHT, BTN_HEIGHT);
             grupo2.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
+            vBoxGrupo2.getChildren().add(grupo2);
+            vBoxGrupo2.setPadding(new Insets(0, 10, 0, 10));
 
-            grupo1.setOnAction(new ButtonGroupChoiceHandler(grupo1, grupo2, respuestas));
-            grupo2.setOnAction(new ButtonGroupChoiceHandler(grupo2, grupo1, respuestas));
+            grupo1.setOnAction(new ButtonGroup1ChoiceHandler(grupo1, grupo2, opcion, respuestas, cantidadDeOpcionesTotales, respuestas2, confirmar));
+            grupo2.setOnAction(new ButtonGroup2ChoiceHandler(grupo2, grupo1, opcion, respuestas, cantidadDeOpcionesTotales, respuestas2, confirmar));
 
-            hBox.getChildren().addAll(labelOpcion, grupo1, grupo2);
+            hBox.getChildren().addAll(labelOpcion, vBoxGrupo1, vBoxGrupo2);
             hBox.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setPadding(new Insets(2, 2, 2, 2));
             opcionesBoxV.getChildren().add(hBox);
+
         }
         opcionesBoxV.maxWidth(WINDOW_WIDTH*0.75);
         opcionesBoxH.getChildren().add(opcionesBoxV);

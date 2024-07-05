@@ -9,12 +9,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PenaltyTF extends Pregunta{
-    public PenaltyTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta, String categoria, String descripcionRespuesta) {
-        super(enunciado, opciones, 2,2,
-                new ArrayList<>(Collections.singletonList(opcionCorrecta)), new EvaluadorPenalty(), categoria, descripcionRespuesta, new ArrayList<>(){{
-            add(new Anulador());
-            add(new Multiplicador(2));
-            add(new Multiplicador(3));
-        }});
+    public PenaltyTF(String enunciado,
+                     ArrayList<Opcion> opciones,
+                     Opcion opcionCorrecta,
+                     String categoria,
+                     String descripcionRespuesta) {
+        super(enunciado,
+                opciones,
+                2,
+                2,
+                new ArrayList<>(Collections.singletonList(opcionCorrecta)),
+                new EvaluadorPenalty(),
+                categoria,
+                descripcionRespuesta,
+                new ArrayList<>(){{add(new Anulador());add(new Multiplicador(2));add(new Multiplicador(3));}});
+    }
+
+    @Override
+    public String getTipoDePregunta(){
+        return "True False con Penalidad";
     }
 }

@@ -9,10 +9,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ClassicTF extends Pregunta{
-    public ClassicTF(String enunciado, ArrayList<Opcion> opciones, Opcion opcionCorrecta, String categoria, String descripcionRespuesta) {
-        super(enunciado, opciones, 2, 2, new ArrayList<>(Collections.singletonList(opcionCorrecta)), new EvaluadorTernario(), categoria, descripcionRespuesta, new ArrayList<>(){{
-            add(new Anulador());
-            add(new Exclusividad());
-        }});
+    public ClassicTF(String enunciado,
+                     ArrayList<Opcion> opciones,
+                     Opcion opcionCorrecta,
+                     String categoria,
+                     String descripcionRespuesta) {
+        super(enunciado,
+                opciones,
+                2,
+                2,
+                new ArrayList<>(Collections.singletonList(opcionCorrecta)),
+                new EvaluadorTernario(),
+                categoria,
+                descripcionRespuesta,
+                new ArrayList<>(){{add(new Anulador());add(new Exclusividad());}});
+    }
+
+    @Override
+    public String getTipoDePregunta(){
+        return "True False Clasico";
     }
 }

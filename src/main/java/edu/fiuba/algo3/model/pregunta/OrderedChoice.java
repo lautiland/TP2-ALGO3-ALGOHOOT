@@ -8,12 +8,25 @@ import edu.fiuba.algo3.model.modificador.Exclusividad;
 import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta{
-    public OrderedChoice(String enunciado,ArrayList<Opcion> opciones, ArrayList<Opcion> opcionesOrdenadas, String categoria, String descripcionRespuesta) {
-        super(enunciado, opciones, 2, 5,
-                opcionesOrdenadas,new EvaluadorTernario(), categoria, descripcionRespuesta, new ArrayList<>(){{
-                    add(new Anulador());
-                    add(new Exclusividad());
-                }});
+    public OrderedChoice(String enunciado,
+                         ArrayList<Opcion> opciones,
+                         ArrayList<Opcion> opcionesOrdenadas,
+                         String categoria,
+                         String descripcionRespuesta) {
+        super(enunciado,
+                opciones,
+                2,
+                5,
+                opcionesOrdenadas,
+                new EvaluadorTernario(),
+                categoria,
+                descripcionRespuesta,
+                new ArrayList<>(){{add(new Anulador());add(new Exclusividad());}});
+    }
+
+    @Override
+    public String getTipoDePregunta(){
+        return "Ordered Choice";
     }
 
     @Override

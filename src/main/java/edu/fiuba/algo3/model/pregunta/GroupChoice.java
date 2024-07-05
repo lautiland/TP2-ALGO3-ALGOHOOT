@@ -11,18 +11,30 @@ public class GroupChoice extends Pregunta{
     private final ArrayList<Opcion> opcionesGrupoA;
     private final ArrayList<Opcion> opcionesGrupoB;
 
-    public GroupChoice(String enunciado, ArrayList<Opcion> opciones,
+    public GroupChoice(String enunciado,
+                       ArrayList<Opcion> opciones,
                        ArrayList<Opcion> opcionesCorrectasGrupoA,
                        ArrayList<Opcion> opcionesCorrectasGrupoB,
-                       String categoria, String descripcionRespuesta) {
+                       String categoria,
+                       String descripcionRespuesta) {
 
-        super(enunciado, opciones, 2, 6,
-                opcionesCorrectasGrupoA, new EvaluadorGroup(), categoria, descripcionRespuesta, new ArrayList<>(){{
-                    add(new Anulador());
-                    add(new Exclusividad());
-                }});
+        super(enunciado,
+                opciones,
+                2,
+                6,
+                opcionesCorrectasGrupoA,
+                new EvaluadorGroup(),
+                categoria,
+                descripcionRespuesta,
+                new ArrayList<>(){{add(new Anulador());add(new Exclusividad());}});
+
         this.opcionesGrupoA = opcionesCorrectasGrupoA;
         this.opcionesGrupoB = opcionesCorrectasGrupoB;
+    }
+
+    @Override
+    public String getTipoDePregunta(){
+        return "Group Choice";
     }
 
     @Override

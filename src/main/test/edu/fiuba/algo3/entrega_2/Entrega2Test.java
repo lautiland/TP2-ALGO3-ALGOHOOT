@@ -23,7 +23,6 @@ public class Entrega2Test {
         jugador2 = new Jugador("Daniel");
         jugador3 = new Jugador("Pedro");
     }
-
     @Test
     public void test01MultiplicadoresFuncionanCorrectamente(){
         Opcion opcion1 = new Opcion("Verdadero");

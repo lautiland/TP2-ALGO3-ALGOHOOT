@@ -2,8 +2,11 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.view.PantallaInicial;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.view.SceneGui;
+
+import java.util.Objects;
 
 
 public class App extends Application {
@@ -18,6 +21,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
+        //TODO: agregar musica
+
         configurarVentana(stage);
         PantallaInicial inicio = new PantallaInicial(stage);
 
@@ -26,8 +31,9 @@ public class App extends Application {
     }
 
     private void configurarVentana(Stage stage) {
-        stage.setTitle("Algo Hoot");
-
+        stage.setTitle("Algohoot");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResource("/icono.png")).toExternalForm());
+        stage.getIcons().add(icon);
         float width = 800;
         float height = 600;
         SceneGui.setDimensions(width, height);

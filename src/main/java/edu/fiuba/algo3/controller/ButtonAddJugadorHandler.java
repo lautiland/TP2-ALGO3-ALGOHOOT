@@ -9,13 +9,13 @@ import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 
-public class ButtonAddJugadorHanlder implements EventHandler<ActionEvent>{
+public class ButtonAddJugadorHandler implements EventHandler<ActionEvent>{
     ArrayList<Jugador> jugadores;
     TextField jugador;
     Label label;
     Button iniciarPartida;
 
-    public ButtonAddJugadorHanlder(ArrayList<Jugador> jugadores_actuales, Label label, TextField jugador_nombre, Button iniciarPartida){
+    public ButtonAddJugadorHandler(ArrayList<Jugador> jugadores_actuales, Label label, TextField jugador_nombre, Button iniciarPartida){
         jugadores = jugadores_actuales;
         jugador = jugador_nombre;
         this.label=label;

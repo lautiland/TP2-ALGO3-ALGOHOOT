@@ -16,9 +16,15 @@ abstract public class Pregunta {
     private final String descripcionRespuesta;
     private final ArrayList<Modificador> modificadoresCompatibles;
 
-    protected Pregunta(String enunciado, ArrayList<Opcion> opciones,
-                       int cantidadOpcionesMin, int cantidadOpcionesMax ,
-                       ArrayList<Opcion> opcionesCorrectas, EvaluadorDePuntajes evaluador, String categoria, String descripcionRespuesta, ArrayList<Modificador> modificadoresCompatibles) {
+    protected Pregunta(String enunciado,
+                       ArrayList<Opcion> opciones,
+                       int cantidadOpcionesMin,
+                       int cantidadOpcionesMax ,
+                       ArrayList<Opcion> opcionesCorrectas,
+                       EvaluadorDePuntajes evaluador,
+                       String categoria,
+                       String descripcionRespuesta,
+                       ArrayList<Modificador> modificadoresCompatibles){
 
         if (opciones.size() < cantidadOpcionesMin || opciones.size() > cantidadOpcionesMax){
             throw new CantidadOpcionesInvalida("La cantidad de opciones es invalida");
@@ -32,6 +38,8 @@ abstract public class Pregunta {
         this.descripcionRespuesta = descripcionRespuesta;
         this.modificadoresCompatibles = modificadoresCompatibles;
     }
+
+    public abstract String getTipoDePregunta();
 
     public Opcion seleccionarOpcion(int indice){
         return this.opciones.get(indice);

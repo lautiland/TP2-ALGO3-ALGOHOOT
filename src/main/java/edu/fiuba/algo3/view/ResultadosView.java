@@ -1,28 +1,12 @@
 package edu.fiuba.algo3.view;
 
-import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
-import edu.fiuba.algo3.controller.ButtonFalseHandler;
+import edu.fiuba.algo3.controller.ButtonContinuarHandler;
 import edu.fiuba.algo3.model.Jugador;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-import javafx.geometry.Insets;
 
 import javafx.geometry.Pos;
 
@@ -50,7 +34,7 @@ public class ResultadosView extends SceneGui {
 
         Button continuar = new Button("Continuar");
         configurarBoton(continuar);
-        continuar.setOnAction(new ButtonContinuarHanlder(stage,new PantallaInicial(stage)));
+        continuar.setOnAction(new ButtonContinuarHandler(stage,new PantallaInicial(stage)));
 
         Label points = new Label("");
         points.setTranslateY(0);
@@ -58,7 +42,7 @@ public class ResultadosView extends SceneGui {
         points.setStyle("-fx-font-size: 24px;");
         for (Jugador jugador : jugadores) {
             int pointsPlayer = jugador.getPuntos();
-            String pointsString = jugador.getNombre()+ ": " + String.valueOf(pointsPlayer);
+            String pointsString = jugador.getNombre()+ ": " + pointsPlayer;
             points.setText(points.getText() + "\n" + pointsString);
         }
         //creación de contenedor fondo de los botones
@@ -77,8 +61,7 @@ public class ResultadosView extends SceneGui {
         StackPane contenedorJuego = new StackPane();
         contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
         contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene scene = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
-        return scene;
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }
 

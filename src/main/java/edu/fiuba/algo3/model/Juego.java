@@ -19,6 +19,7 @@ public class Juego {
     private static final int NO_ENCONTRADO = -1;
     private static final int CANTIDAD_JUGADORES_MINIMOS = 2;
     private final ArrayList<Jugador> jugadores;
+    private ArrayList<Jugador> turnoJugadores;
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
     private final Modificador exclusividad;
@@ -31,6 +32,8 @@ public class Juego {
         }
 
         this.jugadores = jugadores;
+        this.turnoJugadores = new ArrayList<>(jugadores);
+
         cargarPreguntas(archivo);
 
         this.anulador = new Anulador();
@@ -67,18 +70,18 @@ public class Juego {
     }
 
     public String getJugadorActual(){
-        return jugadores.get(0).getNombre();
+        return turnoJugadores.get(0).getNombre();
     }
 
     public void activarAnulador(){
         if (preguntaActual.esCompatibleCon(anulador)) {
-            anulador.usar(jugadores.get(0));
+            anulador.usar(turnoJugadores.get(0));
         }
     }
 
     public void activarExclusividad(){
         if (preguntaActual.esCompatibleCon(exclusividad)) {
-            exclusividad.usar(jugadores.get(0));
+            exclusividad.usar(turnoJugadores.get(0));
         }
     }
 
@@ -101,13 +104,17 @@ public class Juego {
         Multiplicador multiplicador = (Multiplicador) multiplicadores.get(i);
 
         if (preguntaActual.esCompatibleCon(multiplicador)) {
-            multiplicador.usar(jugadores.get(0));
+            multiplicador.usar(turnoJugadores.get(0));
         }
     }
 
+    public Boolean sinJugadoresRestantes(){
+        return turnoJugadores.isEmpty();
+    }
+
     public void responder(ArrayList<Opcion> respuestas){
-        Jugador jugadorActual = jugadores.remove(0);
-        jugadores.add(jugadorActual);
+
+        Jugador jugadorActual = turnoJugadores.remove(0);
 
         jugadorActual.responderPregunta(respuestas);
     }
@@ -126,7 +133,16 @@ public class Juego {
         return preguntaActual;
     }
 
+    public ArrayList<String> obtenerNombresJugadores(){
+        ArrayList<String> nombres = new ArrayList<>();
+        jugadores.forEach(jugador -> nombres.add(jugador.getNombre()));
+        return nombres;
+    }
+
     public boolean siguientePregunta(){
+
+        turnoJugadores.addAll(jugadores);
+
         if (preguntas.isEmpty()){
             return false;
         }

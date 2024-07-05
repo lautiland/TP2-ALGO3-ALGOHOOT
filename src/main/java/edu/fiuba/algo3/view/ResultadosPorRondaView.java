@@ -1,28 +1,12 @@
 package edu.fiuba.algo3.view;
 
-import edu.fiuba.algo3.controller.ButtonContinuarHanlder;
-import edu.fiuba.algo3.controller.ButtonFalseHandler;
-import edu.fiuba.algo3.model.Jugador;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
+import edu.fiuba.algo3.controller.ButtonSiguienteRondaHandler;
+import edu.fiuba.algo3.model.Juego;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-import javafx.geometry.Insets;
 
 import javafx.geometry.Pos;
 
@@ -35,50 +19,47 @@ import java.util.ArrayList;
 
 public class ResultadosPorRondaView extends SceneGui {
 
-    static Stage stage;
-    static ArrayList<Jugador> jugadores;
-    public ResultadosPorRondaView(Stage stage_actual, ArrayList<Jugador> jugadores) {
-        stage = stage_actual;
-        this.jugadores = jugadores;
+    private final Stage stage;
+    private final Juego juego;
+
+    public ResultadosPorRondaView(Stage stage_actual, Juego juego) {
+        this.stage = stage_actual;
+        this.juego = juego;
     }
     public Scene getScene() {
 
         Label labelScreen = new Label("Resultados Por Ronda");
-        labelScreen.setTranslateY(-200);
-        labelScreen.setTranslateX(0);
         labelScreen.setStyle("-fx-font-size: 36px;");
 
-        Button continuar = new Button("Continuar");
-        configurarBoton(continuar);
-        continuar.setOnAction(new ButtonContinuarHanlder(stage,new PantallaInicial(stage)));
+        //Label descripcion = new Label("Puntajes de la ronda:");
+
+
+        Button siguienteRonda = new Button("Siguiente ronda");
+        configurarBoton(siguienteRonda);
+        siguienteRonda.setOnAction(new ButtonSiguienteRondaHandler(stage, juego));
 
         Label points = new Label("");
         points.setTranslateY(0);
         points.setTranslateX(0);
         points.setStyle("-fx-font-size: 24px;");
-        for (Jugador jugador : jugadores) {
-            int pointsPlayer = jugador.getPuntos();
-            String pointsString = jugador.getNombre()+ ": " + String.valueOf(pointsPlayer);
+        ArrayList<String> nombresJugadores = juego.obtenerNombresJugadores();
+        for (String nombreJugador : nombresJugadores) {
+            int pointsPlayer = juego.obtenerPuntaje(nombreJugador);
+            String pointsString = nombreJugador + ": " + pointsPlayer;
             points.setText(points.getText() + "\n" + pointsString);
         }
-        //creación de contenedor fondo de los botones
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
 
-        //creacion contenedor de items
         VBox botonesBox = new VBox();
         botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(labelScreen,points);
+        //TODO: agregar descripcion
+        botonesBox.getChildren().addAll(labelScreen, points, siguienteRonda);
         botonesBox.setAlignment(Pos.CENTER);
 
-        //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
-        Scene scene = new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
-        return scene;
+
+        configurarBackground(contenedorJuego, botonesBox);
+
+        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }
 

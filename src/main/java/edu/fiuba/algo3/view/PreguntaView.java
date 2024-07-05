@@ -7,7 +7,6 @@ import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -65,20 +64,20 @@ public class PreguntaView extends SceneGui {
         root.getChildren().add(opcionesBox);
     }
 
-    public void getRootOrdererChoiceQuestion(Pane root) {
-        //TODO: adaptar ordered
-        Button option1 = new Button("Option 1");
-        option1.setLayoutX(450);
-        option1.setLayoutY(450);
-        configurarBoton(option1);
-
-        Button option2 = new Button("Option 2");
-        option2.setLayoutX(350);
-        option2.setLayoutY(300);
-        configurarBoton(option2);
-
-        root.getChildren().addAll(option1, option2);
-    }
+//    public void getRootOrdererChoiceQuestion(Pane root) {
+//        //TODO: adaptar ordered
+//        Button option1 = new Button("Option 1");
+//        option1.setLayoutX(450);
+//        option1.setLayoutY(450);
+//        configurarBoton(option1);
+//
+//        Button option2 = new Button("Option 2");
+//        option2.setLayoutX(350);
+//        option2.setLayoutY(300);
+//        configurarBoton(option2);
+//
+//        root.getChildren().addAll(option1, option2);
+//    }
 
     public void getRootGroupChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
         HBox opcionesBoxH = new HBox();
@@ -86,6 +85,26 @@ public class PreguntaView extends SceneGui {
         int cantidadDeOpcionesTotales = pregunta.obtenerOpciones().size();
         ArrayList<Opcion> respuestas2 = new ArrayList<>();
 
+        HBox hBoxTitulos = new HBox();
+
+        VBox vBoxGrupo1Text = new VBox();
+        //TODO: agregar titulos de los grupos
+        Label grupo1Text = new Label("Grupo 1");
+        grupo1Text.setStyle("-fx-font-size: 12px;");
+        vBoxGrupo1Text.getChildren().add(grupo1Text);
+        vBoxGrupo1Text.setPadding(new Insets(0, 10, 0, 10));
+
+        VBox vBoxGrupo2Text = new VBox();
+        Label grupo2Text = new Label("Grupo 2");
+        grupo1Text.setStyle("-fx-font-size: 12px;");
+        vBoxGrupo2Text.getChildren().add(grupo2Text);
+        vBoxGrupo2Text.setPadding(new Insets(0, 10, 0, 10));
+
+
+        hBoxTitulos.getChildren().addAll(vBoxGrupo1Text, vBoxGrupo2Text);
+        hBoxTitulos.setAlignment(Pos.CENTER_RIGHT);
+        hBoxTitulos.setPadding(new Insets(2, 2, 2, 2));
+        opcionesBoxV.getChildren().add(hBoxTitulos);
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         for(Opcion opcion : opciones){
@@ -118,7 +137,6 @@ public class PreguntaView extends SceneGui {
             hBox.setAlignment(Pos.CENTER_RIGHT);
             hBox.setPadding(new Insets(2, 2, 2, 2));
             opcionesBoxV.getChildren().add(hBox);
-
         }
         opcionesBoxV.maxWidth(WINDOW_WIDTH*0.75);
         opcionesBoxH.getChildren().add(opcionesBoxV);
@@ -150,6 +168,7 @@ public class PreguntaView extends SceneGui {
         confirmar.setOnAction(new ButtonConfirmarHandler(stage, juego, respuestas));
 
         String tipoDePregunta = preguntaActual.getTipoDePregunta();
+        //TODO: agregar tipo de preguntas faltantes
         if(tipoDePregunta.equalsIgnoreCase("multiple choice clasico") || tipoDePregunta.equalsIgnoreCase("multiple choice parcial") || tipoDePregunta.equalsIgnoreCase("multiple choice con penalidad")){
             getRootMultipleChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("true false clasico") || tipoDePregunta.equalsIgnoreCase("true false con penalidad")) {

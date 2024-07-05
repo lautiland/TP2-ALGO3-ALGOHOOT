@@ -35,6 +35,10 @@ public class Exclusividad extends Modificador {
         return puntajes;
     }
 
+    public String toString(){
+        return "Exclusividad";
+    }
+
     public void desactivar(){
         multiplicador = 1;
     }

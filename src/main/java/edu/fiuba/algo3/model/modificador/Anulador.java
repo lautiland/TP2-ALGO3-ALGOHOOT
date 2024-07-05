@@ -35,6 +35,10 @@ public class Anulador extends Modificador {
         return puntajes;
     }
 
+    public String toString(){
+        return "Anulador";
+    }
+
     public void desactivar(){
         activo = false;
         nadieRecibePuntos = false;

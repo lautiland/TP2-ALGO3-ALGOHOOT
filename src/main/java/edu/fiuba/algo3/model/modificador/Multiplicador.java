@@ -41,6 +41,11 @@ public class Multiplicador extends Modificador {
     }
 
     @Override
+    public String toString() {
+        return "Multiplicador x" + factor;
+    }
+
+    @Override
     public void desactivar() {
         jugadoresQueUsaron.clear();
     }

@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ResultadosPorRondaView extends SceneGui {
 
@@ -38,6 +39,21 @@ public class ResultadosPorRondaView extends SceneGui {
         configurarBoton(siguienteRonda);
         siguienteRonda.setOnAction(new ButtonSiguienteRondaHandler(stage, juego));
 
+        Label modificadoresUsados = new Label("Modificadores usados:\n");
+        modificadoresUsados.setStyle("-fx-font-size: 24px;");
+        modificadoresUsados.setTranslateY(0);
+        modificadoresUsados.setTranslateX(0);
+
+        HashMap<String, Integer> modificadores = juego.getModificadoresUsadosEsteTurno();
+        for (String modificador : modificadores.keySet()) {
+            int cantidadUsos = modificadores.get(modificador);
+            if (cantidadUsos == 0) {
+                continue;
+            }
+            String modificadorString = modificador + ": " + cantidadUsos;
+            modificadoresUsados.setText(modificadoresUsados.getText() + "\n" + modificadorString);
+        }
+
         Label points = new Label("");
         points.setTranslateY(0);
         points.setTranslateX(0);
@@ -52,7 +68,7 @@ public class ResultadosPorRondaView extends SceneGui {
         VBox botonesBox = new VBox();
         botonesBox.setSpacing(10);
         //TODO: agregar descripcion
-        botonesBox.getChildren().addAll(labelScreen, points, siguienteRonda);
+        botonesBox.getChildren().addAll(labelScreen,modificadoresUsados, points, siguienteRonda);
         botonesBox.setAlignment(Pos.CENTER);
 
         StackPane contenedorJuego = new StackPane();

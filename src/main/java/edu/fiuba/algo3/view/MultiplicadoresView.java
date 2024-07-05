@@ -3,10 +3,6 @@ package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.*;
 import edu.fiuba.algo3.model.Juego;
-import edu.fiuba.algo3.model.modificador.Anulador;
-import edu.fiuba.algo3.model.modificador.Exclusividad;
-import edu.fiuba.algo3.model.modificador.Multiplicador;
-import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,7 +10,6 @@ import javafx.stage.Stage;
 
 import javafx.geometry.Insets;
 
-import javafx.geometry.Pos;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,28 +27,27 @@ public class MultiplicadoresView extends SceneGui  {
 
     @Override
     public Scene getScene(Stage stage) {
-        Pregunta pregunta = juego.obtenerPreguntaActual();
         Label labelScreen = new Label("Que modificador vas a utilizar?");
         labelScreen.setPadding(new Insets(0, 0, 20, 0));
 
         Button x2 = new Button("x2");
         configurarBoton(x2);
         x2.setOnAction(new Buttonx2Handler(STAGE, juego));
-        if(!pregunta.esCompatibleCon(new Multiplicador(2))){
+        if(!juego.puedeUsarMultiplicador(2)){
             x2.setDisable(true);
         }
 
         Button x3 = new Button("x3");
         configurarBoton(x3);
         x3.setOnAction(new Buttonx3Handler(STAGE, juego));
-        if(!pregunta.esCompatibleCon(new Multiplicador(3))){
+        if(!juego.puedeUsarMultiplicador(3)){
             x3.setDisable(true);
         }
 
         Button exclusividad = new Button("Exclusividad");
         configurarBoton(exclusividad);
         exclusividad.setOnAction(new ButtonExclusividadHandler(STAGE, juego));
-        if(!pregunta.esCompatibleCon(new Exclusividad())){
+        if(!juego.puedeUsarExclusividad()){
             exclusividad.setDisable(true);
         }
 
@@ -61,7 +55,7 @@ public class MultiplicadoresView extends SceneGui  {
         Button anulador = new Button("Anulador");
         configurarBoton(anulador);
         anulador.setOnAction(new ButtonAnuladorHandler(STAGE, juego));
-        if(!pregunta.esCompatibleCon(new Anulador())){
+        if(!juego.puedeUsarAnulador()){
             anulador.setDisable(true);
         }
 

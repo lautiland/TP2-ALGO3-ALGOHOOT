@@ -43,6 +43,43 @@ public class Juego {
         multiplicadores.add(new Multiplicador(3));
     }
 
+    public boolean puedeUsarExclusividad(){
+        if(preguntaActual.esCompatibleCon(exclusividad)){
+            return exclusividad.puedeUsar(turnoJugadores.get(0));
+        }
+
+        return false;
+    }
+
+    public boolean puedeUsarAnulador(){
+        if(preguntaActual.esCompatibleCon(anulador)){
+            return anulador.puedeUsar(turnoJugadores.get(0));
+        }
+
+        return false;
+    }
+
+    public boolean puedeUsarMultiplicador(int factor){
+        int i = multiplicadores.indexOf(new Multiplicador(factor));
+        if(i == NO_ENCONTRADO){
+            throw new MultiplicadorInvalido();
+        }
+        if (preguntaActual.esCompatibleCon(multiplicadores.get(i))){
+            return multiplicadores.get(i).puedeUsar(turnoJugadores.get(0));
+        }
+        return false;
+    }
+
+    public HashMap<String, Integer> getModificadoresUsadosEsteTurno(){
+        HashMap<String, Integer> usos = new HashMap<>();
+        usos.put(anulador.toString(), anulador.getUsadosEsteTurno());
+        usos.put(exclusividad.toString(), exclusividad.getUsadosEsteTurno());
+        for (Modificador multiplicador : multiplicadores) {
+            usos.put(multiplicador.toString(), multiplicador.getUsadosEsteTurno());
+        }
+        return usos;
+    }
+
     // Este contructor esta pensado para que los jugadores puedan crear sus preguntas y preguntar a los otros (no esta en el alcance de tp):
     public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
@@ -75,13 +112,13 @@ public class Juego {
     }
 
     public void activarAnulador(){
-        if (preguntaActual.esCompatibleCon(anulador)) {
+        if(puedeUsarAnulador()){
             anulador.usar(turnoJugadores.get(0));
         }
     }
 
     public void activarExclusividad(){
-        if (preguntaActual.esCompatibleCon(exclusividad)) {
+        if(puedeUsarExclusividad()){
             exclusividad.usar(turnoJugadores.get(0));
         }
     }
@@ -141,7 +178,9 @@ public class Juego {
     }
 
     public boolean siguientePregunta(){
-
+        anulador.desactivar();
+        exclusividad.desactivar();
+        multiplicadores.forEach(Modificador::desactivar);
         turnoJugadores.addAll(jugadores);
 
         if (preguntas.isEmpty()){
@@ -164,8 +203,5 @@ public class Juego {
         HashMap<Jugador,Integer> puntajesFinales = this.filtrarPuntajes(puntajes);
 
         puntajesFinales.forEach(Jugador::modificarPuntos);
-        anulador.desactivar();
-        exclusividad.desactivar();
-        multiplicadores.forEach(Modificador::desactivar);
     }
 }

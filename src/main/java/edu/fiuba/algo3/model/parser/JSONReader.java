@@ -63,20 +63,24 @@ public class JSONReader {
                 return new PenaltyMC(enunciado, opciones, opcionesCorrectas, categoria, descripcionRespuesta);
             case "ordered choice":
                 return new OrderedChoice(enunciado,opciones , opcionesCorrectas, categoria, descripcionRespuesta);
-            case "group choice":
-                ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
-                ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-                for(Opcion opcion : opciones){
-                    if(opcionesCorrectas.contains(opcion)){
-                        opcionesGrupoA.add(opcion);
-                    }else{
-                        opcionesGrupoB.add(opcion);
-                    }
-                }
-                return new GroupChoice(enunciado, opciones, opcionesGrupoA,opcionesGrupoB, categoria, descripcionRespuesta);
             default:
                 throw new JSONInvalido("Tipo de pregunta invalido");
         }
+    }
+
+    private static Pregunta parsearGroupChoice(JsonObject preguntaObject){
+        String tema = preguntaObject.get("Tema").getAsString();
+        String textoRespuesta = preguntaObject.get("Texto respuesta").getAsString();
+        String preguntaTexto = preguntaObject.get("Pregunta").getAsString();
+        String respuesta = preguntaObject.get("Respuesta").getAsString();
+        String[] respuestasGrupoA = respuesta.split(";")[0].substring(3).split(",");
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
+        parsearOpciones(preguntaObject, opciones, respuestasGrupoA, opcionesCorrectas);
+
+        String descripcionGrupoA = preguntaObject.get("Grupo A").getAsString();
+        String descripcionGrupoB = preguntaObject.get("Grupo B").getAsString();
+        return new GroupChoice(preguntaTexto, opciones, opcionesCorrectas, tema, textoRespuesta, descripcionGrupoA, descripcionGrupoB);
     }
 
     public static ArrayList<Pregunta> obtenerPregunta(Reader reader){
@@ -86,35 +90,36 @@ public class JSONReader {
         ArrayList<Pregunta> preguntasList = new ArrayList<>();
         for (JsonElement pregunta : preguntas) {
             JsonObject preguntaObject = pregunta.getAsJsonObject();
+            String tipo = preguntaObject.get("Tipo").getAsString();
+            if (tipo.equalsIgnoreCase("group choice")){
+                preguntasList.add(parsearGroupChoice(preguntaObject));
+                continue;
+            }
+
             String tema = preguntaObject.get("Tema").getAsString();
             String textoRespuesta = preguntaObject.get("Texto respuesta").getAsString();
-            String tipo = preguntaObject.get("Tipo").getAsString();
             String preguntaTexto = preguntaObject.get("Pregunta").getAsString();
             String respuesta = preguntaObject.get("Respuesta").getAsString();
             String[] respuestas = respuesta.split(",");
             ArrayList<Opcion> opciones = new ArrayList<>();
             ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
-            for (int i = 1; i <= 6; i++) {
-                if(preguntaObject.has("Opcion " + i)){
-                    String opcion = preguntaObject.get("Opcion " + i).getAsString();
-                    opciones.add(new Opcion(opcion));
-                }
-            }
-            if (tipo.equalsIgnoreCase("group choice")){
-                String[] grupos = respuesta.split(";");
-                String[] grupoA = grupos[0].split(",");
-                grupoA[0] = grupoA[0].substring(3);
-                for (String respuestaActual : grupoA) {
-                    opcionesCorrectas.add(opciones.get(Integer.parseInt(respuestaActual) - 1));
-                }
-            }else{
-                for (String respuestaActual : respuestas) {
-                    opcionesCorrectas.add(opciones.get(Integer.parseInt(respuestaActual) - 1));
-                }
-            }
+            parsearOpciones(preguntaObject, opciones, respuestas, opcionesCorrectas);
+
             preguntasList.add(parserPregunta(tipo, preguntaTexto, opciones, opcionesCorrectas, tema, textoRespuesta));
         }
 
         return preguntasList;
+    }
+
+    private static void parsearOpciones(JsonObject preguntaObject, ArrayList<Opcion> opciones, String[] respuestas, ArrayList<Opcion> opcionesCorrectas) {
+        for (int i = 1; i <= 6; i++) {
+            if(preguntaObject.has("Opcion " + i)){
+                String opcion = preguntaObject.get("Opcion " + i).getAsString();
+                opciones.add(new Opcion(opcion));
+            }
+        }
+        for (String respuestaActual : respuestas) {
+            opcionesCorrectas.add(opciones.get(Integer.parseInt(respuestaActual) - 1));
+        }
     }
 }

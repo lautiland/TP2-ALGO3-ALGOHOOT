@@ -271,12 +271,9 @@ public class Entrega2Test {
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA,"", "", "", "");
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(groupChoice);
 
@@ -296,7 +293,7 @@ public class Entrega2Test {
         juego.evaluarRespuestas();
 
         assertEquals(1,jugador1.getPuntos());
-        assertEquals(1, jugador2.getPuntos());
+        assertEquals(0, jugador2.getPuntos());
 
     }
 }

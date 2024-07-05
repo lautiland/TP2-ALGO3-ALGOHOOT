@@ -21,11 +21,10 @@ public class GroupChoiceTest {
             opciones.add(opcion1);
             ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
             opcionesGrupoA.add(opcion1);
-            ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
 
 
             Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si",
-                    opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                    opciones, opcionesGrupoA, "", "", "", "");
             groupChoice.evaluarRespuestas(opciones);
         });
     }
@@ -55,13 +54,10 @@ public class GroupChoiceTest {
             opcionesGrupoA.add(opcion2);
             opcionesGrupoA.add(opcion3);
             opcionesGrupoA.add(opcion4);
-            ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-            opcionesGrupoB.add(opcion5);
-            opcionesGrupoB.add(opcion6);
-            opcionesGrupoB.add(opcion7);
+
 
             Pregunta groupChoice = new GroupChoice("Elegir las opciones que dicen Si",
-                    opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                    opciones, opcionesGrupoA, "", "", "", "");
             groupChoice.evaluarRespuestas(opciones);
         });
     }
@@ -80,12 +76,10 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         assertEquals(groupChoice.seleccionarOpcion(2), opcion3);
         assertEquals(groupChoice.seleccionarOpcion(3), opcion4);
@@ -105,12 +99,10 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -133,12 +125,10 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);
@@ -163,12 +153,10 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion3);
@@ -192,11 +180,9 @@ public class GroupChoiceTest {
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
         opcionesGrupoA.add(opcion3);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion4);
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);
@@ -221,11 +207,10 @@ public class GroupChoiceTest {
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
         opcionesGrupoA.add(opcion3);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion4);
@@ -248,11 +233,10 @@ public class GroupChoiceTest {
         opcionesGrupoA.add(opcion1);
         opcionesGrupoA.add(opcion2);
         opcionesGrupoA.add(opcion3);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion4);
+
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
 
@@ -271,14 +255,9 @@ public class GroupChoiceTest {
         opciones.add(opcion3);
         opciones.add(opcion4);
         ArrayList<Opcion> opcionesGrupoA = new ArrayList<>();
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
-        opcionesGrupoB.add(opcion1);
-        opcionesGrupoB.add(opcion2);
-        opcionesGrupoB.add(opcion3);
-        opcionesGrupoB.add(opcion4);
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion2);
@@ -303,10 +282,9 @@ public class GroupChoiceTest {
         opcionesGrupoA.add(opcion2);
         opcionesGrupoA.add(opcion3);
         opcionesGrupoA.add(opcion4);
-        ArrayList<Opcion> opcionesGrupoB = new ArrayList<>();
 
         Pregunta groupChoice = new GroupChoice("Pregunta de multiple choice",
-                opciones, opcionesGrupoA, opcionesGrupoB, "", "");
+                opciones, opcionesGrupoA, "", "", "", "");
 
         ArrayList<Opcion> respuestas = new ArrayList<>();
         respuestas.add(opcion1);

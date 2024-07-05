@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 public class GroupChoice extends Pregunta{
     private final ArrayList<Opcion> opcionesGrupoA;
+    private final String descripcionGrupoA;
+    private final String descripcionGrupoB;
 
     public GroupChoice(String enunciado,
                        ArrayList<Opcion> opciones,
                        ArrayList<Opcion> opcionesCorrectasGrupoA,
-                       ArrayList<Opcion> opcionesCorrectasGrupoB,
                        String categoria,
-                       String descripcionRespuesta) {
+                       String descripcionRespuesta, String descripcionGrupoA, String descripcionGrupoB) {
 
         super(enunciado,
                 opciones,
@@ -28,11 +29,21 @@ public class GroupChoice extends Pregunta{
                 new ArrayList<>(){{add(new Anulador());add(new Exclusividad());}});
 
         this.opcionesGrupoA = opcionesCorrectasGrupoA;
+        this.descripcionGrupoA = descripcionGrupoA;
+        this.descripcionGrupoB = descripcionGrupoB;
     }
 
     @Override
     public String getTipoDePregunta(){
         return "Group Choice";
+    }
+
+    public String getDescripcionGrupoA(){
+        return descripcionGrupoA;
+    }
+
+    public String getDescripcionGrupoB(){
+        return descripcionGrupoB;
     }
 
     @Override

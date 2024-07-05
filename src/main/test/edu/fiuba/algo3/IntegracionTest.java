@@ -142,9 +142,9 @@ public class IntegracionTest {
         respuesta1.add(opciones.get(1));
         respuesta1.add(opciones.get(2));
         respuesta2 = new ArrayList<>();
-        respuesta2.add(opciones.get(2));
-        respuesta2.add(opciones.get(3));
-        respuesta2.add(opciones.get(5));
+        respuesta2.add(opciones.get(0));
+        respuesta2.add(opciones.get(1));
+        respuesta2.add(opciones.get(4));
         respuesta3 = new ArrayList<>();
         respuesta3.add(opciones.get(0));
         respuesta3.add(opciones.get(1));

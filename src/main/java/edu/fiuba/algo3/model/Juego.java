@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.model;
 
-import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalido;
-import edu.fiuba.algo3.model.excepciones.CantidadPreguntasInvalida;
-import edu.fiuba.algo3.model.excepciones.MultiplicadorInvalido;
-import edu.fiuba.algo3.model.excepciones.NombreJugadorInvalido;
+import edu.fiuba.algo3.model.excepciones.*;
 import edu.fiuba.algo3.model.modificador.Anulador;
 import edu.fiuba.algo3.model.modificador.Exclusividad;
 import edu.fiuba.algo3.model.modificador.Modificador;
@@ -25,8 +22,10 @@ public class Juego {
     private final Modificador exclusividad;
     private final ArrayList<Modificador> multiplicadores;
     private Pregunta preguntaActual;
+    private final int limitePuntos;
+    private final int limitePreguntas;
 
-    public Juego(ArrayList<Jugador> jugadores, Reader archivo){
+    public Juego(ArrayList<Jugador> jugadores, Reader archivo, int limitePreguntas, int limitePuntos){
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
             throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
         }
@@ -39,7 +38,30 @@ public class Juego {
         this.anulador = new Anulador();
         this.exclusividad = new Exclusividad();
         this.multiplicadores = new ArrayList<>();
+        this.limitePuntos = limitePuntos;
+        this.limitePreguntas = limitePreguntas;
         multiplicadores.add(new Multiplicador(2));
+        multiplicadores.add(new Multiplicador(3));
+    }
+
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas, int limitePuntos, int limitePreguntas) {
+        if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
+            throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
+        }
+        if (preguntas.isEmpty()){
+            throw new CantidadPreguntasInvalida("La cantidad de preguntas debe ser al menos 1");
+        }
+
+        this.jugadores = jugadores;
+        this.preguntas = preguntas;
+        preguntaActual = preguntas.remove(0);
+        this.turnoJugadores = new ArrayList<>(jugadores);
+        this.limitePuntos = limitePuntos;
+        this.limitePreguntas = limitePreguntas;
+        this.anulador = new Anulador();
+        this.exclusividad = new Exclusividad();
+        this.multiplicadores = new ArrayList<>();
+        multiplicadores.add(new Multiplicador(CANTIDAD_JUGADORES_MINIMOS));
         multiplicadores.add(new Multiplicador(3));
     }
 
@@ -78,27 +100,6 @@ public class Juego {
             usos.put(multiplicador.toString(), multiplicador.getUsadosEsteTurno());
         }
         return usos;
-    }
-
-    // Este contructor esta pensado para que los jugadores puedan crear sus preguntas y preguntar a los otros (no esta en el alcance de tp):
-    public Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
-        if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
-            throw new CantidadJugadoresInvalido("La cantidad de jugadores debe ser al menos 2");
-        }
-        if (preguntas.isEmpty()){
-            throw new CantidadPreguntasInvalida("La cantidad de preguntas debe ser al menos 1");
-        }
-
-        this.jugadores = jugadores;
-        this.preguntas = preguntas;
-        preguntaActual = preguntas.remove(0);
-        this.turnoJugadores = new ArrayList<>(jugadores);
-
-        this.anulador = new Anulador();
-        this.exclusividad = new Exclusividad();
-        this.multiplicadores = new ArrayList<>();
-        multiplicadores.add(new Multiplicador(CANTIDAD_JUGADORES_MINIMOS));
-        multiplicadores.add(new Multiplicador(3));
     }
 
     public void mezclarPreguntas(){
@@ -196,6 +197,10 @@ public class Juego {
     }
 
     public void siguientePregunta(){
+        if(estaJuegoTerminado()) {
+            throw new JuegoFinalizadoError();
+        }
+
         anulador.desactivar();
         exclusividad.desactivar();
         multiplicadores.forEach(Modificador::desactivar);
@@ -205,7 +210,18 @@ public class Juego {
     }
 
     public boolean estaJuegoTerminado(){
-        return preguntas.isEmpty();
+        int preguntasRestantes = preguntas.size();
+        if (preguntasRestantes == 0 || preguntasRestantes >= limitePreguntas){
+            return true;
+        }
+
+        for (Jugador jugador : jugadores) {
+            if (jugador.getPuntos() >= limitePuntos){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void evaluarRespuestas(){

@@ -9,11 +9,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegracionTest {
     private final String ARCHIVO_PREGUNTAS = "src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json";
+    private static final int LIMITE_PREGUNTAS = 100;
+    private static final int LIMITE_PUNTOS = 100;
 
     @Test
     public void test01PuedoJugarUnaPartidaCompleta() throws FileNotFoundException {
@@ -28,7 +29,7 @@ public class IntegracionTest {
             }
         };
 
-        Juego juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS));
+        Juego juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         ArrayList<Opcion> opciones = juego.obtenerPreguntaActual().obtenerOpciones();
         ArrayList<Opcion> respuesta1  = new ArrayList<>();
@@ -158,9 +159,9 @@ public class IntegracionTest {
 
         juego.evaluarRespuestas();
 
-        assertFalse(juego.siguientePregunta());
         assertEquals(7, jugador1.getPuntos());
         assertEquals(6, jugador2.getPuntos());
         assertEquals(2, jugador3.getPuntos());
+        assertTrue(juego.estaJuegoTerminado());
     }
 }

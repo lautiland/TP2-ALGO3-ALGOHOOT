@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JuegoTest {
+    private static final int LIMITE_PREGUNTAS = 100;
+    private static final int LIMITE_PUNTOS = 100;
 
     @Test
     public void test01CantidadDeJugadoresInvalida() {
@@ -35,7 +37,7 @@ public class JuegoTest {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(preguntaTF);
 
-        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores, preguntas));
+        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS));
     }
 
     @Test
@@ -44,7 +46,7 @@ public class JuegoTest {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
 
-        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores,new FileReader("src/main/resources/preguntas.json")));
+        assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS));
     }
 
     @Test
@@ -56,7 +58,7 @@ public class JuegoTest {
         jugadores.add(jugador2);
 
         ArrayList<Pregunta> preguntas = new ArrayList<>();
-        assertThrows(CantidadPreguntasInvalida.class, () -> new Juego(jugadores, preguntas));
+        assertThrows(CantidadPreguntasInvalida.class, () -> new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS));
     }
 
     @Test
@@ -67,7 +69,7 @@ public class JuegoTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
-        Juego juego = new Juego(jugadores,new FileReader("src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json"));
+        Juego juego = new Juego(jugadores,new FileReader("src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
         ArrayList<Opcion> respuestaCorrecta = new ArrayList<>();
         respuestaCorrecta.add(new Opcion("Microondas"));
         respuestaCorrecta.add(new Opcion("Televisor de tubo CRT"));
@@ -96,7 +98,7 @@ public class JuegoTest {
         Jugador jugador2 = new Jugador("Lautaro");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-        Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"));
+        Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador( 6));
     }
@@ -109,7 +111,7 @@ public class JuegoTest {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
-        Juego juego = new Juego(jugadores,new FileReader("src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json"));
+        Juego juego = new Juego(jugadores,new FileReader("src/main/test/edu/fiuba/algo3/unitarios/example/preguntas_simplificado.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
         ArrayList<Opcion> respuestaCorrecta = new ArrayList<>();
         respuestaCorrecta.add(new Opcion("Microondas"));
         respuestaCorrecta.add(new Opcion("Televisor de tubo CRT"));

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controller;
 
-import edu.fiuba.algo3.view.AddJugadoresView;
+import edu.fiuba.algo3.view.LimitesView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
@@ -15,9 +15,9 @@ public class ButtonIniciarHandler implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        AddJugadoresView jugadoresView = new AddJugadoresView(STAGE);
+        LimitesView limitesView = new LimitesView(STAGE);
         try {
-            STAGE.setScene(jugadoresView.getScene());
+            STAGE.setScene(limitesView.getScene());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
 

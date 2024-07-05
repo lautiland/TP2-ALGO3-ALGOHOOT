@@ -16,9 +16,13 @@ import java.util.ArrayList;
 public class AddJugadoresView extends SceneGui {
 
     public Stage STAGE;
+    private final int limitePreguntas;
+    private final int limitePuntos;
 
-    public AddJugadoresView(Stage stage) {
+    public AddJugadoresView(Stage stage, int limitePreguntas, int limitePuntos) {
         STAGE = stage;
+        this.limitePreguntas = limitePreguntas;
+        this.limitePuntos = limitePuntos;
     }
 
     public Scene getScene() {
@@ -45,7 +49,7 @@ public class AddJugadoresView extends SceneGui {
 
         Button iniciarPartida = new Button("Iniciar Partida");
         configurarBoton(iniciarPartida);
-        iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores));
+        iniciarPartida.setOnAction(new ButtonIniciarPartidaHandler(STAGE,jugadores, limitePreguntas, limitePuntos));
         iniciarPartida.setDisable(true);
 
         Button addButton = new Button("Agregar Jugador");

@@ -16,17 +16,21 @@ public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
     private final Stage STAGE;
     ArrayList<Jugador> jugadores;
     private final static String ARCHIVO_PREGUNTAS =  "src/main/resources/preguntas.json";
+    private final int limitePreguntas;
+    private final int limitePuntos;
 
-    public ButtonIniciarPartidaHandler(Stage stage, ArrayList<Jugador> jugadores_actual){
+    public ButtonIniciarPartidaHandler(Stage stage, ArrayList<Jugador> jugadores_actual, int limitePreguntas, int limitePuntos){
         this.STAGE = stage;
         jugadores = jugadores_actual;
+        this.limitePreguntas = limitePreguntas;
+        this.limitePuntos = limitePuntos;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         Juego juego;
         try {
-            juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS));
+            juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS), limitePreguntas, limitePuntos);
             juego.mezclarPreguntas();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

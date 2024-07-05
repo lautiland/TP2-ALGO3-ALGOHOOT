@@ -13,6 +13,8 @@ public class Entrega1Test {
 
     private Jugador jugador1;
     private Jugador jugador2;
+    private static final int LIMITE_PREGUNTAS = 100;
+    private static final int LIMITE_PUNTOS = 100;
 
     @BeforeEach
     public void beforeEach() {
@@ -44,7 +46,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -76,7 +78,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -117,7 +119,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -158,7 +160,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -190,7 +192,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -222,7 +224,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 
@@ -263,7 +265,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
         juego.evaluarRespuestas();
 
         assertEquals(2,jugador1.getPuntos());
@@ -303,7 +305,7 @@ public class Entrega1Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.evaluarRespuestas();
 

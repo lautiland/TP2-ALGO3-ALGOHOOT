@@ -16,6 +16,8 @@ public class Entrega2Test {
     private Jugador jugador1;
     private Jugador jugador2;
     private Jugador jugador3;
+    private static final int LIMITE_PREGUNTAS = 100;
+    private static final int LIMITE_PUNTOS = 100;
 
     @BeforeEach
     public void beforeEach() {
@@ -42,7 +44,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.activarMultiplicador( 2);
         juego.responder(new ArrayList<>(){{
@@ -85,7 +87,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.activarAnulador();
         juego.responder(new ArrayList<>(){{
@@ -127,7 +129,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.activarExclusividad();
         juego.responder(new ArrayList<>(){{
@@ -180,7 +182,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.responder(new ArrayList<>(){{
             add(opcion1);
@@ -227,7 +229,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(pregunta);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.responder(new ArrayList<>(){{
             add(opcion1);
@@ -278,7 +280,7 @@ public class Entrega2Test {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         preguntas.add(groupChoice);
 
-        Juego juego = new Juego(jugadores,preguntas);
+        Juego juego = new Juego(jugadores,preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
         juego.responder(new ArrayList<>(){{
             add(opcion1);

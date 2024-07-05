@@ -10,16 +10,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PantallaInicial extends SceneGui {
+public class PantallaInicialView extends SceneGui {
 
-    Stage stage;
+    private final Stage stage;
 
 
-    public PantallaInicial(Stage stage_actual) {
+    public PantallaInicialView(Stage stage_actual) {
         stage = stage_actual;
     }
 
-    public Scene getScene() {
+    public Scene getScene(Stage stage) {
 
         //creacion de Botones
         Label bienvenida = new Label("AlgoHoot");

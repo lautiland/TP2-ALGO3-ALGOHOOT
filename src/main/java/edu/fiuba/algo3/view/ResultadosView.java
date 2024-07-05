@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonContinuarHandler;
-import edu.fiuba.algo3.model.Jugador;
+import edu.fiuba.algo3.model.Juego;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
-import javafx.geometry.Pos;
 
 
 import javafx.scene.control.Label;
@@ -19,48 +16,39 @@ import java.util.ArrayList;
 
 public class ResultadosView extends SceneGui {
 
-    static Stage stage;
-    ArrayList<Jugador> jugadores;
-    public ResultadosView(Stage stage_actual, ArrayList<Jugador> jugadores) {
+    private final Stage stage;
+    private final Juego juego;
+    public ResultadosView(Stage stage_actual, Juego juego) {
         stage = stage_actual;
-        this.jugadores = jugadores;
+        this.juego = juego;
     }
     public Scene getScene() {
 
         Label labelScreen = new Label("Resultados");
-        labelScreen.setTranslateY(-200);
-        labelScreen.setTranslateX(0);
         labelScreen.setStyle("-fx-font-size: 36px;");
 
         Button continuar = new Button("Continuar");
         configurarBoton(continuar);
-        continuar.setOnAction(new ButtonContinuarHandler(stage,new PantallaInicial(stage)));
+        continuar.setOnAction(new ButtonContinuarHandler(stage,new PantallaInicialView(stage)));
 
         Label points = new Label("");
-        points.setTranslateY(0);
-        points.setTranslateX(0);
         points.setStyle("-fx-font-size: 24px;");
-        for (Jugador jugador : jugadores) {
-            int pointsPlayer = jugador.getPuntos();
-            String pointsString = jugador.getNombre()+ ": " + pointsPlayer;
+
+        //.
+        ArrayList<String> nombresJugadores = juego.obtenerNombresJugadores();
+        for (String nombreJugador : nombresJugadores) {
+            int pointsPlayer = juego.obtenerPuntaje(nombreJugador);
+            String pointsString = nombreJugador + ": " + pointsPlayer;
             points.setText(points.getText() + "\n" + pointsString);
         }
-        //creación de contenedor fondo de los botones
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
 
-        //creacion contenedor de items
         VBox botonesBox = new VBox();
-        botonesBox.setSpacing(10);
-        botonesBox.getChildren().addAll(labelScreen,points);
-        botonesBox.setAlignment(Pos.CENTER);
+        botonesBox.getChildren().addAll(labelScreen, points, continuar);
 
-        //Contenedor del juego que tiene al organizador de botones
         StackPane contenedorJuego = new StackPane();
-        contenedorJuego.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_SECUNDARIO));
-        contenedorJuego.getChildren().addAll(contenedorBotones, botonesBox);
+
+        configurarBackground(contenedorJuego, botonesBox);
+
         return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

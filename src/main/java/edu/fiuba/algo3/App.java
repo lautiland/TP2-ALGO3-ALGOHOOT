@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.view.PantallaInicial;
+import edu.fiuba.algo3.view.PantallaInicialView;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -21,9 +21,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         configurarVentana(stage);
-        PantallaInicial inicio = new PantallaInicial(stage);
+        PantallaInicialView inicio = new PantallaInicialView(stage);
 
-        stage.setScene(inicio.getScene());
+        stage.setScene(inicio.getScene(stage));
         stage.show();
     }
 

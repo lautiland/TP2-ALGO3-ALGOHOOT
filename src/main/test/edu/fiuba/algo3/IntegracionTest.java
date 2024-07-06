@@ -31,7 +31,7 @@ public class IntegracionTest {
 
         Juego juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        ArrayList<Opcion> opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        ArrayList<Opcion> opciones = juego.obtenerPreguntaActual().getOpciones();
         ArrayList<Opcion> respuesta1  = new ArrayList<>();
         respuesta1.add(opciones.get(1));
         respuesta1.add(opciones.get(0));
@@ -55,7 +55,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(3));
         respuesta1.add(opciones.get(0));
@@ -73,7 +73,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(1));
 
@@ -86,7 +86,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(2));
         respuesta1.add(opciones.get(4));
@@ -103,7 +103,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(0));
         respuesta3 = new ArrayList<>();
@@ -120,7 +120,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(3));
         respuesta1.add(opciones.get(0));
@@ -136,7 +136,7 @@ public class IntegracionTest {
         juego.evaluarRespuestas();
         juego.siguientePregunta();
 
-        opciones = juego.obtenerPreguntaActual().obtenerOpciones();
+        opciones = juego.obtenerPreguntaActual().getOpciones();
         respuesta1 = new ArrayList<>();
         respuesta1.add(opciones.get(0));
         respuesta1.add(opciones.get(1));

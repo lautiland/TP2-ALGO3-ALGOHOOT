@@ -3,6 +3,7 @@ package edu.fiuba.algo3.view;
 import edu.fiuba.algo3.controller.*;
 import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.model.Opcion;
+import edu.fiuba.algo3.model.pregunta.GroupChoice;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -46,7 +47,7 @@ public class PreguntaView extends SceneGui {
         contenedor.setPadding(new Insets(20,200,20, 200));
         contenedor.setSpacing(10);
 
-        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.getOpciones();
         for(Opcion opcion : opciones){
             HBox hBox = new HBox();
             Label textoCheckBox = new Label(opcion.getTexto());
@@ -66,7 +67,7 @@ public class PreguntaView extends SceneGui {
 
     public void cargarOpcionesOrderedChoice(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
 
-        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.getOpciones();
 
         for(Opcion opcion : opciones){
             HBox hBox = new HBox();
@@ -107,20 +108,20 @@ public class PreguntaView extends SceneGui {
     public void cargarOpcionesGroupChoice(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
         HBox opcionesBoxH = new HBox();
         VBox opcionesBoxV = new VBox();
-        int cantidadDeOpcionesTotales = pregunta.obtenerOpciones().size();
+        int cantidadDeOpcionesTotales = pregunta.getOpciones().size();
         ArrayList<Opcion> respuestas2 = new ArrayList<>();
 
         HBox hBoxTitulos = new HBox();
 
         VBox vBoxGrupo1Text = new VBox();
-        //TODO: agregar titulos de los grupos
-        Label grupo1Text = new Label("Grupo 1");
+        //TODO: Arreglar centrado de titulos
+        Label grupo1Text = new Label(((GroupChoice) pregunta).getDescripcionGrupoA());
         grupo1Text.setStyle("-fx-font-size: 12px;");
         vBoxGrupo1Text.getChildren().add(grupo1Text);
         vBoxGrupo1Text.setPadding(new Insets(0, 10, 0, 10));
 
         VBox vBoxGrupo2Text = new VBox();
-        Label grupo2Text = new Label("Grupo 2");
+        Label grupo2Text = new Label(((GroupChoice) pregunta).getDescripcionGrupoB());
         grupo1Text.setStyle("-fx-font-size: 12px;");
         vBoxGrupo2Text.getChildren().add(grupo2Text);
         vBoxGrupo2Text.setPadding(new Insets(0, 10, 0, 10));
@@ -131,7 +132,7 @@ public class PreguntaView extends SceneGui {
         hBoxTitulos.setPadding(new Insets(2, 2, 2, 2));
         opcionesBoxV.getChildren().add(hBoxTitulos);
 
-        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.getOpciones();
         for(Opcion opcion : opciones){
             HBox hBox = new HBox();
 

@@ -72,15 +72,11 @@ abstract public class Pregunta {
         return categoria;
     }
 
-    public ArrayList<Opcion> getOpciones(){
-        return opcionesCorrectas;
-    }
-
     protected int calcularPuntaje( int respuestasCorrectas, int respuestasIncorrectas){
         return evaluador.calcular(respuestasCorrectas,respuestasIncorrectas);
     }
 
-    public ArrayList<Opcion> obtenerOpciones(){
+    public ArrayList<Opcion> getOpciones(){
         return opciones;
     }
 

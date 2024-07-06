@@ -24,9 +24,22 @@ public class ParserTest {
         Reader archivo = new FileReader(RUTA_EJEMPLOS+"preguntas.json");
         ArrayList<Pregunta> preguntas = parser.parsear(archivo, FORMATO);
 
-        // Getters en preguntas para chequear si se parsearon bien?
+        Pregunta primerPregunta = preguntas.get(0);
+        Pregunta ultimaPregunta = preguntas.get(preguntas.size()-1);
 
         assertEquals(24, preguntas.size());
+
+        assertEquals("Ordered Choice", primerPregunta.getTipoDePregunta());
+        assertEquals("CIENCIAS", primerPregunta.getCategoria());
+        assertEquals("Ordene de MAYOR A MENOR los siguientes objetos hogareños según su nivel de radiación electromagnética emitido (el máximo recomendado es 100 microTeslas)", primerPregunta.getEnunciado());
+        assertEquals(4, primerPregunta.getOpciones().size());
+        assertEquals("El microondas emite a  3 cm entre 73 y 200µ, y a 30 cm entre 4 a 8 µT. ",primerPregunta.getDescripcionRespuesta());
+
+        assertEquals("Multiple Choice con Penalidad", ultimaPregunta.getTipoDePregunta());
+        assertEquals("MISCELANEAS", ultimaPregunta.getCategoria());
+        assertEquals("¿Cuáles de las siguientes calles, avenidas o pasajes son del barrio de San Telmo, donde está ubicada la sede Paseo Colón de nuestra universidad?", ultimaPregunta.getEnunciado());
+        assertEquals(5, ultimaPregunta.getOpciones().size());
+        assertEquals("A buscar el mapa", ultimaPregunta.getDescripcionRespuesta());
     }
 
     @Test
@@ -84,6 +97,14 @@ public class ParserTest {
         Reader archivo = new FileReader(RUTA_EJEMPLOS+ "pregunta_group_choice.json");
         ArrayList<Pregunta> preguntas = parser.parsear(archivo, FORMATO);
 
-        assertTrue(preguntas.get(0) instanceof GroupChoice);
+        Pregunta pregunta = preguntas.get(0);
+
+        assertEquals("Group Choice", pregunta.getTipoDePregunta());
+        assertEquals("DEPORTES", pregunta.getCategoria());
+        assertEquals("Asigne las siguientes leyendas del deporte nacional a disciplina grupales (Fútbol, Básquet, Voley, Rugby,) o individuales (atletismo, tenis, artes marciales, ajedrez, etc):", pregunta.getEnunciado());
+        assertEquals(6, pregunta.getOpciones().size());
+        assertEquals("Deportes Grupales", ((GroupChoice) pregunta).getDescripcionGrupoA());
+        assertEquals("Deportes Individuales", ((GroupChoice) pregunta).getDescripcionGrupoB());
+        assertEquals("say no more...", pregunta.getDescripcionRespuesta());
     }
 }

@@ -2,58 +2,38 @@ package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonContinuarHandler;
 import edu.fiuba.algo3.model.Juego;
-import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 
 public class JugarTurnoView  extends SceneGui {
 
-    Stage stage;
-    Juego juego;
+    private final Stage STAGE;
+    private final Juego JUEGO;
 
-    public JugarTurnoView(Stage stage_actual,Juego juego) {
-        stage = stage_actual;
-        this.juego = juego;
+    public JugarTurnoView(Stage stage, Juego juego) {
+        STAGE = stage;
+        JUEGO = juego;
     }
 
     public Scene getScene() {
-        Label labelScreen = new Label("Turno del jugador: " + juego.getJugadorActual());
-        Label player = new Label("Puntos: " + juego.obtenerPuntaje(juego.getJugadorActual()));
 
-        Button buttonContinuar = new Button("Continuar");
-        configurarBoton(buttonContinuar);
-        buttonContinuar.setOnAction(new ButtonContinuarHandler(stage, new MultiplicadoresView(stage, juego)));
+        Label turnoDelJugador = new Label("Turno del jugador: " + JUEGO.getJugadorActual());
+        configurarSubtitulo(turnoDelJugador);
 
-        player.setStyle("-fx-font-size: 24px;");
-        labelScreen.setStyle("-fx-font-size: 24px;");
-        StackPane  root = new StackPane();
-        root.setPadding(new Insets(20));
-        root.setAlignment(Pos.TOP_LEFT);
+        Label player = new Label("Puntos: " + JUEGO.obtenerPuntaje(JUEGO.getJugadorActual()));
+        configurarSubtitulo(player);
 
-        root.getChildren().addAll(player, labelScreen, buttonContinuar);
+        Button continuar = new Button("Continuar");
+        configurarBoton(continuar);
+        continuar.setOnAction(new ButtonContinuarHandler(STAGE, new ModificadoresView(STAGE, JUEGO)));
 
-        //creación de contenedor fondo
-        StackPane contenedorBotones = new StackPane();
-        contenedorBotones.setStyle(String.format("-fx-background-color: %s;",COLOR_FONDO_PRIMARIO));
-        contenedorBotones.setMinSize(600,800);
-        contenedorBotones.setMaxSize(700,900);
-
-        //creacion contenedor de items
-        VBox botonesBox = new VBox();
-        botonesBox.getChildren().addAll(labelScreen, player, buttonContinuar);
-
-        StackPane contenedorJuego = new StackPane();
-
-        configurarBackground(contenedorJuego, botonesBox);
-
-
-        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
+        VBox contenido = new VBox();
+        contenido.getChildren().addAll(turnoDelJugador, player, continuar);
+        return configurarEscena(contenido);
     }
 }

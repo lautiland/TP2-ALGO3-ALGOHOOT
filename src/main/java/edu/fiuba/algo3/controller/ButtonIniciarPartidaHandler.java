@@ -14,30 +14,32 @@ import java.util.ArrayList;
 
 public class ButtonIniciarPartidaHandler implements EventHandler<ActionEvent>{
     private final Stage STAGE;
-    ArrayList<Jugador> jugadores;
-    private final static String ARCHIVO_PREGUNTAS =  "src/main/resources/preguntas.json";
-    private final int limitePreguntas;
-    private final int limitePuntos;
+    private final String ARCHIVO_PREGUNTAS;
+    private final ArrayList<Jugador> JUGADORES;
+    private final int LIMITE_PREGUNTAS;
+    private final int LIMITE_PUNTOS;
 
-    public ButtonIniciarPartidaHandler(Stage stage, ArrayList<Jugador> jugadores_actual, int limitePreguntas, int limitePuntos){
-        this.STAGE = stage;
-        jugadores = jugadores_actual;
-        this.limitePreguntas = limitePreguntas;
-        this.limitePuntos = limitePuntos;
+    public ButtonIniciarPartidaHandler(Stage stage, ArrayList<Jugador> jugadores, String archivoPreguntas , int limitePreguntas, int limitePuntos){
+        STAGE = stage;
+        ARCHIVO_PREGUNTAS = archivoPreguntas;
+        JUGADORES = jugadores;
+        LIMITE_PREGUNTAS = limitePreguntas;
+        LIMITE_PUNTOS = limitePuntos;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         Juego juego;
+
         try {
-            juego = new Juego(jugadores,new FileReader(ARCHIVO_PREGUNTAS), limitePreguntas, limitePuntos);
-            //juego.mezclarPreguntas();
+            juego = new Juego(JUGADORES, new FileReader(ARCHIVO_PREGUNTAS), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+            juego.mezclarPreguntas();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        JugarTurnoView jugadorView = new JugarTurnoView(STAGE, juego);
+
          try {
-             STAGE.setScene(jugadorView.getScene());
+             STAGE.setScene(new JugarTurnoView(STAGE, juego).getScene());
          } catch (Exception ex) {
              throw new RuntimeException(ex);
          }

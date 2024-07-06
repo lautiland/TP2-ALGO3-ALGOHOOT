@@ -1,5 +1,76 @@
 [
   {
+    "ID": 1,
+    "Tema": "CIENCIAS",
+    "Tipo": "Ordered Choice",
+    "Pregunta": "Ordene de MAYOR A MENOR los siguientes objetos hogareños según su nivel de radiación electromagnética emitido (el máximo recomendado es 100 microTeslas)",
+    "Respuesta": "2,1,4,3",
+    "Opcion 1": "Televisor de tubo CRT",
+    "Opcion 2": "Microondas",
+    "Opcion 3": "Imanes del delivery",
+    "Opcion 4": "Heladera",
+
+    "Texto respuesta": "El microondas emite a  3 cm entre 73 y 200µ, y a 30 cm entre 4 a 8 µT. "
+  },
+  {
+    "ID": 2,
+    "Tema": "ARTE",
+    "Tipo": "Multiple Choice Simple",
+    "Pregunta": "¿Cuál es el disco más vendido de la historia?",
+    "Respuesta": "4",
+    "Opcion 1": "Revolver (Los Beatles)",
+    "Opcion 2": "Greatest Hits (Queen)",
+    "Opcion 3": "mp3 (Emilia)",
+    "Opcion 4": "Thriller (Michael Jackson)",
+    "Opcion 5": "Back to Black (Amy Winehouse)",
+    "Texto respuesta": "El disco más vendido de la historia es Thriller, de Michael Jackson. Se estima que ha vendido entre 51 a 65 millones de álbumes."
+  },
+  {
+    "ID": 3,
+    "Tema": "CIENCIAS",
+    "Tipo": "Verdadero Falso",
+    "Pregunta": "El punto de ebullición del agua a 3300m del mar es 100 grados centígrados",
+    "Respuesta": "2",
+    "Opcion 1": "Verdadero",
+    "Opcion 2": "Falso",
+    "Texto respuesta": "En la altura, la temperatura de ebullición es menor por la mayor presión atmosférica"
+  },
+  {
+    "ID": 4,
+    "Tema": "CIENCIAS",
+    "Tipo": "Multiple Choice Simple",
+    "Pregunta": "Qué significa ADN?",
+    "Respuesta": "2",
+    "Opcion 1": "Acido Dehidro Nitrogenado",
+    "Opcion 2": "Acido Desoxi Ribonucléico",
+    "Opcion 3": "Antes de Navidad",
+    "Opcion 4": "Acid Desoxiribonucleic",
+    "Texto respuesta": "say no more..."
+  },
+  {
+    "ID": 5,
+    "Tema": "COMPUTACION",
+    "Tipo": "Verdadero Falso Simple",
+    "Pregunta": "Smalltalk es un lenguaje de programación muerto",
+    "Respuesta": "2",
+    "Opcion 1": "Verdadero",
+    "Opcion 2": "Falso",
+    "Texto respuesta": "Eee...  no vimos nada!"
+  },
+  {
+    "ID": 6.0,
+    "Tema": "DEPORTES",
+    "Tipo": "Multiple Choice Simple",
+    "Pregunta": "Qué equipos del fútbol argentino nunca ganaron una copa libertadores?",
+    "Respuesta": "2,5",
+    "Opcion 1": "San Lorenzo",
+    "Opcion 2": "Newells",
+    "Opcion 3": "Racing",
+    "Opcion 4": "Vélez",
+    "Opcion 5": "Lanús",
+    "Texto respuesta": "Tanto Lanús como Newells fueron subcampeones pero nunca ganaron la copa"
+  },
+  {
     "ID": 7,
     "Tema": "DEPORTES",
     "Tipo": "Ordered choice",

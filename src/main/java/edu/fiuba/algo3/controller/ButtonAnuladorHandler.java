@@ -7,20 +7,22 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 public class ButtonAnuladorHandler implements EventHandler<ActionEvent> {
+
     private final Stage STAGE;
-    private final Juego juego;
+    private final Juego JUEGO;
 
     public ButtonAnuladorHandler(Stage stage, Juego juego){
-        this.STAGE = stage;
-        this.juego = juego;
+        STAGE = stage;
+        JUEGO = juego;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        PreguntaView preguntaView = new PreguntaView(STAGE, juego);
-        juego.activarAnulador();
+
+        JUEGO.activarAnulador();
+
         try {
-            STAGE.setScene(preguntaView.getScene());
+            STAGE.setScene(new PreguntaView(STAGE, JUEGO).getScene());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

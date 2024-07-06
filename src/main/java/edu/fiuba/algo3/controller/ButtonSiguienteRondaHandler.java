@@ -2,7 +2,7 @@ package edu.fiuba.algo3.controller;
 
 import edu.fiuba.algo3.model.Juego;
 import edu.fiuba.algo3.view.JugarTurnoView;
-import edu.fiuba.algo3.view.ResultadosView;
+import edu.fiuba.algo3.view.ResultadosFinalesView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -28,7 +28,7 @@ public class ButtonSiguienteRondaHandler implements EventHandler<ActionEvent> {
                 throw new RuntimeException(ex);
             }
         } catch (Exception JuegoFinalizadoError) {
-            ResultadosView finalizarPartidaView = new ResultadosView(STAGE,juego);
+            ResultadosFinalesView finalizarPartidaView = new ResultadosFinalesView(STAGE,juego);
             try {
                 STAGE.setScene(finalizarPartidaView.getScene());
             } catch (Exception ex) {

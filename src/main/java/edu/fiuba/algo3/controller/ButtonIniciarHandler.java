@@ -6,10 +6,11 @@ import javafx.stage.Stage;
 import javafx.event.EventHandler;
 
 public class ButtonIniciarHandler implements EventHandler<ActionEvent>{
+
     private final Stage STAGE;
 
     public ButtonIniciarHandler(Stage stage){
-        this.STAGE = stage;
+        STAGE = stage;
     }
 
     @Override
@@ -20,7 +21,6 @@ public class ButtonIniciarHandler implements EventHandler<ActionEvent>{
             STAGE.setScene(limitesView.getScene());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
-
         }
     }
 }

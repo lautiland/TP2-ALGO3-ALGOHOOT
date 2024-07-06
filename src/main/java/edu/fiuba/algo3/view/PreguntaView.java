@@ -9,32 +9,24 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-
 import javafx.geometry.Insets;
-
 import javafx.geometry.Pos;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-import javafx.scene.layout.StackPane;
-
+import javafx.stage.Stage;
 import java.util.ArrayList;
-
 
 public class PreguntaView extends SceneGui {
 
-    static Stage stage;
-    private final Juego juego;
+    private final Stage STAGE;
+    private final Juego JUEGO;
 
-    public PreguntaView(Stage stage_actual, Juego juego_actual) {
-        stage = stage_actual;
-        juego = juego_actual;
+    public PreguntaView(Stage stage, Juego juego) {
+        STAGE = stage;
+        JUEGO = juego;
     }
 
-    public static void getRootFalseTrueQuestion(VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
+    public void cargarOpcionesTrueFalse(VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
 
         Button trueBtn = new Button("Verdadero");
         configurarBoton(trueBtn);
@@ -44,28 +36,35 @@ public class PreguntaView extends SceneGui {
         falseBtn.setOnAction(new ButtonFalseHandler(trueBtn, falseBtn, respuestas, confirmar));
         trueBtn.setOnAction(new ButtonTrueHandler(trueBtn, falseBtn, respuestas, confirmar));
 
-        root.getChildren().addAll(trueBtn, falseBtn);
+        opcionesBox.getChildren().addAll(trueBtn, falseBtn);
         confirmar.setTranslateY(20);
     }
 
-    public void getRootMultipleChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
-        VBox opcionesBox = new VBox();
-        opcionesBox.setAlignment(Pos.CENTER);
-        opcionesBox.setPadding(new Insets(20,200,20, 200));
-        opcionesBox.setSpacing(10);
+    public void cargarOpcionesMC(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
+        VBox contenedor = new VBox();
+        contenedor.setAlignment(Pos.CENTER);
+        contenedor.setPadding(new Insets(20,200,20, 200));
+        contenedor.setSpacing(10);
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         for(Opcion opcion : opciones){
-            CheckBox checkBox = new CheckBox(opcion.getTexto());
+            HBox hBox = new HBox();
+            Label textoCheckBox = new Label(opcion.getTexto());
+
+            CheckBox checkBox = new CheckBox();
             checkBox.setOnAction(new OpcionHandler(respuestas, opcion.getTexto(), confirmar));
             checkBox.setAlignment(Pos.TOP_LEFT);
-            checkBox.setMaxWidth(Double.MAX_VALUE);
-            opcionesBox.getChildren().add(checkBox);
+            checkBox.styleProperty().set("-fx-font-size: 18px; -fx-text-fill: black; -fx-font-weight: bold;");
+
+            hBox.getChildren().addAll(checkBox, textoCheckBox);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setSpacing(10);
+            contenedor.getChildren().add(hBox);
         }
-        root.getChildren().add(opcionesBox);
+        opcionesBox.getChildren().add(contenedor);
     }
 
-    public void getRootOrdererChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
+    public void cargarOpcionesOrderedChoice(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
@@ -78,7 +77,7 @@ public class PreguntaView extends SceneGui {
 
             hBox.getChildren().add(labelOpcion);
             hBox.setAlignment(Pos.CENTER);
-            root.getChildren().add(hBox);
+            opcionesBox.getChildren().add(hBox);
         }
 
         HBox cajaOrdenar = new HBox();
@@ -102,10 +101,10 @@ public class PreguntaView extends SceneGui {
         cajaOrdenar.getChildren().addAll(labelOrdenar, textField, validar);
         cajaOrdenar.setAlignment(Pos.CENTER);
 
-        root.getChildren().add(cajaOrdenar);
+        opcionesBox.getChildren().add(cajaOrdenar);
     }
 
-    public void getRootGroupChoiceQuestion(Pregunta pregunta, VBox root, ArrayList<Opcion> respuestas, Button confirmar) {
+    public void cargarOpcionesGroupChoice(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar) {
         HBox opcionesBoxH = new HBox();
         VBox opcionesBoxV = new VBox();
         int cantidadDeOpcionesTotales = pregunta.obtenerOpciones().size();
@@ -168,50 +167,48 @@ public class PreguntaView extends SceneGui {
         opcionesBoxH.getChildren().add(opcionesBoxV);
         opcionesBoxH.setAlignment(Pos.CENTER);
 
-        root.getChildren().add(opcionesBoxH);
+        opcionesBox.getChildren().add(opcionesBoxH);
     }
 
     public Scene getScene() {
-        Pregunta preguntaActual = juego.obtenerPreguntaActual();
+        ArrayList<Opcion> respuestas = new ArrayList<>();
+        Pregunta preguntaActual = JUEGO.obtenerPreguntaActual();
+
+        Label tipoDePregunta = new Label("Pregunta " + preguntaActual.getTipoDePregunta() + ": categoría " + preguntaActual.getCategoria());
+        tipoDePregunta.setStyle(String.format("-fx-font-size: %spx; -fx-text-fill: grey;", TITULO_SIZE/2));
+        tipoDePregunta.setAlignment(Pos.TOP_LEFT);
+        tipoDePregunta.setTranslateY(-20);
 
         Label pregunta = new Label(preguntaActual.getEnunciado());
-        pregunta.setWrapText(true);
-        pregunta.setMaxWidth(WINDOW_WIDTH*0.75);
-        pregunta.setStyle("-fx-font-size: 24px;");
-
-        Label labelTipoDePregunta = new Label(preguntaActual.getTipoDePregunta());
-        labelTipoDePregunta.setStyle("-fx-font-size: 12px;");
-
-        ArrayList<Opcion> respuestas = new ArrayList<>();
-        VBox opcionesBox = new VBox();
-        opcionesBox.getChildren().addAll(pregunta, labelTipoDePregunta);
-        opcionesBox.setAlignment(Pos.CENTER);
-        opcionesBox.setFillWidth(true);
+        configurarSubtitulo(pregunta);
 
         Button confirmar = new Button("Confirmar");
         configurarBoton(confirmar);
         confirmar.setDisable(true);
-        confirmar.setOnAction(new ButtonConfirmarHandler(stage, juego, respuestas));
+        confirmar.setOnAction(new ButtonConfirmarHandler(STAGE, JUEGO, respuestas));
 
-        String tipoDePregunta = preguntaActual.getTipoDePregunta();
-        //TODO: agregar tipo de preguntas faltantes
+        VBox contenido = new VBox();
+        contenido.getChildren().addAll(tipoDePregunta, pregunta);
+        contenido.setAlignment(Pos.CENTER);
+        contenido.setFillWidth(true);
+        cargarOpciones(preguntaActual, contenido, respuestas, confirmar);
+        contenido.getChildren().add(confirmar);
+
+        return configurarEscena(contenido);
+    }
+
+    private void cargarOpciones(Pregunta pregunta, VBox opcionesBox, ArrayList<Opcion> respuestas, Button confirmar){
+        String tipoDePregunta = pregunta.getTipoDePregunta();
+
         if(tipoDePregunta.equalsIgnoreCase("multiple choice clasico") || tipoDePregunta.equalsIgnoreCase("multiple choice parcial") || tipoDePregunta.equalsIgnoreCase("multiple choice con penalidad")){
-            getRootMultipleChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
+            cargarOpcionesMC(pregunta, opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("true false clasico") || tipoDePregunta.equalsIgnoreCase("true false con penalidad")) {
-            getRootFalseTrueQuestion(opcionesBox, respuestas, confirmar);
+            cargarOpcionesTrueFalse(opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("group choice")) {
-            getRootGroupChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
+            cargarOpcionesGroupChoice(pregunta, opcionesBox, respuestas, confirmar);
         } else if (tipoDePregunta.equalsIgnoreCase("ordered choice")) {
-            getRootOrdererChoiceQuestion(preguntaActual, opcionesBox, respuestas, confirmar);
+            cargarOpcionesOrderedChoice(pregunta, opcionesBox, respuestas, confirmar);
         }
-
-        opcionesBox.getChildren().add(confirmar);
-
-        StackPane contenedorJuego = new StackPane();
-
-        configurarBackground(contenedorJuego, opcionesBox);
-
-        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }
 

@@ -7,18 +7,18 @@ import javafx.stage.Stage;
 
 public class ButtonContinuarHandler implements EventHandler<ActionEvent> {
     private final Stage STAGE;
-    private final SceneGui scene;
+    private final SceneGui SIGUIENTE_ESCENA;
 
-    public ButtonContinuarHandler(Stage stage, SceneGui scene){
+    public ButtonContinuarHandler(Stage stage, SceneGui siguienteEscena){
         this.STAGE = stage;
-        this.scene = scene;
+        this.SIGUIENTE_ESCENA = siguienteEscena;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
 
         try {
-            STAGE.setScene(scene.getScene(STAGE));
+            STAGE.setScene(SIGUIENTE_ESCENA.getScene(STAGE));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

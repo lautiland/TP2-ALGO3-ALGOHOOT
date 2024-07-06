@@ -7,20 +7,20 @@ import javafx.stage.Stage;
 import edu.fiuba.algo3.model.Juego;
 
 public class ButtonNingunoHandler implements EventHandler<ActionEvent> {
+
     private final Stage STAGE;
-    private final Juego juego;
+    private final Juego JUEGO;
 
     public ButtonNingunoHandler(Stage stage, Juego juego){
-        this.STAGE = stage;
-        this.juego = juego;
+        STAGE = stage;
+        JUEGO = juego;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        PreguntaView preguntaView = new PreguntaView(STAGE, juego);
         try {
-            STAGE.setScene(preguntaView.getScene());
+            STAGE.setScene(new PreguntaView(STAGE, JUEGO).getScene());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

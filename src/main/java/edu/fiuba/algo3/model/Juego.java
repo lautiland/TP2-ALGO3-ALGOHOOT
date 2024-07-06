@@ -24,6 +24,7 @@ public class Juego {
     private Pregunta preguntaActual;
     private final int limitePuntos;
     private final int limitePreguntas;
+    private int cantidadPreguntas = 1;
 
     public Juego(ArrayList<Jugador> jugadores, Reader archivo, int limitePreguntas, int limitePuntos){
         if (jugadores.size() < CANTIDAD_JUGADORES_MINIMOS){
@@ -207,11 +208,12 @@ public class Juego {
         turnoJugadores.addAll(jugadores);
 
         preguntaActual = preguntas.remove(0);
+        cantidadPreguntas ++;
     }
 
     public boolean estaJuegoTerminado(){
         int preguntasRestantes = preguntas.size();
-        if (preguntasRestantes == 0 || preguntasRestantes >= limitePreguntas){
+        if (preguntasRestantes == 0 || cantidadPreguntas >= limitePreguntas){
             return true;
         }
 

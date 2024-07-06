@@ -2,46 +2,36 @@ package edu.fiuba.algo3.view;
 
 import edu.fiuba.algo3.controller.ButtonIniciarHandler;
 import edu.fiuba.algo3.controller.ButtonSalirHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class PantallaInicialView extends SceneGui {
 
-    private final Stage stage;
+    private final Stage STAGE;
 
-
-    public PantallaInicialView(Stage stage_actual) {
-        stage = stage_actual;
+    public PantallaInicialView(Stage stage) {
+        STAGE = stage;
     }
 
-    public Scene getScene(Stage stage) {
+    public Scene getScene(Stage stageSinUso) {
 
-        //creacion de Botones
         Label bienvenida = new Label("AlgoHoot");
-        bienvenida.setStyle(String.format("-fx-background-color: %s; -fx-text-fill: black; -fx-font-size: %spx ;", COLOR_PRIMARIO, 50));
-        bienvenida.setPrefSize(600,200);
-        bienvenida.setAlignment(Pos.CENTER);
+        configurarTitulo(bienvenida);
 
-        Button iniciarJuego = new Button("Comenzar Juego");
+        Button iniciarJuego = new Button("Iniciar Juego");
         configurarBoton(iniciarJuego);
-        iniciarJuego.setOnAction(new ButtonIniciarHandler(stage));
+        iniciarJuego.setOnAction(new ButtonIniciarHandler(STAGE));
 
         Button salir = new Button("Salir");
         configurarBoton(salir);
-        salir.setOnAction(new ButtonSalirHandler(stage));
+        salir.setOnAction(new ButtonSalirHandler(STAGE));
 
-        VBox botonesBox = new VBox();
-        botonesBox.getChildren().addAll(bienvenida, iniciarJuego,salir);
-        StackPane contenedorJuego = new StackPane();
-
-        configurarBackground(contenedorJuego, botonesBox);
-
-        return new Scene(contenedorJuego, WINDOW_WIDTH, WINDOW_HEIGHT);
+        VBox contenido = new VBox();
+        contenido.getChildren().addAll(bienvenida, iniciarJuego, salir);
+        return configurarEscena(contenido);
 
     }
 }

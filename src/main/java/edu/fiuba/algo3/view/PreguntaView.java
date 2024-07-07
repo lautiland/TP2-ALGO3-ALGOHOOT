@@ -126,6 +126,8 @@ public class PreguntaView extends SceneGui {
             vBoxGrupo1Text.getChildren().add(grupo1Text);
             vBoxGrupo1Text.setPadding(new Insets(0, 10, 0, 10));
         }
+
+
         vBoxGrupo1Text.setTranslateX(-10);
 
         VBox vBoxGrupo2Text = new VBox();

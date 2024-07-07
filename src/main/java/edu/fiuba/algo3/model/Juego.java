@@ -68,7 +68,7 @@ public class Juego {
 
     public boolean puedeUsarExclusividad(){
         if(!preguntaActual.esCompatibleCon(exclusividad)){
-            throw new ModificadorIncompatible();
+            return false;
         }
 
         return exclusividad.puedeUsar(turnoJugadores.get(0));
@@ -76,7 +76,7 @@ public class Juego {
 
     public boolean puedeUsarAnulador(){
         if(!preguntaActual.esCompatibleCon(anulador)){
-            throw new ModificadorIncompatible();
+            return false;
         }
 
         return anulador.puedeUsar(turnoJugadores.get(0));
@@ -88,7 +88,7 @@ public class Juego {
             throw new MultiplicadorInvalido();
         }
         if (!preguntaActual.esCompatibleCon(multiplicadores.get(i))){
-            throw new ModificadorIncompatible();
+            return false;
         }
         return multiplicadores.get(i).puedeUsar(turnoJugadores.get(0));
     }

@@ -147,7 +147,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        assertThrows(ModificadorIncompatible.class, juego::activarExclusividad);
+        assertFalse(juego.puedeUsarExclusividad());
     }
 
     @Test
@@ -166,7 +166,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        assertThrows(ModificadorIncompatible.class, () -> juego.activarMultiplicador(2));
+        assertFalse(juego.puedeUsarMultiplicador(2));
     }
 
     @Test

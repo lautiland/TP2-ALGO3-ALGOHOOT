@@ -20,7 +20,7 @@ public class Juego {
     private ArrayList<Pregunta> preguntas;
     private final Modificador anulador;
     private final Modificador exclusividad;
-    private final ArrayList<Modificador> multiplicadores;
+    private final ArrayList<Multiplicador> multiplicadores;
     private Pregunta preguntaActual;
     private final int limitePuntos;
     private final int limitePreguntas;
@@ -67,19 +67,19 @@ public class Juego {
     }
 
     public boolean puedeUsarExclusividad(){
-        if(preguntaActual.esCompatibleCon(exclusividad)){
-            return exclusividad.puedeUsar(turnoJugadores.get(0));
+        if(!preguntaActual.esCompatibleCon(exclusividad)){
+            throw new ModificadorIncompatible();
         }
 
-        return false;
+        return exclusividad.puedeUsar(turnoJugadores.get(0));
     }
 
     public boolean puedeUsarAnulador(){
-        if(preguntaActual.esCompatibleCon(anulador)){
-            return anulador.puedeUsar(turnoJugadores.get(0));
+        if(!preguntaActual.esCompatibleCon(anulador)){
+            throw new ModificadorIncompatible();
         }
 
-        return false;
+        return anulador.puedeUsar(turnoJugadores.get(0));
     }
 
     public boolean puedeUsarMultiplicador(int factor){
@@ -87,10 +87,10 @@ public class Juego {
         if(i == NO_ENCONTRADO){
             throw new MultiplicadorInvalido();
         }
-        if (preguntaActual.esCompatibleCon(multiplicadores.get(i))){
-            return multiplicadores.get(i).puedeUsar(turnoJugadores.get(0));
+        if (!preguntaActual.esCompatibleCon(multiplicadores.get(i))){
+            throw new ModificadorIncompatible();
         }
-        return false;
+        return multiplicadores.get(i).puedeUsar(turnoJugadores.get(0));
     }
 
     public HashMap<String, Integer> getModificadoresUsadosEsteTurno(){
@@ -159,14 +159,14 @@ public class Juego {
             throw new MultiplicadorInvalido();
         }
 
-        Multiplicador multiplicador = (Multiplicador) multiplicadores.get(i);
+        Multiplicador multiplicador = multiplicadores.get(i);
 
-        if (preguntaActual.esCompatibleCon(multiplicador)) {
+        if (puedeUsarMultiplicador(factor)) {
             multiplicador.usar(turnoJugadores.get(0));
         }
     }
 
-    public Boolean sinJugadoresRestantes(){
+    public Boolean todosLosJugadoresRespondieron(){
         return turnoJugadores.isEmpty();
     }
 
@@ -208,7 +208,7 @@ public class Juego {
         turnoJugadores.addAll(jugadores);
 
         preguntaActual = preguntas.remove(0);
-        cantidadPreguntas ++;
+        cantidadPreguntas++;
     }
 
     public boolean estaJuegoTerminado(){

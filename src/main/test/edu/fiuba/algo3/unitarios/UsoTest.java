@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class UsoTest {
 
@@ -15,7 +17,7 @@ public class UsoTest {
         Uso uso1 = new Uso(jugador1);
         Uso uso2 = new Uso(jugador1);
 
-        assert(uso1.equals(uso2));
+        assertEquals(uso1, uso2);
     }
 
     @Test
@@ -25,7 +27,7 @@ public class UsoTest {
         Uso uso1 = new Uso(jugador1);
         Uso uso2 = new Uso(jugador2);
 
-        assert(!uso1.equals(uso2));
+        assertNotEquals(uso1, uso2);
     }
 
     @Test
@@ -36,7 +38,7 @@ public class UsoTest {
         Uso uso2 = new Uso(jugador1);
         Uso uso3 = new Uso(jugador2);
 
-        assert(uso1.contarMisEquivalentes(new ArrayList<>(Arrays.asList(uso1, uso2, uso3))) == 2);
+        assertEquals(2,uso1.contarMisEquivalentes(new ArrayList<>(Arrays.asList(uso1, uso2, uso3))));
     }
 
 }

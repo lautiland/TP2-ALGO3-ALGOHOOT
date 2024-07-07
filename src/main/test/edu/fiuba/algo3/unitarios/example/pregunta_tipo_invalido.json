@@ -1,0 +1,15 @@
+[
+  {
+    "ID": 16,
+    "Tema": "CIENCIAS",
+    "Tipo": "Unir con flechas",
+    "Pregunta": "¿Cuál es el material natural más duro del planeta?",
+    "Respuesta": "3",
+    "Opcion 1": "Hierro",
+    "Opcion 2": "Acero",
+    "Opcion 3": "Diamante",
+    "Opcion 4": "La voluntad",
+    "Opcion 5": "El silicio",
+    "Texto respuesta": "El diamante es el material natural de mayor dureza, llegando a 10 en la Escala de Dureza de Mohs"
+  }
+]

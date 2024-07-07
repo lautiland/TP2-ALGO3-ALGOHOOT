@@ -1,0 +1,13 @@
+[
+  {
+    "ID": 1,
+    "Tema": "DEPORTES",
+    "Tipo": "Group Choice",
+    "Pregunta": "Asigne las siguientes leyendas del deporte nacional a disciplina grupales (Fútbol, Básquet, Voley, Rugby,) o individuales (atletismo, tenis, artes marciales, ajedrez, etc):",
+    "Respuesta": "A: 1,2,5; B:3,4,6",
+    "Opcion 1": "Lio Messi",
+    "Grupo A": "Deportes Grupales",
+    "Grupo B": "Deportes Individuales",
+    "Texto respuesta": "say no more..."
+  }
+]

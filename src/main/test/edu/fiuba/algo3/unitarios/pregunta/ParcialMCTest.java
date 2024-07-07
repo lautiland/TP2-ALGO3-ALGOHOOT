@@ -65,6 +65,7 @@ public class ParcialMCTest {
 
         assertEquals(parcialMC.seleccionarOpcion(2), opcion3);
         assertEquals(parcialMC.seleccionarOpcion(3), opcion4);
+        assertEquals("Multiple Choice Parcial", parcialMC.getTipoDePregunta());
     }
 
     @Test

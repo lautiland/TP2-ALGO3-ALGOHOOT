@@ -53,6 +53,7 @@ public class ClassicTFTest {
         Pregunta preguntaTF = new ClassicTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
+        assertEquals("True False Clasico", preguntaTF.getTipoDePregunta());
     }
 
     @Test

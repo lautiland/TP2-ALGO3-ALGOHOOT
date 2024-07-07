@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.unitarios;
 
 import edu.fiuba.algo3.model.*;
-import edu.fiuba.algo3.model.excepciones.CantidadJugadoresInvalido;
-import edu.fiuba.algo3.model.excepciones.CantidadPreguntasInvalida;
-import edu.fiuba.algo3.model.excepciones.MultiplicadorInvalido;
+import edu.fiuba.algo3.model.excepciones.*;
 import edu.fiuba.algo3.model.pregunta.ClassicTF;
+import edu.fiuba.algo3.model.pregunta.PenaltyTF;
 import edu.fiuba.algo3.model.pregunta.Pregunta;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -13,17 +13,24 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
     private static final int LIMITE_PREGUNTAS = 100;
     private static final int LIMITE_PUNTOS = 100;
+    private Jugador jugador1;
+    private Jugador jugador2;
+    private ArrayList<Jugador> jugadores;
+
+    @BeforeEach
+    public void setUp() {
+        jugador1 = new Jugador("Mati");
+        jugador2 = new Jugador("Lauti");
+        jugadores = new ArrayList<>();
+    }
 
     @Test
     public void test01CantidadDeJugadoresInvalida() {
-        Jugador jugador1 = new Jugador("Franco");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
 
         Opcion opcion1 = new Opcion("Verdadero");
@@ -42,8 +49,6 @@ public class JuegoTest {
 
     @Test
     public void test02CantidadDeJugadoresInvalida() {
-        Jugador jugador1 = new Jugador("Franco");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
 
         assertThrows(CantidadJugadoresInvalido.class, () -> new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS));
@@ -51,9 +56,6 @@ public class JuegoTest {
 
     @Test
     public void test03NoHayPreguntasEnElJuego(){
-        Jugador jugador1 = new Jugador("Franco");
-        Jugador jugador2 = new Jugador("Lautaro");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
@@ -63,9 +65,6 @@ public class JuegoTest {
 
     @Test
     public void test04SeCarganLasPreguntasCorrectamente() throws FileNotFoundException {
-        Jugador jugador1 = new Jugador("Franco");
-        Jugador jugador2 = new Jugador("Lautaro");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
@@ -93,9 +92,6 @@ public class JuegoTest {
 
     @Test
     public void test05MultiplicadorInvalido() throws FileNotFoundException {
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        Jugador jugador1 = new Jugador("Franco");
-        Jugador jugador2 = new Jugador("Lautaro");
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
@@ -105,9 +101,6 @@ public class JuegoTest {
 
     @Test
     public void test06SeCuentanLosModificadoresPorRondaCorrectamente() throws FileNotFoundException {
-        Jugador jugador1 = new Jugador("Franco");
-        Jugador jugador2 = new Jugador("Lautaro");
-        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
@@ -136,5 +129,398 @@ public class JuegoTest {
 
         assertEquals(1,modificadores.get("Exclusividad"));
         assertEquals(1,modificadores.get("Anulador"));
+    }
+
+    @Test
+    public void test07NoSePuedeUsarExclusividadEnUnaPreguntaPenalidad(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, new Opcion("Verdadero"), "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertThrows(ModificadorIncompatible.class, juego::activarExclusividad);
+    }
+
+    @Test
+    public void test08NoSePuedeUsarMultiplicadorEnUnaPreguntaSinPenalidad(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Pregunta pregunta = new ClassicTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, new Opcion("Verdadero"), "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertThrows(ModificadorIncompatible.class, () -> juego.activarMultiplicador(2));
+    }
+
+    @Test
+    public void test09NoSePuedeUsarAnuladorMasDeUnaVez(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new ClassicTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertTrue(juego.puedeUsarAnulador());
+        juego.activarAnulador();
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        juego.siguientePregunta();
+
+        assertFalse(juego.puedeUsarAnulador());
+        juego.activarAnulador();
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        assertTrue(juego.puedeUsarAnulador());
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+    }
+
+    @Test
+    public void test10NoSePuedeUsarExclusividadMasDeDosVeces(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new ClassicTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertTrue(juego.puedeUsarExclusividad());
+        juego.activarExclusividad();
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        juego.siguientePregunta();
+
+        assertTrue(juego.puedeUsarExclusividad());
+        juego.activarExclusividad();
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        juego.siguientePregunta();
+
+        assertFalse(juego.puedeUsarExclusividad());
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+        assertTrue(juego.puedeUsarExclusividad());
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+    }
+
+    @Test
+    public void test11NoSePuedeUsarMultiplicadorMasDeUnaVez(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertTrue(juego.puedeUsarMultiplicador(2));
+        juego.activarMultiplicador(2);
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+        assertTrue(juego.puedeUsarMultiplicador(3));
+        juego.activarMultiplicador(3);
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        juego.siguientePregunta();
+
+        assertFalse(juego.puedeUsarMultiplicador(2));
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+        assertFalse(juego.puedeUsarMultiplicador(3));
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+    }
+
+    @Test
+    public void test12NoSePuedeUsarUnMultiplicadorInvalido(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertThrows(MultiplicadorInvalido.class, () -> juego.puedeUsarMultiplicador(4));
+    }
+
+    @Test
+    public void test13SeCambiaDeJugadorCorrectamente(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertEquals(new ArrayList<>(){
+            {
+                add("Mati");
+                add("Lauti");
+            }
+
+        }, juego.obtenerNombresJugadores());
+
+        assertEquals("Mati", juego.getJugadorActual());
+        assertEquals(0, juego.obtenerPuntaje("Mati"));
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        assertEquals("Lauti", juego.getJugadorActual());
+        assertEquals(0, juego.obtenerPuntaje("Lauti"));
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        assertTrue(juego.todosLosJugadoresRespondieron());
+        assertFalse(juego.estaJuegoTerminado());
+
+        juego.evaluarRespuestas();
+        juego.siguientePregunta();
+
+        assertEquals("Mati", juego.getJugadorActual());
+        assertEquals(1, juego.obtenerPuntaje("Mati"));
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        assertEquals("Lauti", juego.getJugadorActual());
+        assertEquals(1, juego.obtenerPuntaje("Lauti"));
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        assertTrue(juego.todosLosJugadoresRespondieron());
+        assertTrue(juego.estaJuegoTerminado());
+    }
+
+    @Test
+    public void test14NoSePuedeObtenerPuntajeDeUnJugadorQueNoExiste(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        assertThrows(NombreJugadorInvalido.class, () -> juego.obtenerPuntaje("Pepe"));
+    }
+
+    @Test
+    public void test15NoSePuedeSeguirJugandoUnaPartidaSinpreguntas(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        assertThrows(JuegoFinalizadoError.class, juego::siguientePregunta);
+    }
+
+    @Test
+    public void test16ElJuegoFinalizaSiSeLlegaAlLimiteDePuntaje(){
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Opcion opcionCorrecta = new Opcion("Verdadero");
+
+        Pregunta pregunta = new PenaltyTF("Pregunta de verdadero o falso", new ArrayList<>(){
+            {
+                add(new Opcion("Verdadero"));
+                add(new Opcion("Falso"));
+            }
+        }, opcionCorrecta, "", "");
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(pregunta);
+        preguntas.add(pregunta);
+
+        Juego juego = new Juego(jugadores, preguntas, 1, LIMITE_PREGUNTAS);
+        assertFalse(juego.estaJuegoTerminado());
+
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.responder(new ArrayList<>(){
+            {
+                add(opcionCorrecta);
+            }
+        });
+
+        juego.evaluarRespuestas();
+        assertTrue(juego.estaJuegoTerminado());
     }
 }

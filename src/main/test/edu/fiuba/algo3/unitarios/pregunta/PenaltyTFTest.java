@@ -54,6 +54,7 @@ public class PenaltyTFTest {
         Pregunta preguntaTF = new PenaltyTF("Pregunta de verdadero o falso", opciones, opcion1, "", "");
 
         assertEquals(preguntaTF.seleccionarOpcion(1), opcion2);
+        assertEquals("True False con Penalidad", preguntaTF.getTipoDePregunta());
     }
 
     @Test

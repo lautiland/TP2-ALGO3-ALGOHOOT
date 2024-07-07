@@ -24,7 +24,7 @@ public class ButtonConfirmarHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
         juego.responder(respuestas);
-        if (juego.sinJugadoresRestantes()){
+        if (juego.todosLosJugadoresRespondieron()){
             juego.evaluarRespuestas();
             ResultadosPorRondaView resultadosPorRondaView = new ResultadosPorRondaView(STAGE, juego);
             try {

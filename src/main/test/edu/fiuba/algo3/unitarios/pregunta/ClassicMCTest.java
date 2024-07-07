@@ -65,6 +65,7 @@ public class ClassicMCTest {
 
         assertEquals(preguntaMC.seleccionarOpcion(2), opcion3);
         assertEquals(preguntaMC.seleccionarOpcion(3), opcion4);
+        assertEquals("Multiple Choice Clasico", preguntaMC.getTipoDePregunta());
     }
 
     @Test

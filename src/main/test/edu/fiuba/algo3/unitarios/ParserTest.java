@@ -107,4 +107,28 @@ public class ParserTest {
         assertEquals("Deportes Individuales", ((GroupChoice) pregunta).getDescripcionGrupoB());
         assertEquals("say no more...", pregunta.getDescripcionRespuesta());
     }
+
+    @Test
+    public void test10NoPuedoParsearUnaPreguntaDeUnTipoNoSoportado() throws FileNotFoundException {
+        JuegoParser parser = new JuegoParser();
+
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "pregunta_tipo_invalido.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
+    }
+
+    @Test
+    public void test11NoPuedoParsearUnaPreguntaSinAlMenosDosOpciones() throws FileNotFoundException {
+        JuegoParser parser = new JuegoParser();
+
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "pregunta_opciones_faltantes.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
+    }
+
+    @Test
+    public void test12NoPuedoParasearUnaPreguntaSinTextoRespuesta() throws FileNotFoundException {
+        JuegoParser parser = new JuegoParser();
+
+        Reader archivo = new FileReader(RUTA_EJEMPLOS+ "pregunta_sin_texto_respuesta.json");
+        assertThrows(JSONInvalido.class, () -> parser.parsear(archivo, FORMATO));
+    }
 }

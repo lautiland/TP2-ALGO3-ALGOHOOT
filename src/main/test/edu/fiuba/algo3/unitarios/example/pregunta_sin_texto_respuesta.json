@@ -1,0 +1,17 @@
+[
+  {
+    "ID": 1,
+    "Tema": "DEPORTES",
+    "Tipo": "Group Choice",
+    "Pregunta": "Asigne las siguientes leyendas del deporte nacional a disciplina grupales (Fútbol, Básquet, Voley, Rugby,) o individuales (atletismo, tenis, artes marciales, ajedrez, etc):",
+    "Respuesta": "A: 1,2,5; B:3,4,6",
+    "Opcion 1": "Lio Messi",
+    "Opcion 2": "Manu Ginóbili",
+    "Opcion 3": "Juan Martín del Potro",
+    "Opcion 4": "Miguel Najdorf",
+    "Opcion 5": "Hugo Conte",
+    "Opcion 6": "José Meolans",
+    "Grupo A": "Deportes Grupales",
+    "Grupo B": "Deportes Individuales"
+  }
+]

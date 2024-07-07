@@ -110,43 +110,60 @@ public class PreguntaView extends SceneGui {
         VBox opcionesBoxV = new VBox();
         int cantidadDeOpcionesTotales = pregunta.getOpciones().size();
         ArrayList<Opcion> respuestas2 = new ArrayList<>();
-
         HBox hBoxTitulos = new HBox();
 
+        Label labelTitulo = new Label(" ");
+        labelTitulo.setStyle("-fx-font-size: 12px;");
+        labelTitulo.setPadding(new Insets(0, 10, 0, 10));
+        labelTitulo.setTranslateX(-100);
+
         VBox vBoxGrupo1Text = new VBox();
-        //TODO: Arreglar centrado de titulos
-        Label grupo1Text = new Label(((GroupChoice) pregunta).getDescripcionGrupoA());
-        grupo1Text.setStyle("-fx-font-size: 12px;");
-        vBoxGrupo1Text.getChildren().add(grupo1Text);
-        vBoxGrupo1Text.setPadding(new Insets(0, 10, 0, 10));
+        for (String palabra : ((GroupChoice) pregunta).getDescripcionGrupoA().split(" ")) {
+            Label grupo1Text = new Label(palabra);
+            grupo1Text.setStyle("-fx-font-size: 12px;");
+            grupo1Text.setPrefSize(BTN_HEIGHT*2.25, BTN_HEIGHT);
+            grupo1Text.setMinSize(BTN_HEIGHT*2.25, BTN_HEIGHT);
+            vBoxGrupo1Text.getChildren().add(grupo1Text);
+            vBoxGrupo1Text.setPadding(new Insets(0, 10, 0, 10));
+        }
+        vBoxGrupo1Text.setTranslateX(-10);
 
         VBox vBoxGrupo2Text = new VBox();
-        Label grupo2Text = new Label(((GroupChoice) pregunta).getDescripcionGrupoB());
-        grupo1Text.setStyle("-fx-font-size: 12px;");
-        vBoxGrupo2Text.getChildren().add(grupo2Text);
-        vBoxGrupo2Text.setPadding(new Insets(0, 10, 0, 10));
+        for (String palabra : ((GroupChoice) pregunta).getDescripcionGrupoB().split(" ")) {
+            Label grupo2Text = new Label(palabra);
+            grupo2Text.setStyle("-fx-font-size: 12px;");
+            grupo2Text.setPrefSize(BTN_HEIGHT*2.25, BTN_HEIGHT);
+            grupo2Text.setMinSize(BTN_HEIGHT*2.25, BTN_HEIGHT);
+            vBoxGrupo2Text.getChildren().add(grupo2Text);
+            vBoxGrupo2Text.setPadding(new Insets(0, 10, 0, 10));
+        }
+        vBoxGrupo2Text.setTranslateX(10);
 
 
-        hBoxTitulos.getChildren().addAll(vBoxGrupo1Text, vBoxGrupo2Text);
+        hBoxTitulos.getChildren().addAll(labelTitulo,vBoxGrupo1Text, vBoxGrupo2Text);
         hBoxTitulos.setAlignment(Pos.CENTER_RIGHT);
         hBoxTitulos.setPadding(new Insets(2, 2, 2, 2));
         opcionesBoxV.getChildren().add(hBoxTitulos);
 
         ArrayList<Opcion> opciones = pregunta.getOpciones();
+
         for(Opcion opcion : opciones){
             HBox hBox = new HBox();
 
             Label labelOpcion = new Label(opcion.getTexto());
             labelOpcion.setStyle("-fx-font-size: 12px;");
             labelOpcion.setPadding(new Insets(0, 10, 0, 10));
+            labelOpcion.setTranslateX(-100);
 
             VBox vBoxGrupo1 = new VBox();
             Button grupo1 = new Button();
             configurarBoton(grupo1);
             grupo1.setPrefSize(BTN_HEIGHT, BTN_HEIGHT);
             grupo1.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
+            grupo1.setTranslateX(-50);
             vBoxGrupo1.getChildren().add(grupo1);
             vBoxGrupo1.setPadding(new Insets(0, 10, 0, 10));
+
 
             VBox vBoxGrupo2 = new VBox();
             Button grupo2 = new Button();
@@ -155,6 +172,7 @@ public class PreguntaView extends SceneGui {
             grupo2.setMinSize(BTN_HEIGHT, BTN_HEIGHT);
             vBoxGrupo2.getChildren().add(grupo2);
             vBoxGrupo2.setPadding(new Insets(0, 10, 0, 10));
+            vBoxGrupo2.setTranslateX(10);
 
             grupo1.setOnAction(new ButtonGroup1ChoiceHandler(grupo1, grupo2, opcion, respuestas, cantidadDeOpcionesTotales, respuestas2, confirmar));
             grupo2.setOnAction(new ButtonGroup2ChoiceHandler(grupo2, grupo1, opcion, respuestas, cantidadDeOpcionesTotales, respuestas2, confirmar));

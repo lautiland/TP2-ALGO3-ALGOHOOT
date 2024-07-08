@@ -38,7 +38,7 @@ class EvaludaorTernarioAcumulativo{
 
 Pregunta o-- "1" EvaluadorDePuntajes
 EvaluadorPenalty -up-|> EvaluadorDePuntajes
-EvaluadorTernario -up-|> EvaluadorDePuntajes
+EvaluadorTernario --up-|> EvaluadorDePuntajes
 EvaludaorTernarioAcumulativo -up-|> EvaluadorDePuntajes
 
 @enduml

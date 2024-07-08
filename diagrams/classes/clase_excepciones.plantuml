@@ -13,7 +13,7 @@ class Juego {
 
 abstract Pregunta {
     ...
-# Pregunta(enunciado: String, opciones: List<Opcion>, cantidadOpcionesMin: int, cantidadOpcionesMax: int, opcionesCorrectas: List<Opcion>, \n evaluador: EvaluadorDePuntajes, categoria: String, descripcionRespuesta: String, modificadoresCompatibles: List<Modificador>)
+# Pregunta(enunciado: String, opciones: List<Opcion>, cantidadOpcionesMin: int, \n cantidadOpcionesMax: int, opcionesCorrectas: List<Opcion>, \n evaluador: EvaluadorDePuntajes, categoria: String, descripcionRespuesta: String, \n modificadoresCompatibles: List<Modificador>)
     {method} ...
 }
 
@@ -33,21 +33,21 @@ exception Exception
 
 Juego o-down- "1..*" Pregunta
 Juego .up.> CantidadJugadoresInvalida : "instanciate"
-Juego .up.> CantidadPreguntasInvalida : "instanciate"
+Juego ..up.> CantidadPreguntasInvalida : "instanciate"
 Juego .up.> JugadorNoEncontrado : "instanciate"
-Juego .up.> JuegoFinalizado : "instanciate"
+Juego ..up.> JuegoFinalizado : "instanciate"
 Juego .up.> MultiplicadorNoEncontrado : "instanciate"
 Pregunta .up.> CantidadOpcionesInvalida : "instanciate"
-Juego .up..> JuegoParser : "use"
+Juego ..up..> JuegoParser : "use"
 JuegoParser .up.> JSONReader : "use"
 JSONReader .right.> JSONInvalido : "instanciate"
 
 CantidadJugadoresInvalida -up-|> Exception
 CantidadOpcionesInvalida -up-|> Exception
 CantidadPreguntasInvalida -up-|> Exception
-Exception <|-- JugadorNoEncontrado
+Exception <|--- JugadorNoEncontrado
 Exception <|-- JuegoFinalizado
-Exception <|-- MultiplicadorNoEncontrado
+Exception <|--- MultiplicadorNoEncontrado
 JSONInvalido -down-|> Exception
 
 

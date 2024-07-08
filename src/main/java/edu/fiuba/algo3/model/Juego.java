@@ -18,10 +18,10 @@ public class Juego {
     private final ArrayList<Jugador> jugadores;
     private final ArrayList<Jugador> turnoJugadores;
     private ArrayList<Pregunta> preguntas;
+    private Pregunta preguntaActual;
     private final Modificador anulador;
     private final Modificador exclusividad;
     private final ArrayList<Multiplicador> multiplicadores;
-    private Pregunta preguntaActual;
     private final int limitePuntos;
     private final int limitePreguntas;
     private int cantidadPreguntas = 1;
@@ -85,7 +85,7 @@ public class Juego {
     public boolean puedeUsarMultiplicador(int factor){
         int i = multiplicadores.indexOf(new Multiplicador(factor));
         if(i == NO_ENCONTRADO){
-            throw new MultiplicadorInvalido();
+            throw new MultiplicadorNoEncontrado();
         }
         if (!preguntaActual.esCompatibleCon(multiplicadores.get(i))){
             return false;
@@ -93,14 +93,23 @@ public class Juego {
         return multiplicadores.get(i).puedeUsar(turnoJugadores.get(0));
     }
 
-    public HashMap<String, Integer> getModificadoresUsadosEsteTurno(){
-        HashMap<String, Integer> usos = new HashMap<>();
-        usos.put(anulador.toString(), anulador.getUsadosEsteTurno());
-        usos.put(exclusividad.toString(), exclusividad.getUsadosEsteTurno());
-        for (Modificador multiplicador : multiplicadores) {
-            usos.put(multiplicador.toString(), multiplicador.getUsadosEsteTurno());
+    public boolean todosLosJugadoresRespondieron(){
+        return turnoJugadores.isEmpty();
+    }
+
+    public boolean estaJuegoTerminado(){
+        int preguntasRestantes = preguntas.size();
+        if (preguntasRestantes == 0 || cantidadPreguntas >= limitePreguntas){
+            return true;
         }
-        return usos;
+
+        for (Jugador jugador : jugadores) {
+            if (jugador.getPuntos() >= limitePuntos){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void mezclarPreguntas(){
@@ -127,10 +136,6 @@ public class Juego {
         preguntaActual = preguntas.remove(0);
     }
 
-    public String getJugadorActual(){
-        return turnoJugadores.get(0).getNombre();
-    }
-
     public void activarAnulador(){
         if(puedeUsarAnulador()){
             anulador.usar(turnoJugadores.get(0));
@@ -143,20 +148,10 @@ public class Juego {
         }
     }
 
-    public int obtenerPuntaje(String nombreJugador){
-        for (Jugador jugador : jugadores) {
-            if (jugador.getNombre().equals(nombreJugador)){
-                return jugador.getPuntos();
-            }
-        }
-
-        throw new NombreJugadorInvalido();
-    }
-
     public void activarMultiplicador(int factor){
         int i = multiplicadores.indexOf(new Multiplicador(factor));
         if(i == NO_ENCONTRADO){
-            throw new MultiplicadorInvalido();
+            throw new MultiplicadorNoEncontrado();
         }
 
         Multiplicador multiplicador = multiplicadores.get(i);
@@ -166,40 +161,9 @@ public class Juego {
         }
     }
 
-    public Boolean todosLosJugadoresRespondieron(){
-        return turnoJugadores.isEmpty();
-    }
-
-    public void responder(ArrayList<Opcion> respuestas){
-
-        Jugador jugadorActual = turnoJugadores.remove(0);
-
-        jugadorActual.responderPregunta(respuestas);
-    }
-
-    private HashMap<Jugador,Integer> filtrarPuntajes(HashMap<Jugador, Integer> puntajes){
-        HashMap<Jugador,Integer> puntajeFiltrado = anulador.filtrarPuntos(puntajes);
-        puntajeFiltrado = exclusividad.filtrarPuntos(puntajeFiltrado);
-        for (Modificador multiplicador : multiplicadores) {
-            puntajeFiltrado = multiplicador.filtrarPuntos(puntajeFiltrado);
-        }
-
-        return puntajeFiltrado;
-    }
-
-    public Pregunta obtenerPreguntaActual(){
-        return preguntaActual;
-    }
-
-    public ArrayList<String> obtenerNombresJugadores(){
-        ArrayList<String> nombres = new ArrayList<>();
-        jugadores.forEach(jugador -> nombres.add(jugador.getNombre()));
-        return nombres;
-    }
-
     public void siguientePregunta(){
         if(estaJuegoTerminado()) {
-            throw new JuegoFinalizadoError();
+            throw new JuegoFinalizado();
         }
 
         anulador.desactivar();
@@ -211,19 +175,11 @@ public class Juego {
         cantidadPreguntas++;
     }
 
-    public boolean estaJuegoTerminado(){
-        int preguntasRestantes = preguntas.size();
-        if (preguntasRestantes == 0 || cantidadPreguntas >= limitePreguntas){
-            return true;
-        }
+    public void responder(ArrayList<Opcion> respuestas){
 
-        for (Jugador jugador : jugadores) {
-            if (jugador.getPuntos() >= limitePuntos){
-                return true;
-            }
-        }
+        Jugador jugadorActual = turnoJugadores.remove(0);
 
-        return false;
+        jugadorActual.responderPregunta(respuestas);
     }
 
     public void evaluarRespuestas(){
@@ -238,5 +194,49 @@ public class Juego {
         HashMap<Jugador,Integer> puntajesFinales = this.filtrarPuntajes(puntajes);
 
         puntajesFinales.forEach(Jugador::modificarPuntos);
+    }
+
+    public int obtenerPuntaje(String nombreJugador){
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equals(nombreJugador)){
+                return jugador.getPuntos();
+            }
+        }
+
+        throw new JugadorNoEncontrado();
+    }
+
+    public Pregunta obtenerPreguntaActual(){
+        return preguntaActual;
+    }
+
+    public String getJugadorActual(){
+        return turnoJugadores.get(0).getNombre();
+    }
+
+    public ArrayList<String> obtenerNombresJugadores(){
+        ArrayList<String> nombres = new ArrayList<>();
+        jugadores.forEach(jugador -> nombres.add(jugador.getNombre()));
+        return nombres;
+    }
+
+    public HashMap<String, Integer> getModificadoresUsadosEsteTurno(){
+        HashMap<String, Integer> usos = new HashMap<>();
+        usos.put(anulador.toString(), anulador.getUsadosEsteTurno());
+        usos.put(exclusividad.toString(), exclusividad.getUsadosEsteTurno());
+        for (Modificador multiplicador : multiplicadores) {
+            usos.put(multiplicador.toString(), multiplicador.getUsadosEsteTurno());
+        }
+        return usos;
+    }
+
+    private HashMap<Jugador,Integer> filtrarPuntajes(HashMap<Jugador, Integer> puntajes){
+        HashMap<Jugador,Integer> puntajeFiltrado = anulador.filtrarPuntos(puntajes);
+        puntajeFiltrado = exclusividad.filtrarPuntos(puntajeFiltrado);
+        for (Modificador multiplicador : multiplicadores) {
+            puntajeFiltrado = multiplicador.filtrarPuntos(puntajeFiltrado);
+        }
+
+        return puntajeFiltrado;
     }
 }

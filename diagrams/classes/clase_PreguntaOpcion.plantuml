@@ -1,0 +1,33 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+abstract Pregunta {
+    - enunciado : String
+    - categoria : String
+    - descripcionRespuesta : String
+    - modificadoresCompatibles : List<Modificador>
+    # Pregunta(enunciado: String, opciones: List<Opcion>, cantidadOpcionesMin: int, cantidadOpcionesMax: int, opcionesCorrectas: List<Opcion>, \n evaluador: EvaluadorDePuntajes, categoria: String, descripcionRespuesta: String, modificadoresCompatibles: List<Modificador>)
+    + getDescripcionRespuesta(): String
+    + seleccionarOpciones(indice: int): Opcion
+    + evaluarRespuestas(respuestas: List<Opcion>): int
+    + getEnunciado(): String
+    + getCategoria(): String
+    # calcularPuntaje(respuestasCorrectas: int, respuestasIncorrectas: int): int
+    + getOpciones(): List<Opcion>
+    + esCompatibleCon(modificador: Modificador): boolean
+    + {abstract} getTipoDePregunta(): String
+}
+
+class Opcion {
+    - texto : String
+    + Opcion(texto: String)
+    + getTexto(): String
+    + equals(obj: Object): boolean
+}
+
+Pregunta o-- "2..*" Opcion
+
+@enduml

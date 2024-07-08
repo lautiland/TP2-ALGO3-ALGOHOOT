@@ -1,0 +1,44 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+abstract Pregunta {
+    - enunciado : String
+    - opciones : List<Opcion>
+    - opcionesCorrectas : List<Opcion>
+    - categoria : String
+    - descripcionRespuesta : String
+    - modificadoresCompatibles : List<Modificador>
+    # Pregunta(enunciado: String, opciones: List<Opcion>, cantidadOpcionesMin: int, cantidadOpcionesMax: int, opcionesCorrectas: List<Opcion>, \n evaluador: EvaluadorDePuntajes, categoria: String, descripcionRespuesta: String, modificadoresCompatibles: List<Modificador>)
+    + evaluarRespuestas(respuestas: List<Opcion>): int
+    # calcularPuntaje(respuestasCorrectas: int, respuestasIncorrectas: int): int
+    {method} ...
+}
+
+abstract EvaluadorDePuntajes{
+    # PUNTOS_MAL_RESPONDIDA_PENALIDAD : int
+    # PUNTOS_BIEN_RESPONDIDA : int
+    # PUNTOS_MAL_RESPONDIDA : int
+    + {abstract} calcular(respuestasCorrectas: int, respuestasIncorrectas: int): int
+}
+
+class EvaluadorPenalty{
+    + calcular(respuestasCorrectas: int, respuestasIncorrectas: int): int
+}
+
+class EvaluadorTernario{
+   + calcular(respuestasCorrectas: int, respuestasIncorrectas: int): int
+}
+
+class EvaludaorTernarioAcumulativo{
+   + calcular(respuestasCorrectas: int, respuestasIncorrectas: int): int
+}
+
+Pregunta o-- "1" EvaluadorDePuntajes
+EvaluadorPenalty -up-|> EvaluadorDePuntajes
+EvaluadorTernario -up-|> EvaluadorDePuntajes
+EvaludaorTernarioAcumulativo -up-|> EvaluadorDePuntajes
+
+@enduml

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.model.excepciones;
 
-public class JuegoFinalizadoError extends RuntimeException{
-    public JuegoFinalizadoError(){
+public class JuegoFinalizado extends RuntimeException{
+    public JuegoFinalizado(){
         super("El juego ya ha finalizado");
     }
 }

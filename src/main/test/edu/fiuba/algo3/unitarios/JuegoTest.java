@@ -96,7 +96,7 @@ public class JuegoTest {
         jugadores.add(jugador2);
         Juego juego = new Juego(jugadores,new FileReader("src/main/resources/preguntas.json"), LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        assertThrows(MultiplicadorInvalido.class, () -> juego.activarMultiplicador( 6));
+        assertThrows(MultiplicadorNoEncontrado.class, () -> juego.activarMultiplicador( 6));
     }
 
     @Test
@@ -356,7 +356,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        assertThrows(MultiplicadorInvalido.class, () -> juego.puedeUsarMultiplicador(4));
+        assertThrows(MultiplicadorNoEncontrado.class, () -> juego.puedeUsarMultiplicador(4));
     }
 
     @Test
@@ -450,7 +450,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(jugadores, preguntas, LIMITE_PREGUNTAS, LIMITE_PUNTOS);
 
-        assertThrows(NombreJugadorInvalido.class, () -> juego.obtenerPuntaje("Pepe"));
+        assertThrows(JugadorNoEncontrado.class, () -> juego.obtenerPuntaje("Pepe"));
     }
 
     @Test
@@ -484,7 +484,7 @@ public class JuegoTest {
         });
 
         juego.evaluarRespuestas();
-        assertThrows(JuegoFinalizadoError.class, juego::siguientePregunta);
+        assertThrows(JuegoFinalizado.class, juego::siguientePregunta);
     }
 
     @Test

@@ -5,17 +5,25 @@ skinparam classAttributeIconSize 0
 skinparam monochrome true
 
 class Juego {
-    - jugadores : List<Jugador>
-    + Juego(jugadores: List<Jugador>, preguntas : List<Pregunta>)
-    + hacerPregunta(): Void
+    ...
+    + Juego(jugadores: List<Jugador>, archivo: Reader, limitePreguntas: int, limitePuntos: int)
+    + Juego(jugadores: List<Jugador>, preguntas: List<Pregunta>, limitePreguntas: int, limitePuntos: int)
+    {method}...
 }
 
 abstract Pregunta {
-    - opciones : List<Opcion>
-    - enunciado : String
-    # Pregunta(enunciado : String, opciones : List<Opcion>, cantidadOpcionesMin : Int, cantidadOpcionesMax : Int
-    + seleccionarOpcion(indice : Int): Opcion
-    + {abstract} evaluarRespuestas(respuestas : List<Opcion>): Int
+    ...
+# Pregunta(enunciado: String, opciones: List<Opcion>, cantidadOpcionesMin: int, cantidadOpcionesMax: int, opcionesCorrectas: List<Opcion>, \n evaluador: EvaluadorDePuntajes, categoria: String, descripcionRespuesta: String, modificadoresCompatibles: List<Modificador>)
+    {method} ...
+}
+
+class JuegoParser {
+    + parsear(archivo: Reader, formato: String): List<Pregunta>
+}
+
+class JSONReader {
+    + validarJSON(jsonElement: JsonElement): JsonArray
+    {method} ...
 }
 
 exception CantidadJugadoresInvalida
@@ -26,10 +34,21 @@ exception Exception
 Juego o-down- "1..*" Pregunta
 Juego .up.> CantidadJugadoresInvalida : "instanciate"
 Juego .up.> CantidadPreguntasInvalida : "instanciate"
+Juego .up.> JugadorNoEncontrado : "instanciate"
+Juego .up.> JuegoFinalizado : "instanciate"
+Juego .up.> MultiplicadorNoEncontrado : "instanciate"
 Pregunta .up.> CantidadOpcionesInvalida : "instanciate"
+Juego .up..> JuegoParser : "use"
+JuegoParser .up.> JSONReader : "use"
+JSONReader .right.> JSONInvalido : "instanciate"
 
-CantidadJugadoresInvalida -left-|> Exception
+CantidadJugadoresInvalida -up-|> Exception
 CantidadOpcionesInvalida -up-|> Exception
-CantidadPreguntasInvalida -left-|> Exception
+CantidadPreguntasInvalida -up-|> Exception
+Exception <|-- JugadorNoEncontrado
+Exception <|-- JuegoFinalizado
+Exception <|-- MultiplicadorNoEncontrado
+JSONInvalido -down-|> Exception
+
 
 @enduml

@@ -1,0 +1,71 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+class Juego {
+    - preguntaActual : Pregunta
+    - anulador : Modificador
+    - exclusividad : Modificador
+    - multiplicadores : List<Modificador>
+    - limitePuntos : int
+    - limitePreguntas : int
+    - cantidadPreguntas : int
+    - cantidadDeJugadoresMinimos : int
+
+    + Juego(jugadores: List<Jugador>, archivo: Reader, limitePreguntas: int, limitePuntos: int)
+    + Juego(jugadores: List<Jugador>, preguntas: List<Pregunta>, limitePreguntas: int, limitePuntos: int)
+    + puedeUsarExclusividad(): boolean
+    + puedeUsarAnulador(): boolean
+    + puedeUsarMultiplicador(multiplicador: int): boolean
+    + todosLosJugadoresRespondieron(): boolean
+    + estaJuegoTerminado(): boolean
+    + mezclarPreguntas(): void
+    + cargarPreguntas(archivo: Reader): void
+    + activarAnulador(): void
+    + activarExclusividad(): void
+    + activarMultiplicador(multiplicador: int): void
+    + siguientePregunta(): void
+    + responder(respuestas : List<Opcion>): void
+    + evaluarRespuestas(): void
+    + obtenerPuntaje(nombreJugador: String): int
+    + obtenerPreguntaActual(): Pregunta
+    + getJugadorActual(): String
+    + obtenerNombresJugadores(): List<String>
+    + getModificadoresUsadosEsteTurno(): Map<String, int>
+    - filtrarPuntajes(puntajes: Map<Jugador, int>): puntajes: Map<Jugador, int>
+
+
+
+}
+
+class Jugador {
+    - nombre : String
+    - puntos : int
+    - respuestasActuales : List<Opcion>
+
+    + Jugador(nombre : String)
+    + getPuntos(): int
+    + getNombre(): String
+    + responderPregunta(respuestas : List<Opcion>): void
+    + obtenerRespuestas(): List<Opcion>
+    + modificarPuntos(puntos : int): Void
+}
+
+abstract Pregunta {
+    - enunciado : String
+    - opciones : List<Opcion>
+    - opcionesCorrectas : List<Opcion>
+    - categoria : String
+    - evaluador : EvaluadorDePuntajes
+    - descripcionRespuesta : String
+    - modificadoresCompatibles : List<Modificador>
+    # Pregunta(...)
+    {method} ...
+}
+
+Juego o-- "1..*" Pregunta
+Juego o-- "2..*" Jugador
+
+@enduml

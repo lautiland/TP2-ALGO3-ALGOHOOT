@@ -5,14 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 
 abstract public class SceneGui {
 
     protected static final String ARCHIVO_PREGUNTAS =  "src/main/resources/preguntas.json";
+    protected static final String URL_IMAGEN_FONDO = "/src/main/resources/question_background.png";
     protected static final String COLOR_PRIMARIO = "#d6eaf8";
     protected static final String COLOR_FONDO_PRIMARIO = "#d6dbdf";
     protected static final String COLOR_FONDO_SECUNDARIO = "#2e4053";
@@ -56,7 +56,7 @@ abstract public class SceneGui {
         cambiarAnchoAlto(contenedorJuego, 600, 800);
         contenido.setSpacing(10);
         contenido.setAlignment(Pos.CENTER);
-        contenedorVentana.setStyle(String.format("-fx-background-color: %s;", COLOR_FONDO_SECUNDARIO));
+        contenedorVentana.setStyle(String.format("-fx-background-image: url('" + getClass().getResource("/question_background.png").toExternalForm() + "'); -fx-background-repeat: repeat;"));
         contenedorVentana.getChildren().addAll(contenedorJuego, contenido);
         contenedorVentana.setLayoutX((contenedorVentana.getWidth() - contenedorVentana.getWidth()) / 2);
 
@@ -107,7 +107,14 @@ abstract public class SceneGui {
     }
 
     protected void configurarTitulo(Label bienvenida) {
-        bienvenida.setStyle(String.format("-fx-font-size: %spx; -fx-text-fill: black;", TITULO_SIZE * 2));
+        bienvenida.setStyle(
+                String.format(
+                        "-fx-font-size: %spx; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-text-fill: black; ",
+                        TITULO_SIZE * 4
+                )
+        );
         bienvenida.setAlignment(Pos.TOP_CENTER);
         bienvenida.setTranslateY(-20);
     }

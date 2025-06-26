@@ -11,9 +11,6 @@ import java.util.Objects;
 
 public class App extends Application {
 
-    //private MediaPlayer mediaPlayer;   //para que el recolector de basura no lo borre y se siga reproduciendo
-
-
     public static void main(String[] args) {
         launch();
     }
@@ -34,8 +31,6 @@ public class App extends Application {
         float width = 800;
         float height = 600;
         SceneGui.setDimensions(width, height);
-        //stage.setMaximized(true);
         stage.setResizable(false);
-        //reproducirSonido();
     }
 }
